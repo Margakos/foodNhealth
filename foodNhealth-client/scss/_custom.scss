@@ -1,0 +1,241 @@
+// Here you can add other styles
+.filter-bar {
+  margin-bottom: 8px;
+}
+
+.pagination {
+  margin-top: 0;
+}
+
+.sidebar .nav-dropdown-items .nav-item {
+  padding-left: 15px;
+}
+
+/* Bootstrap */
+.modal-lg {
+  max-width: 1024px;
+}
+.custom-control-indicator {
+  top: 0.7em;
+}
+
+#studyModal > .modal-lg {
+  max-width: 80%;
+}
+
+#precontractualStepsModal > .modal-lg {
+  max-width: 99%;
+  min-height: 1000px;
+}
+
+#digitalDossierModal > .modal-lg {
+  max-width: 90%;
+  min-height: 1000px;
+}
+
+#digitalDossierModal .card {
+  border: none !important;
+  margin-bottom: 0.5rem !important;
+}
+
+#digitalDossierModal .card > .card-body {
+  padding: 0;
+}
+
+#digitalDossierModal .card > .card-header {
+  line-height: 1;
+}
+
+#digitalDossierModal .card > .card-body > label {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#diavgeiaModal > .modal-lg {
+  max-width: 70%;
+}
+
+.table .table {
+  background-color: transparent;
+}
+
+.input-group .form-control {
+  z-index: inherit !important;
+}
+
+#eventType {
+  z-index: 1000 !important;
+}
+
+.form-inline > .form-group {
+  margin-right: 10px !important;
+}
+
+.form-inline > button {
+  margin-top: 10px !important;
+}
+
+.tab-content {
+  border: none;
+}
+
+.border-light {
+  border: none !important;
+}
+
+/* vuetable-2 */
+.vuetable-pagination-info {
+  margin-top: 8px !important;
+}
+
+/* vue-multiselect */
+.is-invalid > .multiselect__tags {
+  border-color: $red;
+}
+
+.multiselect {
+  min-height: 35px;
+}
+
+.multiselect__tags {
+  min-height: 35px !important;
+  border-radius: 0px !important;
+  padding-top: 5px;
+}
+
+.multiselect__tag {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.multiselect__select {
+  height: 35px;
+  padding-top: 0px;
+}
+
+.multiselect__clear {
+  position: absolute;
+  right: 30px;
+  top: 7px;
+
+  display: block;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Element */
+.is-invalid > .el-input__inner {
+  border-color: $red;
+}
+
+.el-input__inner {
+  border-radius: 0px;
+  height: 35px;
+  line-height: 1.25;
+  //line-height: 1.25;
+}
+
+.el-input__icon {
+  line-height: inherit !important;
+}
+
+.el-collapse-item__header {
+  padding-left: 15px;
+}
+
+.el-collapse-item__content {
+  line-height: inherit;
+}
+.el-loading-mask {
+  background-color: rgba(255,255,255,.3) !important;
+}
+/* vue-form-wizard */
+.vue-form-wizard .wizard-header {
+  padding: 0px;
+}
+
+.vue-form-wizard .wizard-nav-pills > li > a {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* FullCalendar */
+.fc table {
+  font-size: 1em;
+}
+
+.fc-event {
+  position: relative; /* for resize handle and other inner positioning */
+  display: block; /* make the <a> tag block */
+  line-height: 1.8;
+  border-radius: 1px;
+  border: 1px solid #20a8d8; /* default BORDER color */
+  padding-left: 5px;
+}
+
+.fc-event,
+.fc-event-dot {
+  background-color: #20a8d8; /* default BACKGROUND color */
+}
+
+.fc-title {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1) !important;
+  //text-transform: uppercase !important;
+  white-space: normal;
+}
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead,
+.fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row,
+.fc-unthemed .fc-content, .fc-unthemed
+.fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
+  border-color: #e5e5e5;
+  color: #536c79 !important;
+}
+
+.fc-left h2 {
+  font-size: 1.5rem;
+}
+
+input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: $gray-500 !important;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $gray-500 !important;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+  color: $gray-500 !important;
+}
+
+input:-ms-input-placeholder { /* IE 10+ */
+  color: $gray-500 !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: $gray-500 !important;
+}
+
+textarea::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: $gray-500 !important;
+}
+
+textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $gray-500 !important;
+}
+
+textarea::-moz-placeholder { /* Firefox 19+ */
+  color: $gray-500 !important;
+}
+
+textarea:-ms-input-placeholder { /* IE 10+ */
+  color: $gray-500 !important;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+  color: $gray-500 !important;
+}
+
+.text-muted{
+  color: $gray-700 !important;
+}
