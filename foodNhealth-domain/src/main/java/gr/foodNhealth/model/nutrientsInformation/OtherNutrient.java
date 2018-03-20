@@ -2,24 +2,26 @@ package gr.foodNhealth.model.nutrientsInformation;
 
 import gr.foodNhealth.model.BaseEntity;
 import gr.foodNhealth.model.NutrientsInformation;
-import gr.foodNhealth.model.nutrientsInformation.basicSunstances.other.Alcohol;
-import gr.foodNhealth.model.nutrientsInformation.basicSunstances.other.Caffeine;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 public class OtherNutrient extends BaseEntity {
 
-    @OneToOne
+    @NotNull
+    @ManyToOne
     private NutrientsInformation nutrientsInformation;
 
-    @OneToOne(mappedBy = "otherNutrient", cascade = CascadeType.REMOVE)
-    private Alcohol alcohol;
+    @ManyToOne
+    private OtherNutrientType otherNutrientType;
 
-    @OneToOne(mappedBy = "otherNutrient", cascade = CascadeType.REMOVE)
-    private Caffeine caffeine;
+    @NotNull
+    @Min(0)
+    @Column(precision = 4, scale = 10, nullable = false)
+    private BigDecimal quantity;
 
 
     public NutrientsInformation getNutrientsInformation() {
@@ -30,19 +32,19 @@ public class OtherNutrient extends BaseEntity {
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public Alcohol getAlcohol() {
-        return alcohol;
+    public OtherNutrientType getOtherNutrientType() {
+        return otherNutrientType;
     }
 
-    public void setAlcohol(Alcohol alcohol) {
-        this.alcohol = alcohol;
+    public void setOtherNutrientType(OtherNutrientType otherNutrientType) {
+        this.otherNutrientType = otherNutrientType;
     }
 
-    public Caffeine getCaffeine() {
-        return caffeine;
+    public BigDecimal getQuantity() {
+        return quantity;
     }
 
-    public void setCaffeine(Caffeine caffeine) {
-        this.caffeine = caffeine;
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
 }

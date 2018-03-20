@@ -3,7 +3,9 @@ package gr.foodNhealth.model;
 import gr.foodNhealth.model.nutrientsInformation.*;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.Collection;
 
 @Entity
 public class NutrientsInformation extends BaseEntity {
@@ -11,20 +13,20 @@ public class NutrientsInformation extends BaseEntity {
     @OneToOne
     private Ingredient ingredient;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private Mineral mineral;
+    @OneToMany(mappedBy = "nutrientsInformation")
+    private Collection<Mineral> minerals;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private Proximate proximate;
+    @OneToMany(mappedBy = "nutrientsInformation")
+    private Collection<Proximate> proximates;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private Vitamin vitamin;
+    @OneToMany(mappedBy = "nutrientsInformation")
+    private Collection<Vitamin> vitamins;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private Lipid lipid;
+    @OneToMany(mappedBy = "nutrientsInformation")
+    private Collection<Lipid> lipids;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private OtherNutrient OtherNutrient;
+    @OneToMany(mappedBy = "nutrientsInformation")
+    private Collection<OtherNutrient> OtherNutrient;
 
 
     public Ingredient getIngredient() {
@@ -35,43 +37,43 @@ public class NutrientsInformation extends BaseEntity {
         this.ingredient = ingredient;
     }
 
-    public Mineral getMineral() {
-        return mineral;
+    public Collection<Mineral> getMinerals() {
+        return minerals;
     }
 
-    public void setMineral(Mineral mineral) {
-        this.mineral = mineral;
+    public void setMineral(Collection<Mineral> minerals) {
+        this.minerals = minerals;
     }
 
-    public Proximate getProximate() {
-        return proximate;
+    public Collection<Proximate> getProximates() {
+        return proximates;
     }
 
-    public void setProximate(Proximate proximate) {
-        this.proximate = proximate;
+    public void setProximates(Collection<Proximate> proximates) {
+        this.proximates = proximates;
     }
 
-    public Vitamin getVitamin() {
-        return vitamin;
+    public Collection<Vitamin> getVitamins() {
+        return vitamins;
     }
 
-    public void setVitamin(Vitamin vitamin) {
-        this.vitamin = vitamin;
+    public void setVitamins(Collection<Vitamin> vitamins) {
+        this.vitamins = vitamins;
     }
 
-    public Lipid getLipid() {
-        return lipid;
+    public Collection<Lipid> getLipids() {
+        return lipids;
     }
 
-    public void setLipid(Lipid lipid) {
-        this.lipid = lipid;
+    public void setLipids(Collection<Lipid> lipids) {
+        this.lipids = lipids;
     }
 
-    public OtherNutrient getOtherNutrient() {
+    public Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> getOtherNutrient() {
         return OtherNutrient;
     }
 
-    public void setOtherNutrient(OtherNutrient OtherNutrient) {
+    public void setOtherNutrient(Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> OtherNutrient) {
         this.OtherNutrient = OtherNutrient;
     }
 }
