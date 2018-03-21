@@ -20,7 +20,7 @@ public class OtherNutrient extends BaseEntity {
 
     @NotNull
     @Min(0)
-    @Column(precision = 4, scale = 10, nullable = false)
+    @Column(precision = 10, scale = 10, nullable = false)
     private BigDecimal quantity;
 
 
