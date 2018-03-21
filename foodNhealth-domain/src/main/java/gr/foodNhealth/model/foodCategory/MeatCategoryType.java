@@ -1,4 +1,4 @@
-package gr.foodNhealth.model.foodCategoty;
+package gr.foodNhealth.model.foodCategory;
 
 import gr.foodNhealth.model.BaseEntity;
 import gr.foodNhealth.model.FoodCategory;
@@ -8,9 +8,9 @@ import javax.persistence.OneToMany;
 import java.util.Collection;
 
 @Entity
-public class FoodCategoryParentType extends BaseEntity {
+public class MeatCategoryType extends BaseEntity {
 
-    @OneToMany(mappedBy = "foodCategoryType")
+    @OneToMany(mappedBy = "meatCategoryType")
     private Collection<FoodCategory> foodCategories;
 
 

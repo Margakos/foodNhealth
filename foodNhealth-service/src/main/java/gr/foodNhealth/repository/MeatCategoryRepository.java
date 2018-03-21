@@ -1,6 +1,6 @@
 package gr.foodNhealth.repository;
 
-import gr.foodNhealth.model.foodCategoty.MeatCategoryType;
+import gr.foodNhealth.model.foodCategory.MeatCategoryType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

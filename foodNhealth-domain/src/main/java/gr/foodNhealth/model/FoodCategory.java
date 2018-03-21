@@ -1,8 +1,8 @@
 package gr.foodNhealth.model;
 
-import gr.foodNhealth.model.foodCategoty.FoodCategoryParentType;
-import gr.foodNhealth.model.foodCategoty.FoodCategoryType;
-import gr.foodNhealth.model.foodCategoty.MeatCategoryType;
+import gr.foodNhealth.model.foodCategory.FoodCategoryParentType;
+import gr.foodNhealth.model.foodCategory.FoodCategoryType;
+import gr.foodNhealth.model.foodCategory.MeatCategoryType;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

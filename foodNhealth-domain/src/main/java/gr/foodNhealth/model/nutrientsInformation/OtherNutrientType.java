@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 public class OtherNutrientType extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "otherNutrientType")
     private Collection<OtherNutrient> otherNutrients;
 
 

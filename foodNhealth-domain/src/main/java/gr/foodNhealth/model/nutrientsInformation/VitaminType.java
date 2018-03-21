@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 public class VitaminType extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "vitaminType")
     private Collection<Vitamin> vitamins;
 
 

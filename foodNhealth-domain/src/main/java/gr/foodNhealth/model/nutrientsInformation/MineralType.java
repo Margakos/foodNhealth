@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 public class MineralType extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "mineralType")
     private Collection<Mineral> minerals;
 
 

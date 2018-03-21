@@ -9,7 +9,7 @@ import java.util.Collection;
 @Entity
 public class LipidType extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "lipidType")
     private Collection<Lipid> lipids;
 
 

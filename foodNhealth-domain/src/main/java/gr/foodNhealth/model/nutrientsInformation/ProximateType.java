@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 public class ProximateType extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "proximateType")
     private Collection<Proximate> proximates;
 
 
