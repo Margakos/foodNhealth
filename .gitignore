@@ -12,9 +12,7 @@ out
 gen
 
 # target files
-foodNhealth-domain/target/**
-foodNhealth-service/target/**
-foodNhealth-webapp/target/**
+*/target/**
 
 ### Node template
 # Logs
