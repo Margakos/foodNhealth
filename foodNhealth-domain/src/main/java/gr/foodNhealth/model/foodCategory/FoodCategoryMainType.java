@@ -8,9 +8,9 @@ import javax.persistence.OneToMany;
 import java.util.Collection;
 
 @Entity
-public class FoodCategoryType extends BaseEntity {
+public class FoodCategoryMainType extends BaseEntity {
 
-    @OneToMany(mappedBy = "foodCategoryType")
+    @OneToMany(mappedBy = "foodCategoryMainType")
     private Collection<FoodCategory> foodCategories;
 
 

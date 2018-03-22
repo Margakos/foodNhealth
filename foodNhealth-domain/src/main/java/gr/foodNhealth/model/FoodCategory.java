@@ -1,7 +1,7 @@
 package gr.foodNhealth.model;
 
-import gr.foodNhealth.model.foodCategory.FoodCategoryParentType;
-import gr.foodNhealth.model.foodCategory.FoodCategoryType;
+import gr.foodNhealth.model.foodCategory.FoodCategoryMainType;
+import gr.foodNhealth.model.foodCategory.FoodCategorySubType;
 import gr.foodNhealth.model.foodCategory.MeatCategoryType;
 
 import javax.persistence.Entity;
@@ -18,11 +18,11 @@ public class FoodCategory extends BaseEntity {
     
     @NotNull
     @ManyToOne
-    private FoodCategoryParentType foodCategoryParentType;
+    private FoodCategoryMainType foodCategoryMainType;
 
     @NotNull
     @ManyToOne
-    private FoodCategoryType foodCategoryType;
+    private FoodCategorySubType foodCategorySubType;
     
     @ManyToOne
     private MeatCategoryType meatCategoryType;
@@ -36,20 +36,20 @@ public class FoodCategory extends BaseEntity {
         this.ingredient = ingredient;
     }
 
-    public FoodCategoryParentType getFoodCategoryParentType() {
-        return foodCategoryParentType;
+    public FoodCategoryMainType getFoodCategoryMainType() {
+        return foodCategoryMainType;
     }
 
-    public void setFoodCategoryParentType(FoodCategoryParentType foodCategoryParentType) {
-        this.foodCategoryParentType = foodCategoryParentType;
+    public void setFoodCategoryMainType(FoodCategoryMainType foodCategoryMainType) {
+        this.foodCategoryMainType = foodCategoryMainType;
     }
 
-    public FoodCategoryType getFoodCategoryType() {
-        return foodCategoryType;
+    public FoodCategorySubType getFoodCategorySubType() {
+        return foodCategorySubType;
     }
 
-    public void setFoodCategoryType(FoodCategoryType foodCategoryType) {
-        this.foodCategoryType = foodCategoryType;
+    public void setFoodCategorySubType(FoodCategorySubType foodCategorySubType) {
+        this.foodCategorySubType = foodCategorySubType;
     }
 
     public MeatCategoryType getMeatCategoryType() {

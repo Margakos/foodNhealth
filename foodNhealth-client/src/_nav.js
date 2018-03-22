@@ -9,6 +9,53 @@ export default {
       name: 'Συστατικά',
       url: '/ingredients',
       icon: 'icon-puzzle'
+    },
+    {
+      name: 'Διαχείριση',
+      url: '/admin',
+      icon: 'fa fa-wrench',
+      children: [
+        {
+          name: 'Κύριες Κατηγορίες Τροφήμων',
+          url: '/admin/foodCategoryMainTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Υποκατηγορίες Τροφήμων',
+          url: '/admin/foodCategorySubTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Υποκατηγορίες Κρεατικών',
+          url: '/admin/meatCategoryTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Θρεπτικών Συστατικών',
+          url: '/admin/proximateTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Ιχνιστοιχείων',
+          url: '/admin/mineralTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Βιταμινών',
+          url: '/admin/vitaminTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Λιπιδίων',
+          url: '/admin/lipidTypes',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Λοιπών',
+          url: '/admin/otherNutrientTypes',
+          icon: 'icon-puzzle'
+        }
+      ]
     }
     // ,
     // {

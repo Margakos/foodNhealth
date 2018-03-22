@@ -20,8 +20,8 @@
         <class>gr.foodNhealth.model.nutrientsInformation.ProximateType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Vitamin</class>
         <class>gr.foodNhealth.model.nutrientsInformation.VitaminType</class>
-        <class>gr.foodNhealth.model.foodCategory.FoodCategoryParentType</class>
-        <class>gr.foodNhealth.model.foodCategory.FoodCategoryType</class>
+        <class>gr.foodNhealth.model.foodCategory.FoodCategoryMainType</class>
+        <class>gr.foodNhealth.model.foodCategory.FoodCategorySubType</class>
         <class>gr.foodNhealth.model.foodCategory.MeatCategoryType</class>
 
         <!--TODO Change below properties according to our need-->

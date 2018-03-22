@@ -28,8 +28,16 @@ import Page500 from '@/views/pages/Page500'
 import Register from '@/views/pages/Register'
 
 // Views - FoodNHealth
-import Ingredients from '@/foodNhealth/Ingredients'
 import Login from '@/foodNhealth/Login'
+import Ingredients from '@/foodNhealth/Ingredients'
+import FoodCategoryMainTypes from '@/foodNhealth/FoodCategoryMainTypes'
+import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
+import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
+import ProximateTypes from '@/foodNhealth/ProximateTypes'
+import MineralTypes from '@/foodNhealth/MineralTypes'
+import VitaminTypes from '@/foodNhealth/VitaminTypes'
+import LipidTypes from '@/foodNhealth/LipidTypes'
+import OtherNutrientTypes from '@/foodNhealth/OtherNutrientTypes'
 
 Vue.use(Router)
 
@@ -63,6 +71,59 @@ export default new Router({
           path: 'ingredients',
           name: 'Ingredients',
           component: Ingredients
+        },
+        {
+          path: 'admin',
+          redirect: '/admin/foodCategoryMainTypes',
+          name: 'Διαχείριση',
+          component: {
+            render (c) {
+              return c('router-view')
+            }
+            // render (c) { return c('keep-alive', [c('router-view')]) }
+          },
+          children: [
+            {
+              path: 'foodCategoryMainTypes',
+              name: 'FoodCategoryMainTypes',
+              component: FoodCategoryMainTypes
+            },
+            {
+              path: 'foodCategorySubTypes',
+              name: 'FoodCategorySubTypes',
+              component: FoodCategorySubTypes
+            },
+            {
+              path: 'meatCategoryTypes',
+              name: 'MeatCategoryTypes',
+              component: MeatCategoryTypes
+            },
+            {
+              path: 'proximateTypes',
+              name: 'ProximateTypes',
+              component: ProximateTypes
+            },
+            {
+              path: 'mineralTypes',
+              name: 'MineralTypes',
+              component: MineralTypes
+            },
+            {
+              path: 'vitaminTypes',
+              name: 'VitaminTypes',
+              component: VitaminTypes
+            },
+            {
+              path: 'lipidTypes',
+              name: 'LipidTypes',
+              component: LipidTypes
+            },
+            {
+              path: 'otherNutrientTypes',
+              name: 'OtherNutrientTypes',
+              component: OtherNutrientTypes
+            }
+          ]
         },
         {
           path: 'components',

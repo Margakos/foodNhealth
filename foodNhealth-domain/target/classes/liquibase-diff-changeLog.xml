@@ -1,11 +1,346 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-
-
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="vasilis (generated)" id="1521727799845-1">
+        <createTable tableName="FoodCategory">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="FoodCategoryPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="foodCategoryMainType_id" type="BIGINT"/>
+            <column name="foodCategorySubType_id" type="BIGINT"/>
+            <column name="ingredient_id" type="BIGINT"/>
+            <column name="meatCategoryType_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-2">
+        <createTable tableName="FoodCategoryMainType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="FoodCategoryMainTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-3">
+        <createTable tableName="FoodCategorySubType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="FoodCategorySubTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-4">
+        <createTable tableName="Ingredient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="IngredientPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-5">
+        <createTable tableName="Lipid">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="LipidPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="quantity" type="DECIMAL(15, 15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lipidType_id" type="BIGINT"/>
+            <column name="nutrientsInformation_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-6">
+        <createTable tableName="LipidType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="LipidTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-7">
+        <createTable tableName="MeatCategoryType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="MeatCategoryTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-8">
+        <createTable tableName="Mineral">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="MineralPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="quantity" type="DECIMAL(15, 15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mineralType_id" type="BIGINT"/>
+            <column name="nutrientsInformation_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-9">
+        <createTable tableName="MineralType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="MineralTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-10">
+        <createTable tableName="NutrientsInformation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="NutrientsInformationPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="ingredient_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-11">
+        <createTable tableName="OtherNutrient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="OtherNutrientPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="quantity" type="DECIMAL(15, 15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nutrientsInformation_id" type="BIGINT"/>
+            <column name="otherNutrientType_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-12">
+        <createTable tableName="OtherNutrientType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="OtherNutrientTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-13">
+        <createTable tableName="Person">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="PersonPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="firstName" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="lastName" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-14">
+        <createTable tableName="Proximate">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ProximatePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="quantity" type="DECIMAL(15, 15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nutrientsInformation_id" type="BIGINT"/>
+            <column name="proximateType_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-15">
+        <createTable tableName="ProximateType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ProximateTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-16">
+        <createTable tableName="Vitamin">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="VitaminPK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="quantity" type="DECIMAL(15, 15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nutrientsInformation_id" type="BIGINT"/>
+            <column name="vitaminType_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-17">
+        <createTable tableName="VitaminType">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="VitaminTypePK"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-18">
+        <addUniqueConstraint columnNames="email" constraintName="UC_PERSONEMAIL_COL" tableName="Person"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-19">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Proximate" constraintName="FK2qlnslnum4xhby7hnv051qdic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-20">
+        <addForeignKeyConstraint baseColumnNames="vitaminType_id" baseTableName="Vitamin" constraintName="FK6rcupjhbj8hpfhiao7m5b7m1v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="VitaminType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-21">
+        <addForeignKeyConstraint baseColumnNames="lipidType_id" baseTableName="Lipid" constraintName="FKehnimuebaygwuvgs9w5qunx8a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="LipidType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-22">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Mineral" constraintName="FKfvd3h047r2t9dp8x9el6nelsn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-23">
+        <addForeignKeyConstraint baseColumnNames="meatCategoryType_id" baseTableName="FoodCategory" constraintName="FKgkfvytqtltrx3s89x99d9ahaw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="MeatCategoryType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-24">
+        <addForeignKeyConstraint baseColumnNames="proximateType_id" baseTableName="Proximate" constraintName="FKgq6rk95ascvjbiepmbd4gjjq0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ProximateType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-25">
+        <addForeignKeyConstraint baseColumnNames="foodCategoryMainType_id" baseTableName="FoodCategory" constraintName="FKls022ibwdtph7dv1ruflb0926" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategoryMainType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-26">
+        <addForeignKeyConstraint baseColumnNames="foodCategorySubType_id" baseTableName="FoodCategory" constraintName="FKmfqjxf7u0mk32hu6uw0cuxv9u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategorySubType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-27">
+        <addForeignKeyConstraint baseColumnNames="otherNutrientType_id" baseTableName="OtherNutrient" constraintName="FKn3tc8c2aipbkvpydqfeqjl8a4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="OtherNutrientType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-28">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="OtherNutrient" constraintName="FKnqewdvap3bmoj8s9u0reepiqu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-29">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Lipid" constraintName="FKob65qfl9tp6smt357y9rq72a7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-30">
+        <addForeignKeyConstraint baseColumnNames="ingredient_id" baseTableName="FoodCategory" constraintName="FKogdsqo19kl6534ukflluvgbry" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-31">
+        <addForeignKeyConstraint baseColumnNames="ingredient_id" baseTableName="NutrientsInformation" constraintName="FKpi89psyl5pp1jayn0s9jyddtl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-32">
+        <addForeignKeyConstraint baseColumnNames="mineralType_id" baseTableName="Mineral" constraintName="FKs53oflk5fr5wnfo9f85kqw6et" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="MineralType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1521727799845-33">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Vitamin" constraintName="FKsjxfnm75lnxlm6bsg473qeymo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
+    <changeSet id="20171128-01" author="aanagnostopoulos">
+        <comment>Insert Super User</comment>
+        <sqlFile path="./insert_super_user.sql"/>
+    </changeSet>
 </databaseChangeLog>
