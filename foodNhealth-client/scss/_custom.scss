@@ -19,40 +19,9 @@
   top: 0.7em;
 }
 
+// TODO this way to change a modals size custom
 #studyModal > .modal-lg {
   max-width: 80%;
-}
-
-#precontractualStepsModal > .modal-lg {
-  max-width: 99%;
-  min-height: 1000px;
-}
-
-#digitalDossierModal > .modal-lg {
-  max-width: 90%;
-  min-height: 1000px;
-}
-
-#digitalDossierModal .card {
-  border: none !important;
-  margin-bottom: 0.5rem !important;
-}
-
-#digitalDossierModal .card > .card-body {
-  padding: 0;
-}
-
-#digitalDossierModal .card > .card-header {
-  line-height: 1;
-}
-
-#digitalDossierModal .card > .card-body > label {
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-#diavgeiaModal > .modal-lg {
-  max-width: 70%;
 }
 
 .table .table {

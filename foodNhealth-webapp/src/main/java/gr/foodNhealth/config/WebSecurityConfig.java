@@ -74,8 +74,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class);
         }
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
+//        http.authorizeRequests().antMatchers("/**").hasIpAddress(apiAllowedIP);
+
         // static resources
         http.authorizeRequests().antMatchers("/public/**", "/favicon.ico").permitAll();
+
+        http.authorizeRequests().anyRequest().authenticated().and().httpBasic()
+                .and().csrf().disable();
     }
 
     @Autowired

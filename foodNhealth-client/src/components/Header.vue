@@ -29,7 +29,6 @@
           <template slot="button-content">
             <span class="d-md-down-none">{{$auth.user().email}}</span>
           </template>
-          <b-dropdown-item @click="changePassword" v-if="!$auth.user().ldapEnabled"><i class="fa fa-gear"></i> Αλλαγή συνθηματικού</b-dropdown-item>
           <b-dropdown-item @click="logout"><i class="fa fa-lock"></i> Αποσύνδεση</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -37,7 +36,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </header>
-    <changePassword v-if="!$auth.user().ldapEnabled"></changePassword>
   </div>
 </template>
 <script>
@@ -77,9 +75,6 @@
       asideToggle (e) {
         e.preventDefault()
         document.body.classList.toggle('aside-menu-hidden')
-      },
-      changePassword () {
-        this.$events.fire('edit-changePassword')
       }
     }
   }

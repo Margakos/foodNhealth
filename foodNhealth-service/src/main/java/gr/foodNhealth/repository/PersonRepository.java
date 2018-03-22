@@ -10,5 +10,13 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
     @RestResource(exported = false)
+    Person findByEmail(String email);
+
+    //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
+    @RestResource(exported = false)
     Person findByEmailAndIsActive(String email, boolean isActive);
+
+    //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
+    @RestResource(exported = false)
+    Person findByEmailAndPasswordAndIsActive(String email, String password, boolean isActive);
 }

@@ -50,7 +50,7 @@ Vue.use(require('@websanova/vue-auth'), {
   loginData: {
     url: 'login?projection=loginPerson',
     method: 'POST',
-    redirect: '/calendar',
+    redirect: '/ingredients',
     fetchUser: false
   },
   fetchData: {
@@ -62,7 +62,6 @@ Vue.use(require('@websanova/vue-auth'), {
     enabled: false,
     interval: 0
   },
-  rolesVar: 'roles',
   forbiddenRedirect: {
     path: '/pages/error/403'
   },
@@ -139,25 +138,6 @@ Vue.mixin({
       })
       return entityURIs
     },
-    // TODO convert to auto-complete, to remove hard coded limit
-    getContexts () {
-      return this.$http.get('contexts?size=' + Vue.prototype.$maxPageSize)
-    },
-    getCompetentAuthorities () {
-      return this.$http.get('competentAuthorities?projection=simpleRole&size=1000')
-    },
-    getDocumentTypesByContext (context) {
-      return this.$http.get('documentTypes/search/findByContexts_Title?context=' + context + '&projection=simpleRole&size=' + Vue.prototype.$maxPageSize)
-    },
-    getDocumentTypes () {
-      return this.$http.get('documentTypes/')
-    },
-    getDepartments () {
-      return this.$http.get('departments?projection=simpleRole&size=' + Vue.prototype.$maxPageSize)
-    },
-    getUserAccessibleDepartments () {
-      return this.$http.get('accessibleDepartments?projection=simpleRole')
-    },
     checkPermissionsByUrl (url) {
       let resolve = this.$router.resolve(url)
       let allowed = true
@@ -165,9 +145,6 @@ Vue.mixin({
         allowed = this.$auth.check(resolve.route.meta.auth.roles)
       }
       return allowed
-    },
-    getPersons () {
-      return this.$http.get('persons?projection=simplePerson&size=1000')
     },
     getMessage (key) {
       let message = this.$messages[key]
@@ -198,6 +175,14 @@ Vue.mixin({
       return percentage === null ? null : percentage.toLocaleString('el', {
         style: 'decimal'
       }).replace(',00', '') + '%'
+    },
+    formatGrams (grams) {
+      return grams === null ? null : grams.toLocaleString('el', {
+        style: 'decimal'
+      }).replace(',00', '') + 'gr'
+    },
+    formatUgrams (ugrams) {
+      // TODO format ugrams
     },
     limitReachedText (count) {
       return 'και ' + count + ' ακόμα αποτελέσματα'

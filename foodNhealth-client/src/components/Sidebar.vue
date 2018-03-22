@@ -40,24 +40,6 @@
             </template>
           </template>
         </template>
-        <li class="nav-item nav-dropdown">
-          <div class="nav-link nav-dropdown-toggle" @click="handleClick"><i class="fa fa-question"></i> Βοήθεια</div>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a href="#/calendar" onclick="window.open('http://www.eaadhsy.gr/n4412/', '_blank')" class="nav-link"><i
-                class="icon-puzzle"></i> Ν.4412/16</a>
-            </li>
-            <li class="nav-item">
-              <a href="#/calendar"
-                 onclick="window.open('http://www.eaadhsy.gr/index.php/m-foreis/m-syxnes-ervthseis-apanthseis-faq-gia-to-n-4412-2016/list/29?lang=gr', '_blank')"
-                 class="nav-link"><i class="icon-puzzle"></i> Ν.4412/16. Συχνές Ερωτήσεις-Απαντήσεις </a>
-            </li>
-            <li class="nav-item">
-              <a href="#/calendar" onclick="window.open('static/manual.pdf', '_blank')" class="nav-link"><i
-                class="icon-puzzle"></i> Εγχειρίδιο Χρήσης</a>
-            </li>
-          </ul>
-        </li>
       </ul>
       <slot></slot>
     </nav>
