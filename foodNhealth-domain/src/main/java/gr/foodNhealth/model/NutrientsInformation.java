@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -28,7 +27,7 @@ public class NutrientsInformation extends BaseEntity {
     private Collection<Lipid> lipids;
 
     @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
-    private Collection<OtherNutrient> OtherNutrient;
+    private Collection<OtherNutrient> otherNutrients;
 
 
     public Ingredient getIngredient() {
@@ -43,7 +42,7 @@ public class NutrientsInformation extends BaseEntity {
         return minerals;
     }
 
-    public void setMineral(Collection<Mineral> minerals) {
+    public void setMinerals(Collection<Mineral> minerals) {
         this.minerals = minerals;
     }
 
@@ -71,11 +70,11 @@ public class NutrientsInformation extends BaseEntity {
         this.lipids = lipids;
     }
 
-    public Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> getOtherNutrient() {
-        return OtherNutrient;
+    public Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> getOtherNutrients() {
+        return otherNutrients;
     }
 
-    public void setOtherNutrient(Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> OtherNutrient) {
-        this.OtherNutrient = OtherNutrient;
+    public void setOtherNutrients(Collection<gr.foodNhealth.model.nutrientsInformation.OtherNutrient> OtherNutrient) {
+        this.otherNutrients = OtherNutrient;
     }
 }

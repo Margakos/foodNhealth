@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Entity
 public class Mineral extends BaseEntity {
 
+    @NotNull
     @ManyToOne
     private NutrientsInformation nutrientsInformation;
 

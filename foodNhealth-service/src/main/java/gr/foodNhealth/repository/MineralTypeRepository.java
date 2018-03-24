@@ -1,8 +1,6 @@
 package gr.foodNhealth.repository;
 
-import gr.foodNhealth.model.nutrientsInformation.Mineral;
 import gr.foodNhealth.model.nutrientsInformation.MineralType;
-import gr.foodNhealth.model.nutrientsInformation.VitaminType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

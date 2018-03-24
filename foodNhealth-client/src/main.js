@@ -182,7 +182,7 @@ Vue.mixin({
     formatGrams (grams) {
       return grams === null ? null : grams.toLocaleString('el', {
         style: 'decimal'
-      }).replace(',00', '') + 'gr'
+      }).replace('', '') + ' gr'
     },
     formatUgrams (ugrams) {
       // TODO format ugrams
