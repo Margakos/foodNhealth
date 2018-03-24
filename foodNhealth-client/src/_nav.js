@@ -16,6 +16,11 @@ export default {
       icon: 'fa fa-wrench',
       children: [
         {
+          name: 'Χρήστες',
+          url: '/admin/persons',
+          icon: 'icon-puzzle'
+        },
+        {
           name: 'Κύριες Κατηγορίες Τροφήμων',
           url: '/admin/foodCategoryMainTypes',
           icon: 'icon-puzzle'
@@ -31,27 +36,27 @@ export default {
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κατηγορίες Θρεπτικών Συστατικών',
+          name: 'Τύποι Θρεπτικών Συστατικών',
           url: '/admin/proximateTypes',
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κατηγορίες Ιχνιστοιχείων',
+          name: 'Τύποι Ιχνιστοιχείων',
           url: '/admin/mineralTypes',
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κατηγορίες Βιταμινών',
+          name: 'Τύποι Βιταμινών',
           url: '/admin/vitaminTypes',
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κατηγορίες Λιπιδίων',
+          name: 'Τύποι Λιπιδίων',
           url: '/admin/lipidTypes',
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κατηγορίες Λοιπών',
+          name: 'Τύποι Λοιπών',
           url: '/admin/otherNutrientTypes',
           icon: 'icon-puzzle'
         }

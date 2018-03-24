@@ -12,15 +12,13 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class FoodCategory extends BaseEntity {
 
-    @NotNull
-    @OneToOne
+
+    @OneToOne(mappedBy = "foodCategory")
     private Ingredient ingredient;
     
-    @NotNull
     @ManyToOne
     private FoodCategoryMainType foodCategoryMainType;
 
-    @NotNull
     @ManyToOne
     private FoodCategorySubType foodCategorySubType;
     

@@ -15,12 +15,13 @@ public class OtherNutrient extends BaseEntity {
     @ManyToOne
     private NutrientsInformation nutrientsInformation;
 
-    @ManyToOne
+    @NotNull
+    @ManyToOne(optional = false)
     private OtherNutrientType otherNutrientType;
 
     @NotNull
     @Min(0)
-    @Column(precision = 15, scale = 15, nullable = false)
+    @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
 

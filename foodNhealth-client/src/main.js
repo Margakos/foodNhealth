@@ -146,6 +146,9 @@ Vue.mixin({
       }
       return allowed
     },
+    getMineralTypes () {
+      return this.$http.get('mineralTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    },
     getMessage (key) {
       let message = this.$messages[key]
       return message != null ? message : key

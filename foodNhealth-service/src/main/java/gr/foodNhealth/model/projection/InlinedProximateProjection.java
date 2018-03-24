@@ -18,5 +18,5 @@ public interface InlinedProximateProjection {
 
     SimpleRoleProjection getProximateType();
 
-//    InlinedNutrientsInformationProjection getNutrientsInformation();
+    InlinedNutrientsInformationProjection getNutrientsInformation();
 }

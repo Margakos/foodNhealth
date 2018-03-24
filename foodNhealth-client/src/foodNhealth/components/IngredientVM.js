@@ -1,24 +1,58 @@
+const availableFormGrams = 'GRAMS'
+const availableFormPieces = 'PIECES'
+const availableFormSlices = 'SLICES'
+
 export default {
   name: 'ingredient',
   data: function () {
     return {
       visible: false,
       ingredient: initIngredient(),
+      minerals: [],
+      mineralTypes: [],
+      mineralType: null,
+      mineralQuantity: 0,
+      availableForms: [availableFormGrams, availableFormPieces, availableFormSlices],
       rules: {
         name: {
           required: true,
           max: 255
+        },
+        availableForm: {
+          required: true
+        },
+        mineralType: {
+          required: true
+        },
+        quantity: {
+          required: true,
+          min_value: 0.000000000001
         }
-      }
+      },
+      mineralsFields: [
+        {
+          key: 'index',
+          label: '#'
+        },
+        {
+          key: 'mineralType',
+          label: 'Τίτλος'
+        },
+        {
+          key: 'quantity',
+          label: ' Ποσότητα',
+          callback: 'formatGrams'
+        },
+        {
+          key: 'actions',
+          label: 'Ενέργειες',
+          thClass: 'text-right',
+          tdClass: 'text-right'
+        }
+      ]
     }
   },
   created () {
-    Promise.all([/* get all the Ingredient required attributes (ex foodCategory) */]).then(([foodCategory]) => {
-      // this.foodCategory = foodCategory.data._embedded.foodCategories
-    }).catch(e => {
-      console.log(e)
-      this.error(this.$messages.errorLoad)
-    })
     console.log('Ingredient created')
   },
   mounted () {
@@ -35,11 +69,24 @@ export default {
     }
   },
   methods: {
+    refreshMineralTypes () {
+      this.$http.get('mineralTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
+        this.mineralTypes = response.data._embedded.mineralTypes
+      })
+    },
+    refreshMinerals () {
+      this.$http.get(this.ingredient.nutrientsInformation._links.minerals.href + '?projection=inlinedMineral').then(response => {
+        this.minerals = response.data._embedded.minerals
+      })
+    },
     onEditIngredient (eventData) {
+      this.invalidateAll()
       if (eventData != null) {
         // Edit existing row
         this.$http.get('ingredients/' + eventData + '?projection=inlinedIngredient').then(response => {
           this.ingredient = response.data
+          this.refreshMineralTypes()
+          this.refreshMinerals()
           this.visible = true
         }).catch(e => {
           console.log(e)
@@ -48,15 +95,11 @@ export default {
       } else {
         // Add new Ingredient
         Object.assign(this.$data.ingredient, initIngredient())
-        // this is the right way to reset the vee-validator
-        this.$validator.reset().then(() => {
-          this.errors.clear('generalForm')
-        })
         this.visible = true
       }
     },
     save () {
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll('generalForm').then((result) => {
         if (!result) {
           return
         }
@@ -71,7 +114,7 @@ export default {
           }).then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         } else {
-          this.$http.post('ingredients' + '?projection=inlinedIngredient', tempIngredient, {
+          this.$http.post('ingredients?projection=inlinedIngredient', tempIngredient, {
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data, headers)
             }]
@@ -81,21 +124,8 @@ export default {
         }
       })
     },
-    transformRequest (data, headers) {
-      console.log(this.ingredientMembers)
-      // convert entities to url in order to send them to Spring Data Rest (like below)
-      // data.foodCategory = this.convertEntityToURI(data.foodCategory)
-      return JSON.stringify(data)
-    },
     cancel () {
       this.visible = false
-    },
-    handleSuccess (response) {
-      this.ingredient = response.data
-      this.ingredient.year = new Date(Date.UTC(this.ingredient.year, 0))
-      this.success(this.$messages.successAction)
-      console.log('fire ingredient-edited event')
-      this.$events.fire('ingredient-edited', this.ingredient)
     },
     handleError (e) {
       console.log(e)
@@ -123,12 +153,73 @@ export default {
             this.error(this.$messages.errorDeleteDependencies)
           })
       })
+    },
+    invalidateAll () {
+      this.$validator.reset().then(() => {
+        this.errors.clear('generalForm')
+        this.errors.clear('mineralsForm')
+        this.errors.clear('foodCategoryForm')
+      })
+    },
+    handleSuccess (response) {
+      this.ingredient = response.data
+      this.success(this.$messages.successAction)
+      console.log('fire ingredient-edited event')
+      this.$events.fire('ingredient-edited', this.ingredient)
+    },
+    transformRequest (data, headers) {
+      data.foodCategory = this.convertEntityToURI(data.foodCategory)
+      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
+      return JSON.stringify(data)
+    },
+    addMineral () {
+      this.$validator.validateAll('mineralsForm').then((result) => {
+        if (!result) {
+          return
+        }
+        let mineral = {
+          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
+          mineralType: this.mineralType._links.self.href,
+          quantity: this.mineralQuantity
+        }
+        this.$http.post('minerals', mineral).then(response => {
+          this.mineralType = null
+          this.mineralQuantity = 0
+          this.refreshMinerals()
+          this.refreshMineralTypes()
+          this.$validator.reset().then(() => {
+            this.errors.clear('mineralsForm')
+          })
+        })
+      })
+    },
+    confirmRemoveMineral (data) {
+      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
+        confirmButtonText: this.$messages.yes,
+        cancelButtonText: this.$messages.no,
+        cancelButtonClass: 'btn btn-warning',
+        confirmButtonClass: 'btn btn-danger',
+        closeOnClickModal: false,
+        closeOnPressEscape: false,
+        type: 'warning'
+      }).then(() => {
+        this.$http.delete('minerals/' + data.id).then(response => {
+          this.refreshMinerals()
+          this.refreshMineralTypes()
+        })
+      }).catch(e => {
+        // confirm dialog cancelled
+      })
     }
   }
 }
+
 function initIngredient () {
   return {
-    id: null
+    id: null,
+    name: '',
+    availableForm: null,
+    nutrientsInformation: null,
+    foodCategory: null
   }
 }
-

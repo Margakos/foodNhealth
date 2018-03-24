@@ -10,6 +10,7 @@ const messages = {
   errorDuplicateRecord: 'Η εγγραφή αυτή υπάρχει ήδη στη βάση δεδομένων',
   errorDeleteDependencies: 'Η εγγραφή αυτή δεν μπορεί να διαγραφεί, καθώς έχει ήδη διασυνδεθεί με άλλες εγγραφές στη βάση',
   warningNoResultFound: 'Δεν βρέθηκαν αποτελέσματα για την αναζήτηση',
+  warningUserChanged: 'Ο λογαρισμός χρήστη με τον οποίο είστε συνδεδεμένος/η τροποποιήθηκε. Παρακαλούμε πραγματοποιήστε εκ νέου είσοδο στην εφαρμογή, προκειμένου να εφαρμοστούν οι αλλαγές.',
   confirmActionTitle: 'Επιβεβαίωση Ενέργειας',
   confirmAction: 'Η ενέργεια αυτή είναι αμετάκλητη. Θέλετε να συνεχίσετε?',
   selected: 'Επιλεγμένο',
@@ -21,9 +22,19 @@ const messages = {
   ok: 'Οκ',
   warning: 'Προειδοποίηση',
   required: 'Το πεδίο δεν έχει συμπληρωθεί.',
-  // DATA BASE ENTITIES
+  // Ddata Base Entities
   Ingredients: 'Συστατικά',
-  Ingredient: 'Συστατικό'
+  Ingredient: 'Συστατικό',
+  // NutrientsInformation
+  Mineral: 'Ιχνοστοιχεία',
+  Lipid: 'Λιπίδια',
+  OtherNutrient: 'Λοιπά',
+  Proximate: 'Θρεπτικά Συστατικά',
+  Vitamin: 'Βιταμίνες',
+  // Enums
+  GRAMS: 'Γραμμάρια',
+  SLICES: 'Φέτες',
+  PIECES: 'Κομμάτια'
 }
 
 export default messages

@@ -10,9 +10,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import java.util.Collection;
+
 @RepositoryRestResource
 public interface MineralTypeRepository extends JpaRepository<MineralType, Long> {
 
     @Query("SELECT mt FROM MineralType mt WHERE mt.title LIKE CONCAT('%',?1,'%') ")
     Page<MineralType> findByQuery(@Param("query") String query, Pageable pageable);
+
+    @Query("SELECT mt FROM MineralType mt WHERE mt NOT IN " +
+            "(SELECT m.mineralType FROM Mineral m WHERE m.nutrientsInformation.ingredient.id=?1)")
+    Collection<MineralType> findNotParticipating(@Param("ingredientId") Long ingredientId);
 }

@@ -2,30 +2,32 @@ package gr.foodNhealth.model;
 
 import gr.foodNhealth.model.nutrientsInformation.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
 public class NutrientsInformation extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(mappedBy = "nutrientsInformation")
     private Ingredient ingredient;
 
-    @OneToMany(mappedBy = "nutrientsInformation")
+    @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<Mineral> minerals;
 
-    @OneToMany(mappedBy = "nutrientsInformation")
+    @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<Proximate> proximates;
 
-    @OneToMany(mappedBy = "nutrientsInformation")
+    @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<Vitamin> vitamins;
 
-    @OneToMany(mappedBy = "nutrientsInformation")
+    @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<Lipid> lipids;
 
-    @OneToMany(mappedBy = "nutrientsInformation")
+    @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<OtherNutrient> OtherNutrient;
 
 

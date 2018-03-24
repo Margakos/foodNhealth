@@ -18,5 +18,5 @@ public interface InlinedVitaminProjection {
     
     SimpleRoleProjection getVitaminType();
 
-//    InlinedNutrientsInformationProjection getNutrientsInformation();
+    InlinedNutrientsInformationProjection getNutrientsInformation();
 }

@@ -11,16 +11,16 @@ import java.math.BigDecimal;
 @Entity
 public class Mineral extends BaseEntity {
 
-    @NotNull
     @ManyToOne
     private NutrientsInformation nutrientsInformation;
 
-    @ManyToOne
+    @NotNull
+    @ManyToOne(optional = false)
     private MineralType mineralType;
 
     @NotNull
     @Min(0)
-    @Column(precision = 15, scale = 15, nullable = false)
+    @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
 

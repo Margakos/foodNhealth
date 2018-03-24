@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import DataTable from '@/foodNhealth/components/DataTable'
 import Ingredient from '@/foodNhealth/components/Ingredient'
 
@@ -25,7 +24,7 @@ export default {
   },
   data: function () {
     return {
-      url: 'ingredients?projection=inlinedIngredient&size=' + Vue.prototype.$maxPageSize,
+      url: 'ingredients/search/findByQuery?projection=inlinedIngredient',
       fields: [
         {
           name: 'id',
@@ -34,11 +33,7 @@ export default {
         {
           name: 'name',
           title: 'Όνομα'
-        },
-        {
-          name: 'quantity',
-          title: 'Ποσότητα'
-        },
+        }
       ],
       append_params: {
         query: ''

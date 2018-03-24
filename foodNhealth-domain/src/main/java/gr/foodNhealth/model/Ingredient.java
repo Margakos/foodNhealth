@@ -1,9 +1,6 @@
 package gr.foodNhealth.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Entity
 
@@ -12,25 +9,18 @@ public class Ingredient extends BaseEntity {
     @Column
     private String name;
 
-    @NotNull
-    @Min(0)
-    @Column(precision = 4, scale = 4, nullable = false)
-    private BigDecimal quantity;
-
     @Column
     private String photoPath;
 
-    @NotNull
-    @OneToOne(mappedBy = "ingredient")
+    @OneToOne(cascade = CascadeType.REMOVE)
     private FoodCategory foodCategory;
 
     @Basic
-    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column
     private AvailableForm availableForm;
 
-    @NotNull
-    @OneToOne(mappedBy = "ingredient")
+    @OneToOne(cascade = CascadeType.REMOVE)
     private NutrientsInformation nutrientsInformation;
 
 
@@ -40,14 +30,6 @@ public class Ingredient extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(BigDecimal quantity) {
-        this.quantity = quantity;
     }
 
     public String getPhotoPath() {
@@ -80,5 +62,9 @@ public class Ingredient extends BaseEntity {
 
     public void setNutrientsInformation(NutrientsInformation nutrientsInformation) {
         this.nutrientsInformation = nutrientsInformation;
+    }
+
+    public enum AvailableForm {
+        GRAMS, PIECES, SLICES
     }
 }

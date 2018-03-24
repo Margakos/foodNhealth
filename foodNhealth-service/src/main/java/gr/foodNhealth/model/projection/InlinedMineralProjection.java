@@ -18,5 +18,5 @@ public interface InlinedMineralProjection {
     
     SimpleRoleProjection getMineralType();
 
-//    InlinedNutrientsInformationProjection getNutrientsInformation();
+    InlinedNutrientsInformationProjection getNutrientsInformation();
 }

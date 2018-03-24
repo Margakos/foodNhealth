@@ -13,14 +13,4 @@ public interface InlinedNutrientsInformationProjection {
     String getTitle();
 
     String getDescription();
-
-    Collection<InlinedProximateProjection> getProximates();
-
-    Collection<InlinedMineralProjection> getMinerals();
-
-    Collection<InlinedVitaminProjection> getVitamins();
-
-    Collection<InlinedLipidProjection> getLipids();
-
-    Collection<InlinedOtherNutrientProjection> getOtherNutrients();
 }

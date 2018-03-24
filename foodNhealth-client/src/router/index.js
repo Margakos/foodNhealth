@@ -28,6 +28,7 @@ import Page500 from '@/views/pages/Page500'
 import Register from '@/views/pages/Register'
 
 // Views - FoodNHealth
+import Persons from '@/foodNhealth/Persons'
 import Login from '@/foodNhealth/Login'
 import Ingredients from '@/foodNhealth/Ingredients'
 import FoodCategoryMainTypes from '@/foodNhealth/FoodCategoryMainTypes'
@@ -83,6 +84,11 @@ export default new Router({
             // render (c) { return c('keep-alive', [c('router-view')]) }
           },
           children: [
+            {
+              path: 'persons',
+              name: 'Persons',
+              component: Persons
+            },
             {
               path: 'foodCategoryMainTypes',
               name: 'FoodCategoryMainTypes',
