@@ -12,5 +12,5 @@ public interface InlinedLipidProjection extends SimpleRoleProjection {
 
     SimpleRoleProjection getLipidType();
 
-    InlinedNutrientsInformationProjection getNutrientsInformation();
+    SimpleRoleProjection getNutrientsInformation();
 }

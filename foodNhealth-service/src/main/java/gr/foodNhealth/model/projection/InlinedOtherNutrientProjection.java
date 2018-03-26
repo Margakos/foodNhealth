@@ -12,5 +12,5 @@ public interface InlinedOtherNutrientProjection extends SimpleRoleProjection {
     
     SimpleRoleProjection getOtherNutrientType();
 
-    InlinedNutrientsInformationProjection getNutrientsInformation();
+    SimpleRoleProjection getNutrientsInformation();
 }

@@ -1,7 +1,3 @@
-const availableFormGrams = 'GRAMS'
-const availableFormPieces = 'PIECES'
-const availableFormSlices = 'SLICES'
-
 export default {
   name: 'ingredient',
   data: function () {
@@ -32,14 +28,10 @@ export default {
       foodCategorySubTypes: [],
       meatCategoryTypes: [],
       meatCategoryType: null,
-      availableForms: [availableFormGrams, availableFormPieces, availableFormSlices],
       rules: {
         name: {
           required: true,
           max: 255
-        },
-        availableForm: {
-          required: false
         },
         mineralType: {
           required: true
@@ -57,7 +49,7 @@ export default {
           required: true
         },
         foodCategoryCoreType: {
-          required: false
+          required: true
         },
         foodCategorySubType: {
           required: true
@@ -577,7 +569,7 @@ function initIngredient () {
   return {
     id: null,
     name: '',
-    availableForm: null,
+    photoPath: null,
     nutrientsInformation: null,
     foodCategoryCoreType: null,
     foodCategorySubType: null,

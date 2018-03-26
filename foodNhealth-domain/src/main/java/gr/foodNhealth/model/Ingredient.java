@@ -5,12 +5,14 @@ import gr.foodNhealth.model.foodCategory.FoodCategorySubType;
 import gr.foodNhealth.model.foodCategory.MeatCategoryType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
-
 public class Ingredient extends BaseEntity {
 
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private String name;
 
     @Column
@@ -25,13 +27,11 @@ public class Ingredient extends BaseEntity {
     @ManyToOne
     private MeatCategoryType meatCategoryType;
 
-    @Basic
-    @Enumerated(EnumType.STRING)
-    @Column
-    private AvailableForm availableForm;
-
     @OneToOne(cascade = CascadeType.REMOVE)
     private NutrientsInformation nutrientsInformation;
+
+    @OneToMany(mappedBy = "ingredient")
+    private Collection<Product> products;
 
 
     public String getName() {
@@ -74,14 +74,6 @@ public class Ingredient extends BaseEntity {
         this.meatCategoryType = meatCategoryType;
     }
 
-    public AvailableForm getAvailableForm() {
-        return availableForm;
-    }
-
-    public void setAvailableForm(AvailableForm availableForm) {
-        this.availableForm = availableForm;
-    }
-
     public NutrientsInformation getNutrientsInformation() {
         return nutrientsInformation;
     }
@@ -90,7 +82,11 @@ public class Ingredient extends BaseEntity {
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public enum AvailableForm {
-        GRAMS, PIECES, SLICES
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 }

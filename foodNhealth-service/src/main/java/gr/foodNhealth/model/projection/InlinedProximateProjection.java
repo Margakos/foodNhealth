@@ -12,5 +12,5 @@ public interface InlinedProximateProjection extends SimpleRoleProjection {
 
     SimpleRoleProjection getProximateType();
 
-    InlinedNutrientsInformationProjection getNutrientsInformation();
+    SimpleRoleProjection getNutrientsInformation();
 }

@@ -33,6 +33,16 @@ export default {
         {
           name: 'name',
           title: 'Όνομα'
+        },
+        {
+          name: 'foodCategoryCoreType',
+          title: 'Κύρια Κατηγορία Συστατικού',
+          callback: 'getMessage'
+        },
+        {
+          name: 'foodCategorySubType',
+          title: 'Υποκατηγορία Συστατικού',
+          callback: 'getMessage'
         }
       ],
       append_params: {

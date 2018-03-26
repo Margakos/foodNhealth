@@ -26,22 +26,6 @@
 
       <b-tabs pills>
         <b-tab title="Γενικά Στοιχεία" active>
-          <!-- Available Form -->
-          <b-form-group description="Επιλέξτε Μορφή Συστατικού"
-                        :feedback="errors.first('availableForm', 'generalForm')"
-                        :state="isValid('availableForm', 'generalForm')">
-            <b-input-group>
-              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
-                           data-vv-scope="generalForm" name="availableForm" id="availableForm"
-                           v-model="ingredient.availableForm" :options="availableForms" :custom-label="getMessage"
-                           :searchable="true" placeholder="Μορφή Συστατικού"
-                           v-validate="rules.availableForm"
-                           :state="isValid('availableForm', 'generalForm')"
-                           :class="{'is-invalid': errors.has('availableForm', 'generalForm')}">
-              </multiselect>
-            </b-input-group>
-          </b-form-group>
-
           <!-- Food Category Core Type -->
           <b-form-group description="Επιλέξτε την Κύρια Κατηγορία που ανήκει το Συστατικό"
                         :feedback="errors.first('foodCategoryCoreType', 'generalForm')"

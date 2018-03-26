@@ -12,13 +12,11 @@ public interface InlinedIngredientProjection extends SimpleRoleProjection {
 
     String getPhotoPath();
 
-    Ingredient.AvailableForm getAvailableForm();
-
     SimpleRoleProjection getFoodCategoryCoreType();
 
     SimpleRoleProjection getFoodCategorySubType();
 
     SimpleRoleProjection getMeatCategoryType();
 
-    InlinedNutrientsInformationProjection getNutrientsInformation();
+    SimpleRoleProjection getNutrientsInformation();
 }
