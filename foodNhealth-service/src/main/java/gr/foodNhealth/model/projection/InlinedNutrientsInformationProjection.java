@@ -6,11 +6,6 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.Collection;
 
 @Projection(name = "inlinedNutrientsInformation", types = NutrientsInformation.class)
-public interface InlinedNutrientsInformationProjection {
+public interface InlinedNutrientsInformationProjection extends SimpleRoleProjection {
 
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
 }

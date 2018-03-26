@@ -42,6 +42,61 @@
             </b-input-group>
           </b-form-group>
 
+          <!-- Food Category Core Type -->
+          <b-form-group description="Επιλέξτε την Κύρια Κατηγορία που ανήκει το Συστατικό"
+                        :feedback="errors.first('foodCategoryCoreType', 'generalForm')"
+                        :state="isValid('foodCategoryCoreType', 'generalForm')">
+            <b-input-group>
+              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
+                           data-vv-scope="generalForm" name="foodCategoryCoreType" id="foodCategoryCoreType"
+                           v-model="ingredient.foodCategoryCoreType" :options="foodCategoryCoreTypes"
+                           :searchable="true" placeholder="Κύρια Κατηγορία Συστατικού"
+                           track-by="id" label="title"
+                           v-validate="rules.foodCategoryCoreType"
+                           :state="isValid('foodCategoryCoreType', 'generalForm')"
+                           :class="{'is-invalid': errors.has('foodCategoryCoreType', 'generalForm')}"
+                           @change="foodCategoryCoreTypeChanged">
+              </multiselect>
+            </b-input-group>
+          </b-form-group>
+
+          <!-- Food Category Sub Type -->
+          <b-form-group description="Επιλέξτε την Υποκατηγορία που ανήκει το Συστατικό"
+                        :feedback="errors.first('foodCategorySubType', 'generalForm')"
+                        :state="isValid('foodCategorySubType', 'generalForm')">
+            <b-input-group>
+              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
+                           data-vv-scope="generalForm" name="foodCategorySubType" id="foodCategorySubType"
+                           v-model="ingredient.foodCategorySubType" :options="foodCategorySubTypes"
+                           :searchable="true" placeholder="Υποκατηγορία Συστατικού"
+                           track-by="id" label="title"
+                           v-validate="rules.foodCategorySubType"
+                           :state="isValid('foodCategorySubType', 'generalForm')"
+                           :class="{'is-invalid': errors.has('foodCategorySubType', 'generalForm')}"
+                           :disabled="isFoodCategorySubTypeDisabled">
+              </multiselect>
+            </b-input-group>
+          </b-form-group>
+
+          <!-- Meat Category Type -->
+          <b-form-group description="Επιλέξτε την Υποκατηγορία Κρέατος που ανήκει το Συστατικό"
+                        :feedback="errors.first('meatCategoryType', 'generalForm')"
+                        :state="isValid('meatCategoryType', 'generalForm')"
+                        v-show="this.ingredient.foodCategorySubType != null && this.ingredient.foodCategorySubType.title === 'Κρέας'">
+            <b-input-group>
+              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
+                           data-vv-scope="generalForm" name="meatCategoryType" id="meatCategoryType"
+                           v-model="ingredient.meatCategoryType" :options="meatCategoryTypes"
+                           :searchable="true" placeholder="Υποκατηγορία Κρέατος"
+                           track-by="id" label="title"
+                           v-validate="rules.meatCategoryType"
+                           :state="isValid('meatCategoryType', 'generalForm')"
+                           :class="{'is-invalid': errors.has('meatCategoryType', 'generalForm')}"
+                           :disabled="isMeatCategoryTypeDisabled">
+              </multiselect>
+            </b-input-group>
+          </b-form-group>
+
         </b-tab>
 
         <b-tab title="Θρεπτικά Συστατικά" :disabled="ingredient.id == null">

@@ -6,13 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 @Projection(name = "inlinedVitamin", types = Vitamin.class)
-public interface InlinedVitaminProjection {
-
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
+public interface InlinedVitaminProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
     

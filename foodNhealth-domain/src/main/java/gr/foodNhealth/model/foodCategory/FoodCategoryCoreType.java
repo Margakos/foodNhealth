@@ -4,18 +4,17 @@ import gr.foodNhealth.model.BaseEntity;
 import gr.foodNhealth.model.Ingredient;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Collection;
 
 @Entity
-public class FoodCategorySubType extends BaseEntity {
+public class FoodCategoryCoreType extends BaseEntity {
 
-    @OneToMany(mappedBy = "foodCategorySubType")
+    @OneToMany(mappedBy = "foodCategoryCoreType")
     private Collection<Ingredient> ingredients;
 
-    @ManyToOne
-    private FoodCategoryCoreType foodCategoryCoreType;
+    @OneToMany(mappedBy = "foodCategoryCoreType")
+    private Collection<FoodCategorySubType> foodCategorySubTypes;
 
     public Collection<Ingredient> getIngredients() {
         return ingredients;
@@ -25,11 +24,11 @@ public class FoodCategorySubType extends BaseEntity {
         this.ingredients = ingredients;
     }
 
-    public FoodCategoryCoreType getFoodCategoryCoreType() {
-        return foodCategoryCoreType;
+    public Collection<FoodCategorySubType> getFoodCategorySubTypes() {
+        return foodCategorySubTypes;
     }
 
-    public void setFoodCategoryCoreType(FoodCategoryCoreType foodCategoryCoreType) {
-        this.foodCategoryCoreType = foodCategoryCoreType;
+    public void setFoodCategorySubTypes(Collection<FoodCategorySubType> foodCategorySubTypes) {
+        this.foodCategorySubTypes = foodCategorySubTypes;
     }
 }

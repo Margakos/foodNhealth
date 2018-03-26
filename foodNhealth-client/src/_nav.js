@@ -21,12 +21,12 @@ export default {
           icon: 'icon-puzzle'
         },
         {
-          name: 'Κύριες Κατηγορίες Τροφήμων',
-          url: '/admin/foodCategoryMainTypes',
+          name: 'Κύριες Κατηγορίες Συστατικών',
+          url: '/admin/foodCategoryCoreTypes',
           icon: 'icon-puzzle'
         },
         {
-          name: 'Υποκατηγορίες Τροφήμων',
+          name: 'Υποκατηγορίες Συστατικών',
           url: '/admin/foodCategorySubTypes',
           icon: 'icon-puzzle'
         },

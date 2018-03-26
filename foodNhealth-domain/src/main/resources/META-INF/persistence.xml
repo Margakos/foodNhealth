@@ -6,7 +6,6 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>gr.foodNhealth.model.FoodCategory</class>
         <class>gr.foodNhealth.model.Ingredient</class>
         <class>gr.foodNhealth.model.NutrientsInformation</class>
         <class>gr.foodNhealth.model.Person</class>
@@ -20,7 +19,7 @@
         <class>gr.foodNhealth.model.nutrientsInformation.ProximateType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Vitamin</class>
         <class>gr.foodNhealth.model.nutrientsInformation.VitaminType</class>
-        <class>gr.foodNhealth.model.foodCategory.FoodCategoryMainType</class>
+        <class>gr.foodNhealth.model.foodCategory.FoodCategoryCoreType</class>
         <class>gr.foodNhealth.model.foodCategory.FoodCategorySubType</class>
         <class>gr.foodNhealth.model.foodCategory.MeatCategoryType</class>
 

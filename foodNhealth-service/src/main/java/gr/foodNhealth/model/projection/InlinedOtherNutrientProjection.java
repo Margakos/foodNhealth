@@ -6,13 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 @Projection(name = "inlinedOtherNutrient", types = OtherNutrient.class)
-public interface InlinedOtherNutrientProjection {
-
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
+public interface InlinedOtherNutrientProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
     

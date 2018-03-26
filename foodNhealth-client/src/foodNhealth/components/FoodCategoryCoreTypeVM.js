@@ -1,10 +1,10 @@
 export default {
-  name: 'foodCategoryMainType',
+  name: 'foodCategoryCoreType',
   components: {},
   data: function () {
     return {
       visible: false,
-      foodCategoryMainType: initFoodCategoryMainType(),
+      foodCategoryCoreType: initFoodCategoryCoreType(),
       rules: {
         title: {
           required: true,
@@ -18,35 +18,35 @@ export default {
     }
   },
   created () {
-    console.log('FoodCategoryMainType created')
+    console.log('FoodCategoryCoreType created')
   },
   mounted () {
-    this.$events.$on('edit-foodCategoryMainType', eventData => this.onEditFoodCategoryMainType(eventData))
-    console.log('FoodCategoryMainType mounted')
+    this.$events.$on('edit-foodCategoryCoreType', eventData => this.onEditFoodCategoryCoreType(eventData))
+    console.log('FoodCategoryCoreType mounted')
   },
   destroyed: function () {
-    this.$events.$off('edit-foodCategoryMainType')
-    console.log('FoodCategoryMainType destroyed')
+    this.$events.$off('edit-foodCategoryCoreType')
+    console.log('FoodCategoryCoreType destroyed')
   },
   computed: {
     isDeletable: function () {
-      return this.foodCategoryMainType.id != null
+      return this.foodCategoryCoreType.id != null
     }
   },
   methods: {
-    onEditFoodCategoryMainType (eventData) {
-      console.log('Edit FoodCategoryMainType:' + eventData)
+    onEditFoodCategoryCoreType (eventData) {
+      console.log('Edit FoodCategoryCoreType:' + eventData)
       this.invalidate()
       if (eventData != null) {
-        this.$http.get('foodCategoryMainTypes/' + eventData).then(response => {
-          this.foodCategoryMainType = response.data
+        this.$http.get('foodCategoryCoreTypes/' + eventData).then(response => {
+          this.foodCategoryCoreType = response.data
           this.visible = true
         }).catch(e => {
           console.log(e)
           this.error(this.$messages.errorLoad)
         })
       } else {
-        this.$data.foodCategoryMainType = initFoodCategoryMainType()
+        this.$data.foodCategoryCoreType = initFoodCategoryCoreType()
         this.visible = true
       }
     },
@@ -56,14 +56,14 @@ export default {
           // validation failed, nothing special to do
           return
         }
-        if (this.foodCategoryMainType.id != null) {
-          // existing foodCategoryMainType, update
-          this.$http.patch('foodCategoryMainTypes/' + this.foodCategoryMainType.id, this.foodCategoryMainType)
+        if (this.foodCategoryCoreType.id != null) {
+          // existing foodCategoryCoreType, update
+          this.$http.patch('foodCategoryCoreTypes/' + this.foodCategoryCoreType.id, this.foodCategoryCoreType)
             .then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         } else {
-          // new foodCategoryMainType, create
-          this.$http.post('foodCategoryMainTypes', this.foodCategoryMainType)
+          // new foodCategoryCoreType, create
+          this.$http.post('foodCategoryCoreTypes', this.foodCategoryCoreType)
             .then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         }
@@ -75,8 +75,8 @@ export default {
     handleSuccess (response) {
       this.success(this.$messages.successAction)
       this.visible = false
-      console.log('fire foodCategoryMainType-edited event')
-      this.$events.fire('foodCategoryMainType-edited', this.foodCategoryMainType)
+      console.log('fire foodCategoryCoreType-edited event')
+      this.$events.fire('foodCategoryCoreType-edited', this.foodCategoryCoreType)
     },
     handleError (e) {
       console.log(e)
@@ -92,8 +92,8 @@ export default {
         closeOnPressEscape: false,
         type: 'warning'
       }).then(() => {
-        // delete foodCategoryMainType
-        this.$http.delete('foodCategoryMainTypes/' + this.foodCategoryMainType.id)
+        // delete foodCategoryCoreType
+        this.$http.delete('foodCategoryCoreTypes/' + this.foodCategoryCoreType.id)
           .then(response => this.handleSuccess(response))
           .catch(e => this.handleError(e))
       })
@@ -106,7 +106,7 @@ export default {
   }
 }
 
-function initFoodCategoryMainType () {
+function initFoodCategoryCoreType () {
   return {
     id: null,
     title: '',

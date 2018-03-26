@@ -1,7 +1,7 @@
 package gr.foodNhealth.model.foodCategory;
 
 import gr.foodNhealth.model.BaseEntity;
-import gr.foodNhealth.model.FoodCategory;
+import gr.foodNhealth.model.Ingredient;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -11,14 +11,13 @@ import java.util.Collection;
 public class MeatCategoryType extends BaseEntity {
 
     @OneToMany(mappedBy = "meatCategoryType")
-    private Collection<FoodCategory> foodCategories;
+    private Collection<Ingredient> ingredients;
 
-
-    public Collection<FoodCategory> getFoodCategories() {
-        return foodCategories;
+    public Collection<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setFoodCategories(Collection<FoodCategory> foodCategories) {
-        this.foodCategories = foodCategories;
+    public void setIngredients(Collection<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

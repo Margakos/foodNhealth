@@ -1,5 +1,9 @@
 package gr.foodNhealth.model;
 
+import gr.foodNhealth.model.foodCategory.FoodCategoryCoreType;
+import gr.foodNhealth.model.foodCategory.FoodCategorySubType;
+import gr.foodNhealth.model.foodCategory.MeatCategoryType;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,8 +16,14 @@ public class Ingredient extends BaseEntity {
     @Column
     private String photoPath;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private FoodCategory foodCategory;
+    @ManyToOne(optional = false)
+    private FoodCategoryCoreType foodCategoryCoreType;
+
+    @ManyToOne(optional = false)
+    private FoodCategorySubType foodCategorySubType;
+
+    @ManyToOne
+    private MeatCategoryType meatCategoryType;
 
     @Basic
     @Enumerated(EnumType.STRING)
@@ -40,12 +50,28 @@ public class Ingredient extends BaseEntity {
         this.photoPath = photoPath;
     }
 
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
+    public FoodCategoryCoreType getFoodCategoryCoreType() {
+        return foodCategoryCoreType;
     }
 
-    public void setFoodCategory(FoodCategory foodCategory) {
-        this.foodCategory = foodCategory;
+    public void setFoodCategoryCoreType(FoodCategoryCoreType foodCategoryCoreType) {
+        this.foodCategoryCoreType = foodCategoryCoreType;
+    }
+
+    public FoodCategorySubType getFoodCategorySubType() {
+        return foodCategorySubType;
+    }
+
+    public void setFoodCategorySubType(FoodCategorySubType foodCategorySubType) {
+        this.foodCategorySubType = foodCategorySubType;
+    }
+
+    public MeatCategoryType getMeatCategoryType() {
+        return meatCategoryType;
+    }
+
+    public void setMeatCategoryType(MeatCategoryType meatCategoryType) {
+        this.meatCategoryType = meatCategoryType;
     }
 
     public AvailableForm getAvailableForm() {

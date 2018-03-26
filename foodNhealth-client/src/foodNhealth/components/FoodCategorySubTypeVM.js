@@ -5,10 +5,14 @@ export default {
     return {
       visible: false,
       foodCategorySubType: initFoodCategorySubType(),
+      foodCategoryCoreTypes: [],
       rules: {
         title: {
           required: true,
           max: 255
+        },
+        foodCategoryCoreType: {
+          required: true
         },
         description: {
           required: false,
@@ -18,6 +22,9 @@ export default {
     }
   },
   created () {
+    Promise.all([this.getFoodCategoryCoreTypes()]).then(([foodCategoryCoreTypes]) => {
+      this.foodCategoryCoreTypes = foodCategoryCoreTypes.data._embedded.foodCategoryCoreTypes
+    })
     console.log('FoodCategorySubType created')
   },
   mounted () {
@@ -110,6 +117,7 @@ function initFoodCategorySubType () {
   return {
     id: null,
     title: '',
+    foodCategoryCoreType: null,
     description: ''
   }
 }

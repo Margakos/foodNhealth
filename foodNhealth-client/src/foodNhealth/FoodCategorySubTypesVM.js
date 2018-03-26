@@ -35,12 +35,17 @@ export default {
           title: 'Όνομα'
         },
         {
+          name: 'foodCategoryCoreType.title',
+          title: 'Κύρια Κατηγορία Συστατικών'
+        },
+        {
           name: 'description',
           title: 'Περιγραφή'
         }
       ],
       append_params: {
-        query: ''
+        query: '',
+        projection: 'inlinedFoodCategorySubType'
       }
     }
   },

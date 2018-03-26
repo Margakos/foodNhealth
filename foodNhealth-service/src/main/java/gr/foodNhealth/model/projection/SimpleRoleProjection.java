@@ -4,7 +4,7 @@ import gr.foodNhealth.model.foodCategory.*;
 import gr.foodNhealth.model.nutrientsInformation.*;
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(name = "simpleRole", types = {FoodCategoryMainType.class, FoodCategorySubType.class, MeatCategoryType.class,
+@Projection(name = "simpleRole", types = {FoodCategoryCoreType.class, FoodCategorySubType.class, MeatCategoryType.class,
         LipidType.class, MineralType.class, OtherNutrientType.class, ProximateType.class, VitaminType.class})
 public interface SimpleRoleProjection {
 

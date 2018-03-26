@@ -1,9 +1,7 @@
 package gr.foodNhealth.service;
 
-import gr.foodNhealth.model.FoodCategory;
 import gr.foodNhealth.model.Ingredient;
 import gr.foodNhealth.model.NutrientsInformation;
-import gr.foodNhealth.repository.FoodCategoryRepository;
 import gr.foodNhealth.repository.NutrientsInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +15,6 @@ public class IngredientService {
     @Autowired
     private NutrientsInformationRepository nutrientsInformationRepository;
 
-    @Autowired
-    private FoodCategoryRepository foodCategoryRepository;
-
     @Transactional
     public Ingredient initNewIngredient (Ingredient ingredient) {
         NutrientsInformation nutrientsInfo = new NutrientsInformation();
@@ -31,13 +26,7 @@ public class IngredientService {
         nutrientsInfo.setIsActive(true);
         nutrientsInformationRepository.save(nutrientsInfo);
 
-        FoodCategory foodCategory = new FoodCategory();
-        foodCategory.setDeleted(false);
-        foodCategory.setIsActive(true);
-        foodCategoryRepository.save(foodCategory);
-
         ingredient.setNutrientsInformation(nutrientsInfo);
-        ingredient.setFoodCategory(foodCategory);
         return ingredient;
     }
 }

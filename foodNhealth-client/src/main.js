@@ -146,8 +146,14 @@ Vue.mixin({
       }
       return allowed
     },
-    getMineralTypes () {
-      return this.$http.get('mineralTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    getFoodCategoryCoreTypes () {
+      return this.$http.get('foodCategoryCoreTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    },
+    getFoodCategorySubTypes (foodCategoryCoreTypeId) {
+      return this.$http.get('foodCategorySubTypes/search/findByFoodCategoryCoreTypeId?foodCategoryCoreTypeId=' + foodCategoryCoreTypeId + '&projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    },
+    getMeatCategoryTypes () {
+      return this.$http.get('meatCategoryTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },
     getMessage (key) {
       let message = this.$messages[key]

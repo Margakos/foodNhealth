@@ -6,13 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 @Projection(name = "inlinedMineral", types = Mineral.class)
-public interface InlinedMineralProjection {
-
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
+public interface InlinedMineralProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
     

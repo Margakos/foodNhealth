@@ -1,5 +1,5 @@
 <template>
-  <b-modal title="Διαχείριση Κύριας Κατηγορίας Τροφήμων" id="foodCategoryMainTypeModal" v-model="visible" :no-close-on-backdrop="true" :no-close-on-esc="true">
+  <b-modal title="Διαχείριση Κύριας Κατηγορίας Τροφήμων" id="foodCategoryCoreTypeModal" v-model="visible" :no-close-on-backdrop="true" :no-close-on-esc="true">
     <b-form :novalidate="false">
 
       <b-form-group description="Εισάγετε τον τίτλο"
@@ -10,7 +10,7 @@
             <i class='fa fa-tag'></i>
           </b-input-group-addon>
           <b-form-input name="title" type="text" placeholder="Τίτλος"
-                        v-model="foodCategoryMainType.title"
+                        v-model="foodCategoryCoreType.title"
                         v-validate="rules.title"
                         :state="isValid('title')">
           </b-form-input>
@@ -25,7 +25,7 @@
             <i class='fa fa-vcard-o'></i>
           </b-input-group-addon>
           <b-form-input name="description" type="text" placeholder="Περιγραφή"
-                        v-model="foodCategoryMainType.description"
+                        v-model="foodCategoryCoreType.description"
                         v-validate="rules.description"
                         :state="isValid('description')"></b-form-input>
         </b-input-group>
@@ -44,4 +44,4 @@
   </b-modal>
 </template>
 
-<script src="./FoodCategoryMainTypeVM.js"></script>
+<script src="./FoodCategoryCoreTypeVM.js"></script>

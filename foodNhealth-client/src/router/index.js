@@ -31,7 +31,7 @@ import Register from '@/views/pages/Register'
 import Persons from '@/foodNhealth/Persons'
 import Login from '@/foodNhealth/Login'
 import Ingredients from '@/foodNhealth/Ingredients'
-import FoodCategoryMainTypes from '@/foodNhealth/FoodCategoryMainTypes'
+import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
 import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
 import ProximateTypes from '@/foodNhealth/ProximateTypes'
@@ -75,7 +75,7 @@ export default new Router({
         },
         {
           path: 'admin',
-          redirect: '/admin/foodCategoryMainTypes',
+          redirect: '/admin/foodCategoryCoreTypes',
           name: 'Διαχείριση',
           component: {
             render (c) {
@@ -90,9 +90,9 @@ export default new Router({
               component: Persons
             },
             {
-              path: 'foodCategoryMainTypes',
-              name: 'FoodCategoryMainTypes',
-              component: FoodCategoryMainTypes
+              path: 'foodCategoryCoreTypes',
+              name: 'FoodCategoryCoreTypes',
+              component: FoodCategoryCoreTypes
             },
             {
               path: 'foodCategorySubTypes',

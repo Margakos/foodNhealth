@@ -6,13 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 @Projection(name = "inlinedIngredient", types = Ingredient.class)
-public interface InlinedIngredientProjection {
-
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
+public interface InlinedIngredientProjection extends SimpleRoleProjection {
 
     String getName();
 
@@ -20,7 +14,11 @@ public interface InlinedIngredientProjection {
 
     Ingredient.AvailableForm getAvailableForm();
 
-    InlinedFoodCategoryProjection getFoodCategory();
+    SimpleRoleProjection getFoodCategoryCoreType();
+
+    SimpleRoleProjection getFoodCategorySubType();
+
+    SimpleRoleProjection getMeatCategoryType();
 
     InlinedNutrientsInformationProjection getNutrientsInformation();
 }

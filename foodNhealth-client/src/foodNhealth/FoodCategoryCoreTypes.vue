@@ -11,7 +11,7 @@
                         :fields="fields"
                         :append-params="append_params" :per-page="rowsPerPage"></data-table>
             <div slot="footer">
-              <b-button size="lg" variant="primary" class="pull-right" @click="createFoodCategoryMainType"><i class="fa fa-plus"></i>
+              <b-button size="lg" variant="primary" class="pull-right" @click="createFoodCategoryCoreType"><i class="fa fa-plus"></i>
                 Δημιουργία
               </b-button>
             </div>
@@ -19,9 +19,8 @@
         </div>
       </div>
     </div>
-    <foodCategoryMainType></foodCategoryMainType>
+    <foodCategoryCoreType></foodCategoryCoreType>
   </div>
 </template>
 
-
-<script src="./FoodCategoryMainTypesVM.js"></script>
+<script src="./FoodCategoryCoreTypesVM.js"></script>

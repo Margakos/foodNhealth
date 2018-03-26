@@ -28,6 +28,10 @@ export default {
       otherNutrientTypes: [],
       otherNutrientType: null,
       otherNutrientQuantity: 0,
+      foodCategoryCoreTypes: [],
+      foodCategorySubTypes: [],
+      meatCategoryTypes: [],
+      meatCategoryType: null,
       availableForms: [availableFormGrams, availableFormPieces, availableFormSlices],
       rules: {
         name: {
@@ -35,7 +39,7 @@ export default {
           max: 255
         },
         availableForm: {
-          required: true
+          required: false
         },
         mineralType: {
           required: true
@@ -50,6 +54,15 @@ export default {
           required: true
         },
         otherNutrientType: {
+          required: true
+        },
+        foodCategoryCoreType: {
+          required: false
+        },
+        foodCategorySubType: {
+          required: true
+        },
+        meatCategoryType: {
           required: true
         },
         quantity: {
@@ -165,6 +178,11 @@ export default {
     }
   },
   created () {
+    Promise.all([this.getFoodCategoryCoreTypes(), this.getMeatCategoryTypes()])
+      .then(([foodCategoryCoreTypes, meatCategoryTypes]) => {
+        this.foodCategoryCoreTypes = foodCategoryCoreTypes.data._embedded.foodCategoryCoreTypes
+        this.meatCategoryTypes = meatCategoryTypes.data._embedded.meatCategoryTypes
+      })
     console.log('Ingredient created')
   },
   mounted () {
@@ -176,8 +194,14 @@ export default {
     console.log('Ingredient destroyed')
   },
   computed: {
-    isDeletable: function () {
+    isDeletable () {
       return this.ingredient.id != null
+    },
+    isMeatCategoryTypeDisabled () {
+      return this.ingredient.foodCategorySubType != null && this.ingredient.foodCategorySubType.title !== 'Κρέας'
+    },
+    isFoodCategorySubTypeDisabled () {
+      return this.ingredient.foodCategoryCoreType == null
     }
   },
   methods: {
@@ -538,6 +562,13 @@ export default {
       }).catch(e => {
         // confirm dialog cancelled
       })
+    },
+    foodCategoryCoreTypeChanged (foodCategoryCoreType) {
+      if (foodCategoryCoreType == null) {
+        this.ingredient.foodCategorySubType = null
+        this.foodCategorySubTypes = []
+      }
+      this.getFoodCategorySubTypes(foodCategoryCoreType.id)
     }
   }
 }
@@ -548,6 +579,8 @@ function initIngredient () {
     name: '',
     availableForm: null,
     nutrientsInformation: null,
-    foodCategory: null
+    foodCategoryCoreType: null,
+    foodCategorySubType: null,
+    meatCategoryType: null
   }
 }

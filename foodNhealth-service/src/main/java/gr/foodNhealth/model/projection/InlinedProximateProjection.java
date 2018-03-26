@@ -6,13 +6,7 @@ import org.springframework.data.rest.core.config.Projection;
 import java.math.BigDecimal;
 
 @Projection(name = "inlinedProximate", types = Proximate.class)
-public interface InlinedProximateProjection {
-
-    Long getId();
-
-    String getTitle();
-
-    String getDescription();
+public interface InlinedProximateProjection extends SimpleRoleProjection {
 
     BigDecimal getQuantity();
 
