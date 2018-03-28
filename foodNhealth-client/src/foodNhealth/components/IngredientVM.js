@@ -6,24 +6,14 @@ export default {
       ingredient: initIngredient(),
       minerals: [],
       mineralTypes: [],
-      mineralType: null,
-      mineralQuantity: 0,
       vitamins: [],
       vitaminTypes: [],
-      vitaminType: null,
-      vitaminQuantity: 0,
       lipids: [],
       lipidTypes: [],
-      lipidType: null,
-      lipidQuantity: 0,
       proximates: [],
       proximateTypes: [],
-      proximateType: null,
-      proximateQuantity: 0,
       otherNutrients: [],
       otherNutrientTypes: [],
-      otherNutrientType: null,
-      otherNutrientQuantity: 0,
       foodCategoryCoreTypes: [],
       foodCategorySubTypes: [],
       meatCategoryTypes: [],
@@ -59,7 +49,7 @@ export default {
         },
         quantity: {
           required: true,
-          min_value: 0.000000000001
+          min_value: 0
         }
       },
       mineralsFields: [
@@ -170,10 +160,9 @@ export default {
     }
   },
   created () {
-    Promise.all([this.getFoodCategoryCoreTypes(), this.getMeatCategoryTypes()])
-      .then(([foodCategoryCoreTypes, meatCategoryTypes]) => {
+    Promise.all([this.getFoodCategoryCoreTypes()])
+      .then(([foodCategoryCoreTypes]) => {
         this.foodCategoryCoreTypes = foodCategoryCoreTypes.data._embedded.foodCategoryCoreTypes
-        this.meatCategoryTypes = meatCategoryTypes.data._embedded.meatCategoryTypes
       })
     console.log('Ingredient created')
   },
@@ -190,7 +179,7 @@ export default {
       return this.ingredient.id != null
     },
     isMeatCategoryTypeDisabled () {
-      return this.ingredient.foodCategorySubType != null && this.ingredient.foodCategorySubType.title !== 'Κρέας'
+      return this.ingredient.foodCategorySubType != null && this.ingredient.foodCategorySubType.title.split(' ')[1] !== 'Fat'
     },
     isFoodCategorySubTypeDisabled () {
       return this.ingredient.foodCategoryCoreType == null
@@ -198,65 +187,65 @@ export default {
   },
   methods: {
     refreshNutrientsInformation () {
-      this.refreshMineralTypes()
-      this.refreshVitaminTypes()
-      this.refreshLipidTypes()
-      this.refreshProximateTypes()
-      this.refreshOtherNutrientTypes()
       this.refreshMinerals()
       this.refreshVitamins()
       this.refreshLipids()
       this.refreshProximates()
       this.refreshOtherNutrients()
     },
-    refreshMineralTypes () {
-      this.$http.get('mineralTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
-        this.mineralTypes = response.data._embedded.mineralTypes
-      })
-    },
-    refreshVitaminTypes () {
-      this.$http.get('vitaminTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
-        this.vitaminTypes = response.data._embedded.vitaminTypes
-      })
-    },
-    refreshLipidTypes () {
-      this.$http.get('lipidTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
-        this.lipidTypes = response.data._embedded.lipidTypes
-      })
-    },
-    refreshProximateTypes () {
-      this.$http.get('proximateTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
-        this.proximateTypes = response.data._embedded.proximateTypes
-      })
-    },
-    refreshOtherNutrientTypes () {
-      this.$http.get('otherNutrientTypes/search/findNotParticipating?ingredientId=' + this.ingredient.id).then(response => {
-        this.otherNutrientTypes = response.data._embedded.otherNutrientTypes
-      })
-    },
     refreshMinerals () {
+      let _self = this
       this.$http.get(this.ingredient.nutrientsInformation._links.minerals.href + '?projection=inlinedMineral').then(response => {
         this.minerals = response.data._embedded.minerals
+        this.minerals.forEach(function (mineral, index) {
+          _self.mineralTypes.push(mineral.mineralType)
+        })
       })
     },
     refreshVitamins () {
+      let _self = this
       this.$http.get(this.ingredient.nutrientsInformation._links.vitamins.href + '?projection=inlinedVitamin').then(response => {
         this.vitamins = response.data._embedded.vitamins
+        this.vitamins.forEach(function (vitamin, index) {
+          _self.vitaminTypes.push(vitamin.vitaminType)
+        })
       })
     },
     refreshLipids () {
+      let _self = this
       this.$http.get(this.ingredient.nutrientsInformation._links.lipids.href + '?projection=inlinedLipid').then(response => {
         this.lipids = response.data._embedded.lipids
+        this.lipids.forEach(function (lipid, index) {
+          _self.lipidTypes.push(lipid.lipidType)
+        })
       })
     },
     refreshProximates () {
+      let _self = this
       this.$http.get(this.ingredient.nutrientsInformation._links.proximates.href + '?projection=inlinedProximate').then(response => {
         this.proximates = response.data._embedded.proximates
+        this.proximates.forEach(function (proximate, index) {
+          _self.proximateTypes.push(proximate.proximateType)
+        })
       })
     },
     refreshOtherNutrients () {
+      let _self = this
       this.$http.get(this.ingredient.nutrientsInformation._links.otherNutrients.href + '?projection=inlinedOtherNutrient').then(response => {
         this.otherNutrients = response.data._embedded.otherNutrients
+        this.otherNutrients.forEach(function (otherNutrient, index) {
+          _self.otherNutrientTypes.push(otherNutrient.otherNutrientType)
+        })
+      })
+    },
+    refreshFoodCategorySubTypes (foodCategoryCoreType) {
+      this.getFoodCategorySubTypes(foodCategoryCoreType.id).then(response => {
+        this.foodCategorySubTypes = response.data._embedded.foodCategorySubTypes
+      })
+    },
+    refreshMeatCategoryTypes (foodCategorySubType) {
+      this.getMeatCategoryTypes(foodCategorySubType.id).then(response => {
+        this.meatCategoryTypes = response.data._embedded.meatCategoryTypes
       })
     },
     onEditIngredient (eventData) {
@@ -298,11 +287,6 @@ export default {
               return _self.transformRequest(data, headers)
             }]
           }).then(response => {
-            this.refreshMineralTypes()
-            this.refreshVitaminTypes()
-            this.refreshLipidTypes()
-            this.refreshProximateTypes()
-            this.refreshOtherNutrientTypes()
             this.handleSuccess(response)
           }).catch(e => this.handleError(e))
         }
@@ -341,10 +325,6 @@ export default {
     invalidateAll () {
       this.$validator.reset().then(() => {
         this.errors.clear('generalForm')
-        this.errors.clear('mineralsForm')
-        this.errors.clear('vitaminsForm')
-        this.errors.clear('lipidsForm')
-        this.errors.clear('proximatesForm')
         this.errors.clear('otherNutrientsForm')
         this.errors.clear('foodCategoryForm')
       })
@@ -352,207 +332,78 @@ export default {
     handleSuccess (response) {
       this.ingredient = response.data
       this.success(this.$messages.successAction)
+      this.refreshNutrientsInformation()
       console.log('fire ingredient-edited event')
       this.$events.fire('ingredient-edited', this.ingredient)
     },
     transformRequest (data, headers) {
-      data.foodCategory = this.convertEntityToURI(data.foodCategory)
+      data.foodCategoryCoreType = this.convertEntityToURI(data.foodCategoryCoreType)
+      data.foodCategorySubType = this.convertEntityToURI(data.foodCategorySubType)
+      data.meatCategoryType = data.meatCategoryType != null ? this.convertEntityToURI(data.meatCategoryType) : null
       data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
       return JSON.stringify(data)
     },
-    addMineral () {
-      this.$validator.validateAll('mineralsForm').then((result) => {
-        if (!result) {
-          return
-        }
-        let mineral = {
-          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
-          mineralType: this.mineralType._links.self.href,
-          quantity: this.mineralQuantity
-        }
-        this.$http.post('minerals', mineral).then(response => {
-          this.mineralType = null
-          this.mineralQuantity = 0
-          this.refreshMinerals()
-          this.refreshMineralTypes()
-          this.$validator.reset().then(() => {
-            this.errors.clear('mineralsForm')
-          })
-        })
+    transformNutrientsRequest (data, headers) {
+      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
+      return JSON.stringify(data)
+    },
+    updateMineral (mineral) {
+      let _self = this
+      mineral.nutrientsInformation = this.ingredient.nutrientsInformation
+      this.$http.patch('minerals/' + mineral.id, mineral, {
+        transformRequest: [function (data, headers) {
+          return _self.transformNutrientsRequest(data, headers)
+        }]
+      }).then(response => {
+        this.refreshMinerals()
+        this.success(this.$messages.successAction)
       })
     },
-    addVitamin () {
-      this.$validator.validateAll('vitaminsForm').then((result) => {
-        if (!result) {
-          return
-        }
-        let vitamin = {
-          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
-          vitaminType: this.vitaminType._links.self.href,
-          quantity: this.vitaminQuantity
-        }
-        this.$http.post('vitamins', vitamin).then(response => {
-          this.vitaminType = null
-          this.vitaminQuantity = 0
-          this.refreshVitamins()
-          this.refreshVitaminTypes()
-          this.$validator.reset().then(() => {
-            this.errors.clear('vitaminsForm')
-          })
-        })
+    updateVitamin (vitamin) {
+      let _self = this
+      vitamin.nutrientsInformation = this.ingredient.nutrientsInformation
+      this.$http.patch('vitamins/' + vitamin.id, vitamin, {
+        transformRequest: [function (data, headers) {
+          return _self.transformNutrientsRequest(data, headers)
+        }]
+      }).then(response => {
+        this.refreshVitamins()
+        this.success(this.$messages.successAction)
       })
     },
-    addLipid () {
-      this.$validator.validateAll('lipidsForm').then((result) => {
-        if (!result) {
-          return
-        }
-        let lipid = {
-          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
-          lipidType: this.lipidType._links.self.href,
-          quantity: this.lipidQuantity
-        }
-        this.$http.post('lipids', lipid).then(response => {
-          this.lipidType = null
-          this.lipidQuantity = 0
-          this.refreshLipids()
-          this.refreshLipidTypes()
-          this.$validator.reset().then(() => {
-            this.errors.clear('lipidsForm')
-          })
-        })
+    updateLipid (lipid) {
+      let _self = this
+      lipid.nutrientsInformation = this.ingredient.nutrientsInformation
+      this.$http.patch('lipids/' + lipid.id, lipid, {
+        transformRequest: [function (data, headers) {
+          return _self.transformNutrientsRequest(data, headers)
+        }]
+      }).then(response => {
+        this.refreshLipids()
+        this.success(this.$messages.successAction)
       })
     },
-    addProximate () {
-      this.$validator.validateAll('proximatesForm').then((result) => {
-        if (!result) {
-          return
-        }
-        let proximate = {
-          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
-          proximateType: this.proximateType._links.self.href,
-          quantity: this.proximateQuantity
-        }
-        this.$http.post('proximates', proximate).then(response => {
-          this.proximateType = null
-          this.proximateQuantity = 0
-          this.refreshProximates()
-          this.refreshProximateTypes()
-          this.$validator.reset().then(() => {
-            this.errors.clear('proximatesForm')
-          })
-        })
+    updateProximate (proximate) {
+      let _self = this
+      proximate.nutrientsInformation = this.ingredient.nutrientsInformation
+      this.$http.patch('proximates/' + proximate.id, proximate, {
+        transformRequest: [function (data, headers) {
+          return _self.transformNutrientsRequest(data, headers)
+        }]
+      }).then(response => {
+        this.refreshProximates()
+        this.success(this.$messages.successAction)
       })
     },
-    addOtherNutrient () {
-      this.$validator.validateAll('otherNutrientsForm').then((result) => {
-        if (!result) {
-          return
-        }
-        let otherNutrient = {
-          nutrientsInformation: this.ingredient.nutrientsInformation._links.self.href,
-          otherNutrientType: this.otherNutrientType._links.self.href,
-          quantity: this.otherNutrientQuantity
-        }
-        this.$http.post('otherNutrients', otherNutrient).then(response => {
-          this.otherNutrientType = null
-          this.otherNutrientQuantity = 0
-          this.refreshOtherNutrients()
-          this.refreshOtherNutrientTypes()
-          this.$validator.reset().then(() => {
-            this.errors.clear('otherNutrientsForm')
-          })
-        })
-      })
-    },
-    confirmRemoveMineral (data) {
-      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
-        confirmButtonText: this.$messages.yes,
-        cancelButtonText: this.$messages.no,
-        cancelButtonClass: 'btn btn-warning',
-        confirmButtonClass: 'btn btn-danger',
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        type: 'warning'
-      }).then(() => {
-        this.$http.delete('minerals/' + data.id).then(response => {
-          this.refreshMinerals()
-          this.refreshMineralTypes()
-        })
-      }).catch(e => {
-        // confirm dialog cancelled
-      })
-    },
-    confirmRemoveVitamin (data) {
-      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
-        confirmButtonText: this.$messages.yes,
-        cancelButtonText: this.$messages.no,
-        cancelButtonClass: 'btn btn-warning',
-        confirmButtonClass: 'btn btn-danger',
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        type: 'warning'
-      }).then(() => {
-        this.$http.delete('vitamins/' + data.id).then(response => {
-          this.refreshVitamins()
-          this.refreshVitaminTypes()
-        })
-      }).catch(e => {
-        // confirm dialog cancelled
-      })
-    },
-    confirmRemoveLipid (data) {
-      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
-        confirmButtonText: this.$messages.yes,
-        cancelButtonText: this.$messages.no,
-        cancelButtonClass: 'btn btn-warning',
-        confirmButtonClass: 'btn btn-danger',
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        type: 'warning'
-      }).then(() => {
-        this.$http.delete('lipids/' + data.id).then(response => {
-          this.refreshLipids()
-          this.refreshLipidTypes()
-        })
-      }).catch(e => {
-        // confirm dialog cancelled
-      })
-    },
-    confirmRemoveProximate (data) {
-      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
-        confirmButtonText: this.$messages.yes,
-        cancelButtonText: this.$messages.no,
-        cancelButtonClass: 'btn btn-warning',
-        confirmButtonClass: 'btn btn-danger',
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        type: 'warning'
-      }).then(() => {
-        this.$http.delete('proximates/' + data.id).then(response => {
-          this.refreshProximates()
-          this.refreshProximateTypes()
-        })
-      }).catch(e => {
-        // confirm dialog cancelled
-      })
-    },
-    confirmRemoveOtherNutrient (data) {
-      this.$confirm(this.$messages.confirmAction, this.$messages.confirmActionTitle, {
-        confirmButtonText: this.$messages.yes,
-        cancelButtonText: this.$messages.no,
-        cancelButtonClass: 'btn btn-warning',
-        confirmButtonClass: 'btn btn-danger',
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        type: 'warning'
-      }).then(() => {
-        this.$http.delete('otherNutrients/' + data.id).then(response => {
-          this.refreshOtherNutrients()
-          this.refreshOtherNutrientTypes()
-        })
-      }).catch(e => {
-        // confirm dialog cancelled
+    updateOtherNutrient (otherNutrient) {
+      let _self = this
+      this.$http.patch('otherNutrients/' + otherNutrient.id, otherNutrient, {
+        transformRequest: [function (data, headers) {
+          return _self.transformNutrientsRequest(data, headers)
+        }]
+      }).then(response => {
+        this.refreshOtherNutrients()
+        this.success(this.$messages.successAction)
       })
     },
     foodCategoryCoreTypeChanged (foodCategoryCoreType) {
@@ -560,7 +411,14 @@ export default {
         this.ingredient.foodCategorySubType = null
         this.foodCategorySubTypes = []
       }
-      this.getFoodCategorySubTypes(foodCategoryCoreType.id)
+      this.refreshFoodCategorySubTypes(foodCategoryCoreType)
+    },
+    foodCategorySubTypeChanged (foodCategorySubType) {
+      if (foodCategorySubType == null) {
+        this.ingredient.meatCategoryType = null
+        this.meatCategoryTypes = []
+      }
+      this.refreshMeatCategoryTypes(foodCategorySubType)
     }
   }
 }

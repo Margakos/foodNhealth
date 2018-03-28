@@ -35,12 +35,17 @@ export default {
           title: 'Όνομα'
         },
         {
+          name: 'foodCategorySubType.title',
+          title: 'Τύπος Υποκατηγορίας'
+        },
+        {
           name: 'description',
           title: 'Περιγραφή'
         }
       ],
       append_params: {
-        query: ''
+        query: '',
+        projection: 'inlinedMeatCategoryType'
       }
     }
   },

@@ -16,14 +16,26 @@ public class Proximate extends BaseEntity{
     private NutrientsInformation nutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private ProximateType proximateType;
+    @Column(nullable = false)
+    private String proximateType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+    public Proximate () {}
+
+    public Proximate (String proximateType) {
+        this.proximateType = proximateType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public Proximate (String proximateType, NutrientsInformation nutrientsInformation) {
+        this.proximateType = proximateType;
+        this.quantity = BigDecimal.ZERO;
+        this.nutrientsInformation = nutrientsInformation;
+    }
 
     public NutrientsInformation getNutrientsInformation() {
         return nutrientsInformation;
@@ -33,11 +45,11 @@ public class Proximate extends BaseEntity{
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public ProximateType getProximateType() {
+    public String getProximateType() {
         return proximateType;
     }
 
-    public void setProximateType(ProximateType proximateType) {
+    public void setProximateType(String proximateType) {
         this.proximateType = proximateType;
     }
 

@@ -15,16 +15,33 @@ public class IngredientService {
     @Autowired
     private NutrientsInformationRepository nutrientsInformationRepository;
 
+    @Autowired
+    private ProximateService proximateService;
+
+    @Autowired
+    private MineralService mineralService;
+
+    @Autowired
+    private VitaminService vitaminService;
+
+    @Autowired
+    private LipidService lipidService;
+
+    @Autowired
+    private OtherNutrientService otherNutrientService;
+
     @Transactional
     public Ingredient initNewIngredient (Ingredient ingredient) {
         NutrientsInformation nutrientsInfo = new NutrientsInformation();
-        nutrientsInfo.setLipids(new ArrayList<>());
-        nutrientsInfo.setMinerals(new ArrayList<>());
-        nutrientsInfo.setOtherNutrients(new ArrayList<>());
-        nutrientsInfo.setProximates(new ArrayList<>());
         nutrientsInfo.setDeleted(false);
         nutrientsInfo.setIsActive(true);
-        nutrientsInformationRepository.save(nutrientsInfo);
+        nutrientsInfo = nutrientsInformationRepository.save(nutrientsInfo);
+
+        lipidService.initIngredientLipids(nutrientsInfo);
+        proximateService.initIngredientProximates(nutrientsInfo);
+        mineralService.initIngredientMinerals(nutrientsInfo);
+        vitaminService.initIngredientVitamins(nutrientsInfo);
+        otherNutrientService.initIngredientOtherNutrients(nutrientsInfo);
 
         ingredient.setNutrientsInformation(nutrientsInfo);
         return ingredient;

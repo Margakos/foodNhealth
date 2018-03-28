@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 public interface InlinedProductMineralProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
-    
-    SimpleRoleProjection getMineralType();
+
+    String getMineralType();
 
     SimpleRoleProjection getProductNutrientsInformation();
 }

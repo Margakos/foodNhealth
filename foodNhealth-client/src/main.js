@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -150,10 +151,13 @@ Vue.mixin({
       return this.$http.get('foodCategoryCoreTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },
     getFoodCategorySubTypes (foodCategoryCoreTypeId) {
-      return this.$http.get('foodCategorySubTypes/search/findByFoodCategoryCoreTypeId?foodCategoryCoreTypeId=' + foodCategoryCoreTypeId + '&projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+      return this.$http.get('foodCategorySubTypes/search/findByFoodCategoryCoreTypeId?foodCategoryCoreTypeId=' + foodCategoryCoreTypeId + '&projection=inlinedFoodCategorySubType&size=' + Vue.prototype.$maxPageSize)
     },
-    getMeatCategoryTypes () {
-      return this.$http.get('meatCategoryTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    getAllFoodCategorySubTypes () {
+      return this.$http.get('foodCategorySubTypes?projection=inlinedFoodCategorySubType&size=' + Vue.prototype.$maxPageSize)
+    },
+    getMeatCategoryTypes (foodCategorySubTypeId) {
+      return this.$http.get('meatCategoryTypes/search/findByFoodCategorySubTypeId?foodCategorySubTypeId=' + foodCategorySubTypeId + '&projection=inlinedMeatCategoryType&size=' + Vue.prototype.$maxPageSize)
     },
     getMessage (key) {
       let message = this.$messages[key]

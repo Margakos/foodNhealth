@@ -586,4 +586,162 @@
     <changeSet author="vasilis (generated)" id="1522072680944-24">
         <addForeignKeyConstraint baseColumnNames="vitaminType_id" baseTableName="ProductVitamin" constraintName="FKsmhjaehj9sqfpq1t9mhnw2w50" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="VitaminType"/>
     </changeSet>
+    <changeSet author="vasilis (generated)" id="1522131458905-1">
+        <addColumn tableName="MeatCategoryType">
+            <column name="foodCategorySubType_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522131458905-2">
+        <addForeignKeyConstraint baseColumnNames="foodCategorySubType_id" baseTableName="MeatCategoryType" constraintName="FK3rfbah8loehjic3tl8r6l2msv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategorySubType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522131458905-3">
+        <addNotNullConstraint columnDataType="bigint" columnName="foodCategoryCoreType_id" tableName="FoodCategorySubType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-1">
+        <addColumn tableName="Lipid">
+            <column name="lipidType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-2">
+        <addColumn tableName="ProductLipid">
+            <column name="lipidType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-3">
+        <addColumn tableName="Mineral">
+            <column name="mineralType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-4">
+        <addColumn tableName="ProductMineral">
+            <column name="mineralType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-5">
+        <addColumn tableName="OtherNutrient">
+            <column name="otherNutrientType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-6">
+        <addColumn tableName="ProductOtherNutrient">
+            <column name="otherNutrientType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-7">
+        <addColumn tableName="ProductProximate">
+            <column name="proximateType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-8">
+        <addColumn tableName="Proximate">
+            <column name="proximateType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-9">
+        <addColumn tableName="ProductVitamin">
+            <column name="vitaminType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-10">
+        <addColumn tableName="Vitamin">
+            <column name="vitaminType" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-11">
+        <dropForeignKeyConstraint baseTableName="ProductOtherNutrient" constraintName="FK46t1xnfs7nqafl22snvjj6at9"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-12">
+        <dropForeignKeyConstraint baseTableName="Vitamin" constraintName="FK6rcupjhbj8hpfhiao7m5b7m1v"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-13">
+        <dropForeignKeyConstraint baseTableName="ProductMineral" constraintName="FKbv0aitnei0olkh1epfg7q0xf2"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-14">
+        <dropForeignKeyConstraint baseTableName="ProductProximate" constraintName="FKdw5aaqghnxnq7vgxkv77bidib"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-15">
+        <dropForeignKeyConstraint baseTableName="Lipid" constraintName="FKehnimuebaygwuvgs9w5qunx8a"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-16">
+        <dropForeignKeyConstraint baseTableName="Proximate" constraintName="FKgq6rk95ascvjbiepmbd4gjjq0"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-17">
+        <dropForeignKeyConstraint baseTableName="OtherNutrient" constraintName="FKn3tc8c2aipbkvpydqfeqjl8a4"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-18">
+        <dropForeignKeyConstraint baseTableName="ProductLipid" constraintName="FKo556n1lgq0r70ua2rbc4kf6jg"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-19">
+        <dropForeignKeyConstraint baseTableName="Mineral" constraintName="FKs53oflk5fr5wnfo9f85kqw6et"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-20">
+        <dropForeignKeyConstraint baseTableName="ProductVitamin" constraintName="FKsmhjaehj9sqfpq1t9mhnw2w50"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-21">
+        <dropTable tableName="LipidType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-22">
+        <dropTable tableName="MineralType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-23">
+        <dropTable tableName="OtherNutrientType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-24">
+        <dropTable tableName="ProximateType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-25">
+        <dropTable tableName="VitaminType"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-26">
+        <dropColumn columnName="lipidType_id" tableName="Lipid"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-27">
+        <dropColumn columnName="lipidType_id" tableName="ProductLipid"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-28">
+        <dropColumn columnName="mineralType_id" tableName="Mineral"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-29">
+        <dropColumn columnName="mineralType_id" tableName="ProductMineral"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-30">
+        <dropColumn columnName="otherNutrientType_id" tableName="OtherNutrient"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-31">
+        <dropColumn columnName="otherNutrientType_id" tableName="ProductOtherNutrient"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-32">
+        <dropColumn columnName="proximateType_id" tableName="ProductProximate"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-33">
+        <dropColumn columnName="proximateType_id" tableName="Proximate"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-34">
+        <dropColumn columnName="vitaminType_id" tableName="ProductVitamin"/>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522136018117-35">
+        <dropColumn columnName="vitaminType_id" tableName="Vitamin"/>
+    </changeSet>
 </databaseChangeLog>

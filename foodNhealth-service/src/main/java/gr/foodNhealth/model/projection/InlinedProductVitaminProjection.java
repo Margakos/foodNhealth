@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 public interface InlinedProductVitaminProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
-    
-    SimpleRoleProjection getVitaminType();
+
+    String getVitaminType();
 
     SimpleRoleProjection getProductNutrientsInformation();
 }

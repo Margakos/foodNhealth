@@ -10,7 +10,7 @@ public interface InlinedMineralProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
     
-    SimpleRoleProjection getMineralType();
+    String getMineralType();
 
     SimpleRoleProjection getNutrientsInformation();
 }

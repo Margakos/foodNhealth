@@ -35,12 +35,12 @@ export default {
           title: 'Όνομα'
         },
         {
-          name: 'foodCategoryCoreType',
+          name: 'foodCategoryCoreType.title',
           title: 'Κύρια Κατηγορία Συστατικού',
           callback: 'getMessage'
         },
         {
-          name: 'foodCategorySubType',
+          name: 'foodCategorySubType.title',
           title: 'Υποκατηγορία Συστατικού',
           callback: 'getMessage'
         }

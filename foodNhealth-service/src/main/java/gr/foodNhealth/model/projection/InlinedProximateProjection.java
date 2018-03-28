@@ -10,7 +10,7 @@ public interface InlinedProximateProjection extends SimpleRoleProjection {
 
     BigDecimal getQuantity();
 
-    SimpleRoleProjection getProximateType();
+    String getProximateType();
 
     SimpleRoleProjection getNutrientsInformation();
 }

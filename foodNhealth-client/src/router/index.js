@@ -34,11 +34,6 @@ import Ingredients from '@/foodNhealth/Ingredients'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
 import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
-import ProximateTypes from '@/foodNhealth/ProximateTypes'
-import MineralTypes from '@/foodNhealth/MineralTypes'
-import VitaminTypes from '@/foodNhealth/VitaminTypes'
-import LipidTypes from '@/foodNhealth/LipidTypes'
-import OtherNutrientTypes from '@/foodNhealth/OtherNutrientTypes'
 
 Vue.use(Router)
 
@@ -103,31 +98,6 @@ export default new Router({
               path: 'meatCategoryTypes',
               name: 'MeatCategoryTypes',
               component: MeatCategoryTypes
-            },
-            {
-              path: 'proximateTypes',
-              name: 'ProximateTypes',
-              component: ProximateTypes
-            },
-            {
-              path: 'mineralTypes',
-              name: 'MineralTypes',
-              component: MineralTypes
-            },
-            {
-              path: 'vitaminTypes',
-              name: 'VitaminTypes',
-              component: VitaminTypes
-            },
-            {
-              path: 'lipidTypes',
-              name: 'LipidTypes',
-              component: LipidTypes
-            },
-            {
-              path: 'otherNutrientTypes',
-              name: 'OtherNutrientTypes',
-              component: OtherNutrientTypes
             }
           ]
         },

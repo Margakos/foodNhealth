@@ -58,6 +58,7 @@ export default {
       }
     },
     save () {
+      let _self = this
       this.$validator.validateAll().then((result) => {
         if (!result) {
           // validation failed, nothing special to do
@@ -65,16 +66,26 @@ export default {
         }
         if (this.foodCategorySubType.id != null) {
           // existing foodCategorySubType, update
-          this.$http.patch('foodCategorySubTypes/' + this.foodCategorySubType.id, this.foodCategorySubType)
-            .then(response => this.handleSuccess(response))
+          this.$http.patch('foodCategorySubTypes/' + this.foodCategorySubType.id, this.foodCategorySubType, {
+            transformRequest: [function (data, headers) {
+              return _self.transformRequest(data, headers)
+            }]
+          }).then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         } else {
           // new foodCategorySubType, create
-          this.$http.post('foodCategorySubTypes', this.foodCategorySubType)
-            .then(response => this.handleSuccess(response))
+          this.$http.post('foodCategorySubTypes', this.foodCategorySubType, {
+            transformRequest: [function (data, headers) {
+              return _self.transformRequest(data, headers)
+            }]
+          }).then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         }
       })
+    },
+    transformRequest (data, headers) {
+      data.foodCategoryCoreType = this.convertEntityToURI(data.foodCategoryCoreType)
+      return JSON.stringify(data)
     },
     cancel () {
       this.visible = false

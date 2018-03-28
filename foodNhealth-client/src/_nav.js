@@ -34,31 +34,6 @@ export default {
           name: 'Υποκατηγορίες Κρεατικών',
           url: '/admin/meatCategoryTypes',
           icon: 'icon-puzzle'
-        },
-        {
-          name: 'Τύποι Θρεπτικών Συστατικών',
-          url: '/admin/proximateTypes',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'Τύποι Ιχνιστοιχείων',
-          url: '/admin/mineralTypes',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'Τύποι Βιταμινών',
-          url: '/admin/vitaminTypes',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'Τύποι Λιπιδίων',
-          url: '/admin/lipidTypes',
-          icon: 'icon-puzzle'
-        },
-        {
-          name: 'Τύποι Λοιπών',
-          url: '/admin/otherNutrientTypes',
-          icon: 'icon-puzzle'
         }
       ]
     }

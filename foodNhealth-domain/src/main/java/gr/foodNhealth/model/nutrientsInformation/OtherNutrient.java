@@ -16,14 +16,27 @@ public class OtherNutrient extends BaseEntity {
     private NutrientsInformation nutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private OtherNutrientType otherNutrientType;
+    @Column(nullable = false)
+    private String otherNutrientType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+
+    public OtherNutrient () {}
+
+    public OtherNutrient (String otherNutrientType) {
+        this.otherNutrientType = otherNutrientType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public OtherNutrient (String otherNutrientType, NutrientsInformation nutrientsInformation) {
+        this.otherNutrientType = otherNutrientType;
+        this.quantity = BigDecimal.ZERO;
+        this.nutrientsInformation = nutrientsInformation;
+    }
 
     public NutrientsInformation getNutrientsInformation() {
         return nutrientsInformation;
@@ -33,11 +46,11 @@ public class OtherNutrient extends BaseEntity {
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public OtherNutrientType getOtherNutrientType() {
+    public String getOtherNutrientType() {
         return otherNutrientType;
     }
 
-    public void setOtherNutrientType(OtherNutrientType otherNutrientType) {
+    public void setOtherNutrientType(String otherNutrientType) {
         this.otherNutrientType = otherNutrientType;
     }
 

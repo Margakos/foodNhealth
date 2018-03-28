@@ -11,7 +11,7 @@ public interface InlinedProductProximateProjection extends SimpleRoleProjection 
 
     BigDecimal getQuantity();
 
-    SimpleRoleProjection getProximateType();
+    String getProximateType();
 
     SimpleRoleProjection getProductNutrientsInformation();
 }

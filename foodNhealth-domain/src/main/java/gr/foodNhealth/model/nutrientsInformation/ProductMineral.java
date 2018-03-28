@@ -2,6 +2,7 @@ package gr.foodNhealth.model.nutrientsInformation;
 
 import gr.foodNhealth.model.BaseEntity;
 import gr.foodNhealth.model.NutrientsInformation;
+import gr.foodNhealth.model.Product;
 import gr.foodNhealth.model.ProductNutrientsInformation;
 
 import javax.persistence.Column;
@@ -19,14 +20,26 @@ public class ProductMineral extends BaseEntity {
     private ProductNutrientsInformation productNutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private MineralType mineralType;
+    @Column(nullable = false)
+    private String mineralType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+    public ProductMineral () {}
+
+    public ProductMineral (String mineralType) {
+        this.mineralType = mineralType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public ProductMineral (String mineralType, ProductNutrientsInformation productNutrientsInformation) {
+        this.mineralType = mineralType;
+        this.quantity = BigDecimal.ZERO;
+        this.productNutrientsInformation = productNutrientsInformation;
+    }
 
     public ProductNutrientsInformation getProductNutrientsInformation() {
         return productNutrientsInformation;
@@ -36,11 +49,11 @@ public class ProductMineral extends BaseEntity {
         this.productNutrientsInformation = productNutrientsInformation;
     }
 
-    public MineralType getMineralType() {
+    public String getMineralType() {
         return mineralType;
     }
 
-    public void setMineralType(MineralType mineralType) {
+    public void setMineralType(String mineralType) {
         this.mineralType = mineralType;
     }
 

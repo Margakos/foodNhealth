@@ -16,5 +16,6 @@ public interface FoodCategorySubTypeRepository extends JpaRepository<FoodCategor
     @Query("SELECT fct FROM FoodCategorySubType fct WHERE fct.title LIKE CONCAT('%',?1,'%') ")
     Page<FoodCategorySubType> findByQuery(@Param("query") String query, Pageable pageable);
 
+    @Query("SELECT fcst FROM FoodCategorySubType fcst WHERE fcst.foodCategoryCoreType.id=?1")
     Collection<FoodCategorySubType> findByFoodCategoryCoreTypeId(@Param("foodCategoryCoreTypeId") Long foodCategoryCoreTypeId);
 }

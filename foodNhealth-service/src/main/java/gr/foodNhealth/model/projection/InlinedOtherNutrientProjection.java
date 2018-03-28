@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 public interface InlinedOtherNutrientProjection extends SimpleRoleProjection {
     
     BigDecimal getQuantity();
-    
-    SimpleRoleProjection getOtherNutrientType();
+
+    String getOtherNutrientType();
 
     SimpleRoleProjection getNutrientsInformation();
 }

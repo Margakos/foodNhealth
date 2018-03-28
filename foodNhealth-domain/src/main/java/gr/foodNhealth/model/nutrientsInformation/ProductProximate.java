@@ -2,6 +2,7 @@ package gr.foodNhealth.model.nutrientsInformation;
 
 import gr.foodNhealth.model.BaseEntity;
 import gr.foodNhealth.model.NutrientsInformation;
+import gr.foodNhealth.model.Product;
 import gr.foodNhealth.model.ProductNutrientsInformation;
 
 import javax.persistence.Column;
@@ -19,14 +20,26 @@ public class ProductProximate extends BaseEntity{
     private ProductNutrientsInformation productNutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private ProximateType proximateType;
+    @Column(nullable = false)
+    private String proximateType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+    public ProductProximate () {}
+
+    public ProductProximate (String proximateType) {
+        this.proximateType = proximateType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public ProductProximate (String proximateType, ProductNutrientsInformation productNutrientsInformation) {
+        this.proximateType = proximateType;
+        this.quantity = BigDecimal.ZERO;
+        this.productNutrientsInformation = productNutrientsInformation;
+    }
 
     public ProductNutrientsInformation getProductNutrientsInformation() {
         return productNutrientsInformation;
@@ -36,11 +49,11 @@ public class ProductProximate extends BaseEntity{
         this.productNutrientsInformation = productNutrientsInformation;
     }
 
-    public ProximateType getProximateType() {
+    public String getProximateType() {
         return proximateType;
     }
 
-    public void setProximateType(ProximateType proximateType) {
+    public void setProximateType(String proximateType) {
         this.proximateType = proximateType;
     }
 

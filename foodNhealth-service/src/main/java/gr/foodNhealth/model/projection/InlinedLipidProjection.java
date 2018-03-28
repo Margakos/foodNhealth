@@ -10,7 +10,7 @@ public interface InlinedLipidProjection extends SimpleRoleProjection {
 
     BigDecimal getQuantity();
 
-    SimpleRoleProjection getLipidType();
+    String getLipidType();
 
     SimpleRoleProjection getNutrientsInformation();
 }

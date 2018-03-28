@@ -19,14 +19,26 @@ public class ProductLipid extends BaseEntity {
     private ProductNutrientsInformation productNutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private LipidType lipidType;
+    @Column(nullable = false)
+    private String lipidType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+    public ProductLipid () {}
+
+    public ProductLipid (String lipidType) {
+        this.lipidType = lipidType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public ProductLipid (String lipidType, ProductNutrientsInformation productNutrientsInformation) {
+        this.lipidType = lipidType;
+        this.quantity = BigDecimal.ZERO;
+        this.productNutrientsInformation = productNutrientsInformation;
+    }
 
     public ProductNutrientsInformation getProductNutrientsInformation() {
         return productNutrientsInformation;
@@ -36,11 +48,11 @@ public class ProductLipid extends BaseEntity {
         this.productNutrientsInformation = productNutrientsInformation;
     }
 
-    public LipidType getLipidType() {
+    public String getLipidType() {
         return lipidType;
     }
 
-    public void setLipidType(LipidType lipidType) {
+    public void setLipidType(String lipidType) {
         this.lipidType = lipidType;
     }
 

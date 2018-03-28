@@ -6,23 +6,31 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>gr.foodNhealth.model.FoodCategory</class>
         <class>gr.foodNhealth.model.Ingredient</class>
         <class>gr.foodNhealth.model.NutrientsInformation</class>
         <class>gr.foodNhealth.model.Person</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Lipid</class>
+        <class>gr.foodNhealth.model.nutrientsInformation.ProductLipid</class>
         <class>gr.foodNhealth.model.nutrientsInformation.LipidType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Mineral</class>
+        <class>gr.foodNhealth.model.nutrientsInformation.ProductMineral</class>
         <class>gr.foodNhealth.model.nutrientsInformation.MineralType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.OtherNutrient</class>
+        <class>gr.foodNhealth.model.nutrientsInformation.ProductOtherNutrient</class>
         <class>gr.foodNhealth.model.nutrientsInformation.OtherNutrientType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Proximate</class>
+        <class>gr.foodNhealth.model.nutrientsInformation.ProductProximate</class>
         <class>gr.foodNhealth.model.nutrientsInformation.ProximateType</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Vitamin</class>
+        <class>gr.foodNhealth.model.nutrientsInformation.ProductVitamin</class>
         <class>gr.foodNhealth.model.nutrientsInformation.VitaminType</class>
-        <class>gr.foodNhealth.model.foodCategory.FoodCategoryMainType</class>
+        <class>gr.foodNhealth.model.foodCategory.FoodCategoryCoreType</class>
         <class>gr.foodNhealth.model.foodCategory.FoodCategorySubType</class>
         <class>gr.foodNhealth.model.foodCategory.MeatCategoryType</class>
+        <class>gr.foodNhealth.model.Product</class>
+        <class>gr.foodNhealth.model.ProductNutrientsInformation</class>
+        <class>gr.foodNhealth.model.ProductPackage</class>
+        <class>gr.foodNhealth.model.Supermarket</class>
 
         <!--TODO Change below properties according to our need-->
         <properties>

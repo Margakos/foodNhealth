@@ -16,14 +16,27 @@ public class Mineral extends BaseEntity {
     private NutrientsInformation nutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private MineralType mineralType;
+    @Column(nullable = false)
+    private String mineralType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+
+    public Mineral () {}
+
+    public Mineral (String mineralType) {
+        this.mineralType = mineralType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public Mineral (String mineralType, NutrientsInformation nutrientsInformation) {
+        this.mineralType = mineralType;
+        this.quantity = BigDecimal.ZERO;
+        this.nutrientsInformation = nutrientsInformation;
+    }
 
     public NutrientsInformation getNutrientsInformation() {
         return nutrientsInformation;
@@ -33,11 +46,11 @@ public class Mineral extends BaseEntity {
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public MineralType getMineralType() {
+    public String getMineralType() {
         return mineralType;
     }
 
-    public void setMineralType(MineralType mineralType) {
+    public void setMineralType(String mineralType) {
         this.mineralType = mineralType;
     }
 

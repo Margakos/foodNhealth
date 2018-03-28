@@ -18,14 +18,26 @@ public class Vitamin extends BaseEntity {
     private NutrientsInformation nutrientsInformation;
 
     @NotNull
-    @ManyToOne(optional = false)
-    private VitaminType vitaminType;
+    @Column(nullable = false)
+    private String vitaminType;
 
     @NotNull
     @Min(0)
     @Column(precision = 15, scale = 12, nullable = false)
     private BigDecimal quantity;
 
+    public Vitamin () {}
+
+    public Vitamin (String vitaminType) {
+        this.vitaminType = vitaminType;
+        this.quantity = BigDecimal.ZERO;
+    }
+
+    public Vitamin (String vitaminType, NutrientsInformation nutrientsInformation) {
+        this.vitaminType = vitaminType;
+        this.quantity = BigDecimal.ZERO;
+        this.nutrientsInformation = nutrientsInformation;
+    }
 
     public NutrientsInformation getNutrientsInformation() {
         return nutrientsInformation;
@@ -35,11 +47,11 @@ public class Vitamin extends BaseEntity {
         this.nutrientsInformation = nutrientsInformation;
     }
 
-    public VitaminType getVitaminType() {
+    public String getVitaminType() {
         return vitaminType;
     }
 
-    public void setVitaminType(VitaminType vitaminType) {
+    public void setVitaminType(String vitaminType) {
         this.vitaminType = vitaminType;
     }
 

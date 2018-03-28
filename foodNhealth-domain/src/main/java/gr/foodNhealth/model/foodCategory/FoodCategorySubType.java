@@ -14,7 +14,7 @@ public class FoodCategorySubType extends BaseEntity {
     @OneToMany(mappedBy = "foodCategorySubType")
     private Collection<Ingredient> ingredients;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private FoodCategoryCoreType foodCategoryCoreType;
 
     public Collection<Ingredient> getIngredients() {
