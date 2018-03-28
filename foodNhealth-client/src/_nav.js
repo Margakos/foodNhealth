@@ -11,6 +11,11 @@ export default {
       icon: 'icon-puzzle'
     },
     {
+      name: 'Προϊόντα',
+      url: '/products',
+      icon: 'icon-puzzle'
+    },
+    {
       name: 'Διαχείριση',
       url: '/admin',
       icon: 'fa fa-wrench',

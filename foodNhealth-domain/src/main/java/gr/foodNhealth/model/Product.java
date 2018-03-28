@@ -19,14 +19,14 @@ public class Product extends BaseEntity {
     @Column
     private AvailableForm availableForm;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Collection<ProductPackage> productPackages;
 
     @NotNull
     @ManyToOne(optional = false)
     private Ingredient ingredient;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private ProductNutrientsInformation productNutrientsInformation;
 
 

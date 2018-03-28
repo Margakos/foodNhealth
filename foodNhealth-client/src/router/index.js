@@ -31,6 +31,7 @@ import Register from '@/views/pages/Register'
 import Persons from '@/foodNhealth/Persons'
 import Login from '@/foodNhealth/Login'
 import Ingredients from '@/foodNhealth/Ingredients'
+import Products from '@/foodNhealth/Products'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
 import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
@@ -67,6 +68,11 @@ export default new Router({
           path: 'ingredients',
           name: 'Ingredients',
           component: Ingredients
+        },
+        {
+          path: 'products',
+          name: 'Products',
+          component: Products
         },
         {
           path: 'admin',

@@ -23,21 +23,6 @@ export default {
           required: true,
           max: 255
         },
-        mineralType: {
-          required: true
-        },
-        vitaminType: {
-          required: true
-        },
-        lipidType: {
-          required: true
-        },
-        proximateType: {
-          required: true
-        },
-        otherNutrientType: {
-          required: true
-        },
         foodCategoryCoreType: {
           required: true
         },
@@ -325,8 +310,6 @@ export default {
     invalidateAll () {
       this.$validator.reset().then(() => {
         this.errors.clear('generalForm')
-        this.errors.clear('otherNutrientsForm')
-        this.errors.clear('foodCategoryForm')
       })
     },
     handleSuccess (response) {

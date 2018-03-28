@@ -147,6 +147,9 @@ Vue.mixin({
       }
       return allowed
     },
+    getIngredients () {
+      return this.$http.get('ingredients?projection=inlinedIngredient&size=' + Vue.prototype.$maxPageSize)
+    },
     getFoodCategoryCoreTypes () {
       return this.$http.get('foodCategoryCoreTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },
@@ -158,6 +161,9 @@ Vue.mixin({
     },
     getMeatCategoryTypes (foodCategorySubTypeId) {
       return this.$http.get('meatCategoryTypes/search/findByFoodCategorySubTypeId?foodCategorySubTypeId=' + foodCategorySubTypeId + '&projection=inlinedMeatCategoryType&size=' + Vue.prototype.$maxPageSize)
+    },
+    getSupermarkets () {
+      return this.$http.get('supermarkets?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },
     getMessage (key) {
       let message = this.$messages[key]

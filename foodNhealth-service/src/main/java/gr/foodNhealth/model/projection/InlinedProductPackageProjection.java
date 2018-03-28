@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @Projection(name = "inlinedProductPackage", types = ProductPackage.class)
 public interface InlinedProductPackageProjection extends SimpleRoleProjection {
 
-    SimpleRoleProjection getSupermarket();
-
     InlinedProductProjection getProduct();
+
+    SimpleRoleProjection getSupermarket();
 
     BigDecimal getQuantity();
 

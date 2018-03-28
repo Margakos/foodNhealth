@@ -170,16 +170,21 @@
                   </template>
                   <template slot="quantity" slot-scope="data">
                     <div class="col-8 center">
-                      <b-form-group description="Ποσότητα Βιταμίνης (grams)">
-                        <b-form-input type="number" name="quantity" id="quantity"
-                                      v-model="vitamins[data.index].quantity" :value="data.value">
+                      <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
+                                    :feedback="errors.first('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)"
+                                    :state="isValid('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)">
+                        <b-form-input :data-vv-scope="'vitaminsForm_' + data.index" type="number" :name="'quantity_' + vitamins[data.index].id" :id="'quantity_' + vitamins[data.index].id"
+                                      v-model="vitamins[data.index].quantity" :value="data.value"
+                                      v-validate="rules.quantity"
+                                      :state="isValid('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)"
+                                      :class="{'is-invalid': errors.has('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)}">
                         </b-form-input>
                       </b-form-group>
                     </div>
                   </template>
                   <template slot="actions" slot-scope="row">
                     <!-- We use click.stop here to prevent a 'row-clicked' event from also happening -->
-                    <b-button variant="success" @click.stop="updateVitamin(row.item)"><i
+                    <b-button variant="success" @click.stop="updateVitamin(row.item)" :disabled="errors.any('vitaminsForm_' + row.index) || ingredient.id == null"><i
                       class="fa fa-check"></i></b-button>
                   </template>
                 </b-table>
@@ -198,16 +203,21 @@
                   </template>
                   <template slot="quantity" slot-scope="data">
                     <div class="col-8 center">
-                      <b-form-group description="Ποσότητα Λιπιδίου (grams)">
-                        <b-form-input type="number" name="quantity" id="quantity"
-                                      v-model="lipids[data.index].quantity" :value="data.value">
+                      <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
+                                    :feedback="errors.first('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)"
+                                    :state="isValid('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)">
+                        <b-form-input :data-vv-scope="'lipidsForm_' + data.index" type="number" :name="'quantity_' + lipids[data.index].id" :id="'quantity_' + lipids[data.index].id"
+                                      v-model="lipids[data.index].quantity" :value="data.value"
+                                      v-validate="rules.quantity"
+                                      :state="isValid('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)"
+                                      :class="{'is-invalid': errors.has('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)}">
                         </b-form-input>
                       </b-form-group>
                     </div>
                   </template>
                   <template slot="actions" slot-scope="row">
                     <!-- We use click.stop here to prevent a 'row-clicked' event from also happening -->
-                    <b-button variant="success" @click.stop="updateLipid(row.item)"><i
+                    <b-button variant="success" @click.stop="updateLipid(row.item)" :disabled="errors.any('lipidsForm_' + row.index) || ingredient.id == null"><i
                       class="fa fa-check"></i></b-button>
                   </template>
                 </b-table>
@@ -221,21 +231,26 @@
                   <template slot="index" slot-scope="data">
                     {{data.index + 1}}
                   </template>
-                  <template slot="lipidType" slot-scope="data">
+                  <template slot="otherNutrientType" slot-scope="data">
                     {{data.value}}
                   </template>
                   <template slot="quantity" slot-scope="data">
                     <div class="col-8 center">
-                      <b-form-group description="Ποσότητα Λοιπού (grams)">
-                        <b-form-input type="number" name="quantity" id="quantity"
-                                      v-model="otherNutrients[data.index].quantity" :value="data.value">
+                      <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
+                                    :feedback="errors.first('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)"
+                                    :state="isValid('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)">
+                        <b-form-input :data-vv-scope="'otherNutrientsForm_' + data.index" type="number" :name="'quantity_' + otherNutrients[data.index].id" :id="'quantity_' + otherNutrients[data.index].id"
+                                      v-model="otherNutrients[data.index].quantity" :value="data.value"
+                                      v-validate="rules.quantity"
+                                      :state="isValid('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)"
+                                      :class="{'is-invalid': errors.has('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)}">
                         </b-form-input>
                       </b-form-group>
                     </div>
                   </template>
                   <template slot="actions" slot-scope="row">
                     <!-- We use click.stop here to prevent a 'row-clicked' event from also happening -->
-                    <b-button variant="success" @click.stop="updateOtherNutrient(row.item)"><i
+                    <b-button variant="success" @click.stop="updateOtherNutrient(row.item)" :disabled="errors.any('otherNutrientsForm_' + row.index) || ingredient.id == null"><i
                       class="fa fa-check"></i></b-button>
                   </template>
                 </b-table>
