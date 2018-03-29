@@ -16,7 +16,7 @@ public class VitaminService {
     @Autowired
     private VitaminRepository vitaminRepository;
 
-    public Collection<Vitamin> initIngredientVitamins (NutrientsInformation nutrientsInformation) {
+    private Collection<Vitamin> initVitamins (NutrientsInformation nutrientsInformation) {
         List<Vitamin> vitamins = new ArrayList<>();
         vitamins.add(new Vitamin("Vitamin A", nutrientsInformation));
         vitamins.add(new Vitamin("Vitamin B1", nutrientsInformation));
@@ -37,7 +37,18 @@ public class VitaminService {
             vitamin.setIsActive(true);
             vitamin.setDeleted(false);
         });
+        return vitamins;
+    }
+
+    public Collection<Vitamin> initIngredientVitamins (NutrientsInformation nutrientsInformation) {
+        Collection<Vitamin> vitamins = initVitamins(nutrientsInformation);
         vitaminRepository.save(vitamins);
         return vitamins;
+    }
+
+    public Collection<Vitamin> initProductVitamins (NutrientsInformation productNutrientsInformation) {
+        Collection<Vitamin> productVitamins = initVitamins(productNutrientsInformation);
+        vitaminRepository.save(productVitamins);
+        return productVitamins;
     }
 }

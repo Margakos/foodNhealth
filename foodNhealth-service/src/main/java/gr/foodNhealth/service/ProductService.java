@@ -3,9 +3,7 @@ package gr.foodNhealth.service;
 import gr.foodNhealth.model.Ingredient;
 import gr.foodNhealth.model.NutrientsInformation;
 import gr.foodNhealth.model.Product;
-import gr.foodNhealth.model.ProductNutrientsInformation;
 import gr.foodNhealth.repository.NutrientsInformationRepository;
-import gr.foodNhealth.repository.ProductNutrientsInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,38 +15,38 @@ public class ProductService {
     private UtilsService utils;
 
     @Autowired
-    private ProductNutrientsInformationRepository productNutrientsInformationRepository;
+    private NutrientsInformationRepository nutrientsInformationRepository;
 
     @Autowired
-    private ProductProximateService productProximateService;
+    private ProximateService proximateService;
 
     @Autowired
-    private ProductMineralService productMineralService;
+    private MineralService mineralService;
 
     @Autowired
-    private ProductVitaminService productVitaminService;
+    private VitaminService vitaminService;
 
     @Autowired
-    private ProductLipidService productLipidService;
+    private LipidService lipidService;
 
     @Autowired
-    private ProductOtherNutrientService productOtherNutrientService;
+    private OtherNutrientService otherNutrientService;
 
     @Transactional
     public Product initNewProduct (Product product, Ingredient ingredient) {
-        ProductNutrientsInformation productNutrientsInformation = new ProductNutrientsInformation();
+        NutrientsInformation productNutrientsInformation = new NutrientsInformation();
         productNutrientsInformation.setDeleted(false);
         productNutrientsInformation.setIsActive(true);
-        productNutrientsInformation = productNutrientsInformationRepository.save(productNutrientsInformation);
+        productNutrientsInformation = nutrientsInformationRepository.save(productNutrientsInformation);
 
-        productNutrientsInformation.setProductLipids(productLipidService.initProductLipids(productNutrientsInformation));
-        productNutrientsInformation.setProductProximates(productProximateService.initProductProximates(productNutrientsInformation));
-        productNutrientsInformation.setProductMinerals(productMineralService.initProductMinerals(productNutrientsInformation));
-        productNutrientsInformation.setProductVitamins(productVitaminService.initProductVitamins(productNutrientsInformation));
-        productNutrientsInformation.setProductOtherNutrients(productOtherNutrientService.initProductOtherNutrients(productNutrientsInformation));
-        productNutrientsInformation = utils.propagateNutrientsInformation(productNutrientsInformation, ingredient.getNutrientsInformation());
+        productNutrientsInformation.setLipids(lipidService.initProductLipids(productNutrientsInformation));
+        productNutrientsInformation.setProximates(proximateService.initProductProximates(productNutrientsInformation));
+        productNutrientsInformation.setMinerals(mineralService.initProductMinerals(productNutrientsInformation));
+        productNutrientsInformation.setVitamins(vitaminService.initProductVitamins(productNutrientsInformation));
+        productNutrientsInformation.setOtherNutrients(otherNutrientService.initProductOtherNutrients(productNutrientsInformation));
+        productNutrientsInformation = utils.propagateNutrientsInformationToProduct(productNutrientsInformation, ingredient.getNutrientsInformation());
 
-        product.setProductNutrientsInformation(productNutrientsInformation);
+        product.setNutrientsInformation(productNutrientsInformation);
         return product;
     }
 }

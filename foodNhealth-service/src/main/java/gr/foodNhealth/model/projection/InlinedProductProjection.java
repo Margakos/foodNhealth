@@ -12,7 +12,7 @@ public interface InlinedProductProjection extends SimpleRoleProjection {
 
     Product.AvailableForm getAvailableForm();
 
-    SimpleRoleProjection getProductNutrientsInformation();
+    SimpleRoleProjection getNutrientsInformation();
 
     InlinedIngredientProjection getIngredient();
 }

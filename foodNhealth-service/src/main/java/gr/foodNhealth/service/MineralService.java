@@ -16,7 +16,7 @@ public class MineralService {
     @Autowired
     private MineralRepository mineralRepository;
 
-    public Collection<Mineral> initIngredientMinerals (NutrientsInformation nutrientsInformation) {
+    private Collection<Mineral> initMinerals (NutrientsInformation nutrientsInformation) {
         List<Mineral> minerals = new ArrayList<>();
         minerals.add(new Mineral("Calcium", nutrientsInformation));
         minerals.add(new Mineral("Chromium", nutrientsInformation));
@@ -37,7 +37,18 @@ public class MineralService {
             mineral.setIsActive(true);
             mineral.setDeleted(false);
         });
+        return minerals;
+    }
+
+    public Collection<Mineral> initIngredientMinerals (NutrientsInformation nutrientsInformation) {
+        Collection<Mineral> minerals = initMinerals(nutrientsInformation);
         mineralRepository.save(minerals);
         return minerals;
+    }
+
+    public Collection<Mineral> initProductMinerals (NutrientsInformation productNutrientsInformation) {
+        Collection<Mineral> productMinerals = initMinerals(productNutrientsInformation);
+        mineralRepository.save(productMinerals);
+        return productMinerals;
     }
 }

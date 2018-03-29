@@ -5,6 +5,7 @@ import gr.foodNhealth.model.nutrientsInformation.OtherNutrient;
 import gr.foodNhealth.model.nutrientsInformation.Proximate;
 import gr.foodNhealth.repository.ProximateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ProximateService {
     @Autowired
     private ProximateRepository proximateRepository;
 
-    public Collection<Proximate> initIngredientProximates (NutrientsInformation nutrientsInformation) {
+    private Collection<Proximate> initProximates (NutrientsInformation nutrientsInformation) {
         List<Proximate> proximates = new ArrayList<>();
         proximates.add(new Proximate("Water", nutrientsInformation));
         proximates.add(new Proximate("Energy", nutrientsInformation));
@@ -30,7 +31,18 @@ public class ProximateService {
             proximate.setIsActive(true);
             proximate.setDeleted(false);
         });
+        return proximates;
+    }
+
+    public Collection<Proximate> initIngredientProximates (NutrientsInformation nutrientsInformation) {
+        Collection<Proximate> proximates = initProximates(nutrientsInformation);
         proximateRepository.save(proximates);
         return proximates;
+    }
+
+    public Collection<Proximate> initProductProximates (NutrientsInformation productNutrientsInformation) {
+        Collection<Proximate> productProximates = initProximates(productNutrientsInformation);
+        proximateRepository.save(productProximates);
+        return productProximates;
     }
 }

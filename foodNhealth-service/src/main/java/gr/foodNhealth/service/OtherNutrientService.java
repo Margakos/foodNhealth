@@ -16,7 +16,7 @@ public class OtherNutrientService {
     @Autowired
     private OtherNutrientRepository otherNutrientRepository;
 
-    public Collection<OtherNutrient> initIngredientOtherNutrients (NutrientsInformation nutrientsInformation) {
+    private Collection<OtherNutrient> initOtherNutrients (NutrientsInformation nutrientsInformation) {
         List<OtherNutrient> otherNutrients = new ArrayList<>();
         otherNutrients.add(new OtherNutrient("Alcohol", nutrientsInformation));
         otherNutrients.add(new OtherNutrient("Caffeine", nutrientsInformation));
@@ -24,7 +24,18 @@ public class OtherNutrientService {
             otherNutrient.setIsActive(true);
             otherNutrient.setDeleted(false);
         });
+        return otherNutrients;
+    }
+
+    public Collection<OtherNutrient> initIngredientOtherNutrients (NutrientsInformation nutrientsInformation) {
+        Collection<OtherNutrient> otherNutrients = initOtherNutrients(nutrientsInformation);
         otherNutrientRepository.save(otherNutrients);
         return otherNutrients;
+    }
+
+    public Collection<OtherNutrient> initProductOtherNutrients (NutrientsInformation productNutrientsInformation) {
+        Collection<OtherNutrient> productOtherNutrients = initOtherNutrients(productNutrientsInformation);
+        otherNutrientRepository.save(productOtherNutrients);
+        return productOtherNutrients;
     }
 }

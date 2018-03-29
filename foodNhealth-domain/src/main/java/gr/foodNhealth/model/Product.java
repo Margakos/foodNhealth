@@ -27,7 +27,7 @@ public class Product extends BaseEntity {
     private Ingredient ingredient;
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    private ProductNutrientsInformation productNutrientsInformation;
+    private NutrientsInformation nutrientsInformation;
 
     @ManyToMany
     private Collection<Recipe> recipes;
@@ -73,12 +73,12 @@ public class Product extends BaseEntity {
         this.ingredient = ingredient;
     }
 
-    public ProductNutrientsInformation getProductNutrientsInformation() {
-        return productNutrientsInformation;
+    public NutrientsInformation getNutrientsInformation() {
+        return nutrientsInformation;
     }
 
-    public void setProductNutrientsInformation(ProductNutrientsInformation productNutrientsInformation) {
-        this.productNutrientsInformation = productNutrientsInformation;
+    public void setNutrientsInformation(NutrientsInformation nutrientsInformation) {
+        this.nutrientsInformation = nutrientsInformation;
     }
 
     public Collection<Recipe> getRecipes() {

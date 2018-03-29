@@ -104,31 +104,31 @@
               <b-tab title="Θρεπτικά Συστατικά" active>
                 <div class="row">
 
-                  <b-table striped hover :items="productProximates" :fields="productProximatesFields">
+                  <b-table striped hover :items="proximates" :fields="proximatesFields">
                     <!-- virtual index column -->
                     <template slot="index" slot-scope="data">
                       {{data.index + 1}}
                     </template>
-                    <template slot="productProximateType" slot-scope="data">
+                    <template slot="proximateType" slot-scope="data">
                       {{data.value}}
                     </template>
                     <template slot="quantity" slot-scope="data">
                       <div class="col-8 center">
                         <b-form-group description="Ποσότητα Θρεπτικού Συστατικού (grams)"
-                                      :feedback="errors.first('quantity_' + productProximates[data.index].id, 'productProximatesForm_' + data.index)"
-                                      :state="isValid('quantity_' + productProximates[data.index].id, 'productProximatesForm_' + data.index)">
-                          <b-form-input :data-vv-scope="'productProximatesForm_' + data.index" type="number" :name="'quantity_' + productProximates[data.index].id" :id="'quantity_' + productProximates[data.index].id"
-                                        v-model="productProximates[data.index].quantity" :value="data.value"
+                                      :feedback="errors.first('quantity_' + proximates[data.index].id, 'proximatesForm_' + data.index)"
+                                      :state="isValid('quantity_' + proximates[data.index].id, 'proximatesForm_' + data.index)">
+                          <b-form-input :data-vv-scope="'proximatesForm_' + data.index" type="number" :name="'quantity_' + proximates[data.index].id" :id="'quantity_' + proximates[data.index].id"
+                                        v-model="proximates[data.index].quantity" :value="data.value"
                                         v-validate="rules.quantity"
-                                        :state="isValid('quantity_' + productProximates[data.index].id, 'productProximatesForm_' + data.index)"
-                                        :class="{'is-invalid': errors.has('quantity_' + productProximates[data.index].id, 'productProximatesForm_' + data.index)}">
+                                        :state="isValid('quantity_' + proximates[data.index].id, 'proximatesForm_' + data.index)"
+                                        :class="{'is-invalid': errors.has('quantity_' + proximates[data.index].id, 'proximatesForm_' + data.index)}">
                           </b-form-input>
                         </b-form-group>
                       </div>
                     </template>
                     <template slot="actions" slot-scope="row">
                       <!-- We use click.stop here to prevent a 'row-clicked' event from also happening -->
-                      <b-button variant="success" @click.stop="updateProximate(row.item)" :disabled="errors.any('productProximatesForm_' + row.index) || product.id == null"><i
+                      <b-button variant="success" @click.stop="updateProximate(row.item)" :disabled="errors.any('proximatesForm_' + row.index) || product.id == null"><i
                         class="fa fa-check"></i></b-button>
                     </template>
                   </b-table>
@@ -138,31 +138,31 @@
 
               <b-tab title="Ιχνοστοιχεία">
                 <div class="row">
-                  <b-table striped hover :items="productMinerals" :fields="productMineralsFields">
+                  <b-table striped hover :items="minerals" :fields="mineralsFields">
                      virtual index column
                     <template slot="index" slot-scope="data">
                       {{data.index + 1}}
                     </template>
-                    <template slot="productMineralType" slot-scope="data">
+                    <template slot="mineralType" slot-scope="data">
                       {{data.value}}
                     </template>
                     <template slot="quantity" slot-scope="data">
                       <div class="col-8 center">
                         <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
-                                      :feedback="errors.first('quantity_' + productMinerals[data.index].id, 'productMineralsForm_' + data.index)"
-                                      :state="isValid('quantity_' + productMinerals[data.index].id, 'productMineralsForm_' + data.index)">
-                          <b-form-input :data-vv-scope="'productMineralsForm_' + data.index" type="number" :name="'quantity_' + productMinerals[data.index].id" :id="'quantity_' + productMinerals[data.index].id"
-                                        v-model="productMinerals[data.index].quantity" :value="data.value"
+                                      :feedback="errors.first('quantity_' + minerals[data.index].id, 'mineralsForm_' + data.index)"
+                                      :state="isValid('quantity_' + minerals[data.index].id, 'mineralsForm_' + data.index)">
+                          <b-form-input :data-vv-scope="'mineralsForm_' + data.index" type="number" :name="'quantity_' + minerals[data.index].id" :id="'quantity_' + minerals[data.index].id"
+                                        v-model="minerals[data.index].quantity" :value="data.value"
                                         v-validate="rules.quantity"
-                                        :state="isValid('quantity_' + productMinerals[data.index].id, 'productMineralsForm_' + data.index)"
-                                        :class="{'is-invalid': errors.has('quantity_' + productMinerals[data.index].id, 'productMineralsForm_' + data.index)}">
+                                        :state="isValid('quantity_' + minerals[data.index].id, 'mineralsForm_' + data.index)"
+                                        :class="{'is-invalid': errors.has('quantity_' + minerals[data.index].id, 'mineralsForm_' + data.index)}">
                           </b-form-input>
                         </b-form-group>
                       </div>
                     </template>
                     <template slot="actions" slot-scope="row">
                        <!--We use click.stop here to prevent a 'row-clicked' event from also happening-->
-                      <b-button variant="success" @click.stop="updateMineral(row.item)" :disabled="errors.any('productMineralsForm_' + row.index) || product.id == null"><i
+                      <b-button variant="success" @click.stop="updateMineral(row.item)" :disabled="errors.any('mineralsForm_' + row.index) || product.id == null"><i
                         class="fa fa-check"></i></b-button>
                     </template>
                   </b-table>
@@ -171,31 +171,31 @@
 
               <b-tab title="Βιταμίνες">
                 <div class="row">
-                  <b-table striped hover :items="productVitamins" :fields="productVitaminsFields">
+                  <b-table striped hover :items="vitamins" :fields="vitaminsFields">
                      virtual index column
                     <template slot="index" slot-scope="data">
                       {{data.index + 1}}
                     </template>
-                    <template slot="productVitaminType" slot-scope="data">
+                    <template slot="vitaminType" slot-scope="data">
                       {{data.value}}
                     </template>
                     <template slot="quantity" slot-scope="data">
                       <div class="col-8 center">
                         <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
-                                      :feedback="errors.first('quantity_' + productVitamins[data.index].id, 'productVitaminsForm_' + data.index)"
-                                      :state="isValid('quantity_' + productVitamins[data.index].id, 'productVitaminsForm_' + data.index)">
-                          <b-form-input :data-vv-scope="'productVitaminsForm_' + data.index" type="number" :name="'quantity_' + productVitamins[data.index].id" :id="'quantity_' + productVitamins[data.index].id"
-                                        v-model="productVitamins[data.index].quantity" :value="data.value"
+                                      :feedback="errors.first('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)"
+                                      :state="isValid('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)">
+                          <b-form-input :data-vv-scope="'vitaminsForm_' + data.index" type="number" :name="'quantity_' + vitamins[data.index].id" :id="'quantity_' + vitamins[data.index].id"
+                                        v-model="vitamins[data.index].quantity" :value="data.value"
                                         v-validate="rules.quantity"
-                                        :state="isValid('quantity_' + productVitamins[data.index].id, 'productVitaminsForm_' + data.index)"
-                                        :class="{'is-invalid': errors.has('quantity_' + productVitamins[data.index].id, 'productVitaminsForm_' + data.index)}">
+                                        :state="isValid('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)"
+                                        :class="{'is-invalid': errors.has('quantity_' + vitamins[data.index].id, 'vitaminsForm_' + data.index)}">
                           </b-form-input>
                         </b-form-group>
                       </div>
                     </template>
                     <template slot="actions" slot-scope="row">
-                       We use click.stop here to prevent a 'row-clicked' event from also happening
-                      <b-button variant="success" @click.stop="updateVitamin(row.item)" :disabled="errors.any('productVitaminsForm_' + row.index) || product.id == null"><i
+                       <!--We use click.stop here to prevent a 'row-clicked' event from also happening-->
+                      <b-button variant="success" @click.stop="updateVitamin(row.item)" :disabled="errors.any('vitaminsForm_' + row.index) || product.id == null"><i
                         class="fa fa-check"></i></b-button>
                     </template>
                   </b-table>
@@ -204,31 +204,31 @@
 
               <b-tab title="Λιπίδια">
                 <div class="row">
-                  <b-table striped hover :items="productLipids" :fields="productLipidsFields">
+                  <b-table striped hover :items="lipids" :fields="lipidsFields">
                      virtual index column
                     <template slot="index" slot-scope="data">
                       {{data.index + 1}}
                     </template>
-                    <template slot="productLipidType" slot-scope="data">
+                    <template slot="lipidType" slot-scope="data">
                       {{data.value}}
                     </template>
                     <template slot="quantity" slot-scope="data">
                       <div class="col-8 center">
                         <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
-                                      :feedback="errors.first('quantity_' + productLipids[data.index].id, 'productLipidsForm_' + data.index)"
-                                      :state="isValid('quantity_' + productLipids[data.index].id, 'productLipidsForm_' + data.index)">
-                          <b-form-input :data-vv-scope="'productLipidsForm_' + data.index" type="number" :name="'quantity_' + productLipids[data.index].id" :id="'quantity_' + productLipids[data.index].id"
-                                        v-model="productLipids[data.index].quantity" :value="data.value"
+                                      :feedback="errors.first('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)"
+                                      :state="isValid('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)">
+                          <b-form-input :data-vv-scope="'lipidsForm_' + data.index" type="number" :name="'quantity_' + lipids[data.index].id" :id="'quantity_' + lipids[data.index].id"
+                                        v-model="lipids[data.index].quantity" :value="data.value"
                                         v-validate="rules.quantity"
-                                        :state="isValid('quantity_' + productLipids[data.index].id, 'productLipidsForm_' + data.index)"
-                                        :class="{'is-invalid': errors.has('quantity_' + productLipids[data.index].id, 'productLipidsForm_' + data.index)}">
+                                        :state="isValid('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)"
+                                        :class="{'is-invalid': errors.has('quantity_' + lipids[data.index].id, 'lipidsForm_' + data.index)}">
                           </b-form-input>
                         </b-form-group>
                       </div>
                     </template>
                     <template slot="actions" slot-scope="row">
-                       We use click.stop here to prevent a 'row-clicked' event from also happening
-                      <b-button variant="success" @click.stop="updateLipid(row.item)" :disabled="errors.any('productLipidsForm_' + row.index) || product.id == null"><i
+                       <!--We use click.stop here to prevent a 'row-clicked' event from also happening-->
+                      <b-button variant="success" @click.stop="updateLipid(row.item)" :disabled="errors.any('lipidsForm_' + row.index) || product.id == null"><i
                         class="fa fa-check"></i></b-button>
                     </template>
                   </b-table>
@@ -237,31 +237,31 @@
 
               <b-tab title="Λοιπά">
                 <div class="row">
-                  <b-table striped hover :items="productOtherNutrients" :fields="productOtherNutrientsFields">
+                  <b-table striped hover :items="otherNutrients" :fields="otherNutrientsFields">
                      virtual index column
                     <template slot="index" slot-scope="data">
                       {{data.index + 1}}
                     </template>
-                    <template slot="productOtherNutrientType" slot-scope="data">
+                    <template slot="otherNutrientType" slot-scope="data">
                       {{data.value}}
                     </template>
                     <template slot="quantity" slot-scope="data">
                       <div class="col-8 center">
                         <b-form-group description="Ποσότητα Ιχνοστοιχείου (grams)"
-                                      :feedback="errors.first('quantity_' + productOtherNutrients[data.index].id, 'productOtherNutrientsForm_' + data.index)"
-                                      :state="isValid('quantity_' + productOtherNutrients[data.index].id, 'productOtherNutrientsForm_' + data.index)">
-                          <b-form-input :data-vv-scope="'productOtherNutrientsForm_' + data.index" type="number" :name="'quantity_' + productOtherNutrients[data.index].id" :id="'quantity_' + productOtherNutrients[data.index].id"
-                                        v-model="productOtherNutrients[data.index].quantity" :value="data.value"
+                                      :feedback="errors.first('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)"
+                                      :state="isValid('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)">
+                          <b-form-input :data-vv-scope="'otherNutrientsForm_' + data.index" type="number" :name="'quantity_' + otherNutrients[data.index].id" :id="'quantity_' + otherNutrients[data.index].id"
+                                        v-model="otherNutrients[data.index].quantity" :value="data.value"
                                         v-validate="rules.quantity"
-                                        :state="isValid('quantity_' + productOtherNutrients[data.index].id, 'productOtherNutrientsForm_' + data.index)"
-                                        :class="{'is-invalid': errors.has('quantity_' + productOtherNutrients[data.index].id, 'productOtherNutrientsForm_' + data.index)}">
+                                        :state="isValid('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)"
+                                        :class="{'is-invalid': errors.has('quantity_' + otherNutrients[data.index].id, 'otherNutrientsForm_' + data.index)}">
                           </b-form-input>
                         </b-form-group>
                       </div>
                     </template>
                     <template slot="actions" slot-scope="row">
-                       We use click.stop here to prevent a 'row-clicked' event from also happening
-                      <b-button variant="success" @click.stop="updateOtherNutrient(row.item)" :disabled="errors.any('productOtherNutrientsForm_' + row.index) || product.id == null"><i
+                       <!--We use click.stop here to prevent a 'row-clicked' event from also happening-->
+                      <b-button variant="success" @click.stop="updateOtherNutrient(row.item)" :disabled="errors.any('otherNutrientsForm_' + row.index) || product.id == null"><i
                         class="fa fa-check"></i></b-button>
                     </template>
                   </b-table>

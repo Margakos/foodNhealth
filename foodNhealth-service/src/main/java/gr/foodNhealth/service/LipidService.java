@@ -17,7 +17,7 @@ public class LipidService {
     @Autowired
     private LipidRepository lipidRepository;
 
-    public Collection<Lipid> initIngredientLipids (NutrientsInformation nutrientsInfo) {
+    private Collection<Lipid> initLipids (NutrientsInformation nutrientsInfo) {
         List<Lipid> lipids = new ArrayList<>();
         lipids.add(new Lipid("Saturated", nutrientsInfo));
         lipids.add(new Lipid("Monounsaturated", nutrientsInfo));
@@ -27,7 +27,18 @@ public class LipidService {
             lipid.setIsActive(true);
             lipid.setDeleted(false);
         });
+        return lipids;
+    }
+
+    public Collection<Lipid> initIngredientLipids (NutrientsInformation nutrientsInfo) {
+        Collection<Lipid> lipids = initLipids(nutrientsInfo);
         lipidRepository.save(lipids);
         return lipids;
+    }
+
+    public Collection<Lipid> initProductLipids (NutrientsInformation productNutrientsInfo) {
+        Collection<Lipid> productLipids = initLipids(productNutrientsInfo);
+        lipidRepository.save(productLipids);
+        return productLipids;
     }
 }

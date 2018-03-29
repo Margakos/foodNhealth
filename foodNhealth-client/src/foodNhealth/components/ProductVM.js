@@ -11,16 +11,16 @@ export default {
     return {
       visible: false,
       product: initProduct(),
-      productMinerals: [],
-      productMineralTypes: [],
-      productVitamins: [],
-      productVitaminTypes: [],
-      productLipids: [],
-      productLipidTypes: [],
-      productProximates: [],
-      productProximateTypes: [],
-      productOtherNutrients: [],
-      productOtherNutrientTypes: [],
+      minerals: [],
+      mineralTypes: [],
+      vitamins: [],
+      vitaminTypes: [],
+      lipids: [],
+      lipidTypes: [],
+      proximates: [],
+      proximateTypes: [],
+      otherNutrients: [],
+      otherNutrientTypes: [],
       productPackages: [],
       ingredients: [],
       availableForms: [constants.AvailableForms.Grams, constants.AvailableForms.Pieces, constants.AvailableForms.Slices],
@@ -40,13 +40,13 @@ export default {
           min_value: 0
         }
       },
-      productMineralsFields: [
+      mineralsFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'productMineralType',
+          key: 'mineralType',
           label: 'Τίτλος'
         },
         {
@@ -61,13 +61,13 @@ export default {
           tdClass: 'text-right'
         }
       ],
-      productVitaminsFields: [
+      vitaminsFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'productVitaminType',
+          key: 'vitaminType',
           label: 'Τίτλος'
         },
         {
@@ -82,13 +82,13 @@ export default {
           tdClass: 'text-right'
         }
       ],
-      productLipidsFields: [
+      lipidsFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'productLipidType',
+          key: 'lipidType',
           label: 'Τίτλος'
         },
         {
@@ -103,13 +103,13 @@ export default {
           tdClass: 'text-right'
         }
       ],
-      productProximatesFields: [
+      proximatesFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'productProximateType',
+          key: 'proximateType',
           label: 'Τίτλος'
         },
         {
@@ -124,13 +124,13 @@ export default {
           tdClass: 'text-right'
         }
       ],
-      productOtherNutrientsFields: [
+      otherNutrientsFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'productOtherNutrientType',
+          key: 'otherNutrientType',
           label: 'Τίτλος'
         },
         {
@@ -196,54 +196,54 @@ export default {
   },
   methods: {
     refreshNutrientsInformation () {
-      this.refreshProductMinerals()
-      this.refreshProductVitamins()
-      this.refreshProductLipids()
-      this.refreshProductProximates()
-      this.refreshProductOtherNutrients()
+      this.refreshMinerals()
+      this.refreshVitamins()
+      this.refreshLipids()
+      this.refreshProximates()
+      this.refreshOtherNutrients()
     },
-    refreshProductMinerals () {
+    refreshMinerals () {
       let _self = this
-      this.$http.get(this.product.productNutrientsInformation._links.productMinerals.href + '?projection=inlinedMineral').then(response => {
-        this.productMinerals = response.data._embedded.productMinerals
-        this.productMinerals.forEach(function (productMineral, index) {
-          _self.productMineralTypes.push(productMineral.productMineralType)
+      this.$http.get(this.product.nutrientsInformation._links.minerals.href + '?projection=inlinedMineral').then(response => {
+        this.minerals = response.data._embedded.minerals
+        this.minerals.forEach(function (mineral, index) {
+          _self.mineralTypes.push(mineral.mineralType)
         })
       })
     },
-    refreshProductVitamins () {
+    refreshVitamins () {
       let _self = this
-      this.$http.get(this.product.productNutrientsInformation._links.productVitamins.href + '?projection=inlinedVitamin').then(response => {
-        this.productVitamins = response.data._embedded.productVitamins
-        this.productVitamins.forEach(function (productVitamin, index) {
-          _self.productVitaminTypes.push(productVitamin.productVitaminType)
+      this.$http.get(this.product.nutrientsInformation._links.vitamins.href + '?projection=inlinedVitamin').then(response => {
+        this.vitamins = response.data._embedded.vitamins
+        this.vitamins.forEach(function (vitamin, index) {
+          _self.vitaminTypes.push(vitamin.vitaminType)
         })
       })
     },
-    refreshProductLipids () {
+    refreshLipids () {
       let _self = this
-      this.$http.get(this.product.productNutrientsInformation._links.productLipids.href + '?projection=inlinedLipid').then(response => {
-        this.productLipids = response.data._embedded.productLipids
-        this.productLipids.forEach(function (productLipid, index) {
-          _self.productLipidTypes.push(productLipid.productLipidType)
+      this.$http.get(this.product.nutrientsInformation._links.lipids.href + '?projection=inlinedLipid').then(response => {
+        this.lipids = response.data._embedded.lipids
+        this.lipids.forEach(function (lipid, index) {
+          _self.lipidTypes.push(lipid.lipidType)
         })
       })
     },
-    refreshProductProximates () {
+    refreshProximates () {
       let _self = this
-      this.$http.get(this.product.productNutrientsInformation._links.productProximates.href + '?projection=inlinedProximate').then(response => {
-        this.productProximates = response.data._embedded.productProximates
-        this.productProximates.forEach(function (productProximate, index) {
-          _self.productProximateTypes.push(productProximate.productProximateType)
+      this.$http.get(this.product.nutrientsInformation._links.proximates.href + '?projection=inlinedProximate').then(response => {
+        this.proximates = response.data._embedded.proximates
+        this.proximates.forEach(function (proximate, index) {
+          _self.proximateTypes.push(proximate.proximateType)
         })
       })
     },
-    refreshProductOtherNutrients () {
+    refreshOtherNutrients () {
       let _self = this
-      this.$http.get(this.product.productNutrientsInformation._links.productOtherNutrients.href + '?projection=inlinedOtherNutrient').then(response => {
-        this.productOtherNutrients = response.data._embedded.productOtherNutrients
-        this.productOtherNutrients.forEach(function (productOtherNutrient, index) {
-          _self.productOtherNutrientTypes.push(productOtherNutrient.productOtherNutrientType)
+      this.$http.get(this.product.nutrientsInformation._links.otherNutrients.href + '?projection=inlinedOtherNutrient').then(response => {
+        this.otherNutrients = response.data._embedded.otherNutrients
+        this.otherNutrients.forEach(function (otherNutrient, index) {
+          _self.otherNutrientTypes.push(otherNutrient.otherNutrientType)
         })
       })
     },
@@ -330,7 +330,7 @@ export default {
     invalidateAll () {
       this.$validator.reset().then(() => {
         this.errors.clear('generalForm')
-        this.errors.clear('productOtherNutrientsForm')
+        this.errors.clear('otherNutrientsForm')
       })
     },
     handleSuccess (response) {
@@ -342,69 +342,69 @@ export default {
     },
     transformRequest (data, headers) {
       data.ingredient = this.convertEntityToURI(data.ingredient)
-      data.productNutrientsInformation = this.convertEntityToURI(data.productNutrientsInformation)
+      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
       return JSON.stringify(data)
     },
     transformNutrientsRequest (data, headers) {
-      data.productNutrientsInformation = this.convertEntityToURI(data.productNutrientsInformation)
+      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
       return JSON.stringify(data)
     },
-    updateMineral (productMineral) {
+    updateMineral (mineral) {
       let _self = this
-      productMineral.productNutrientsInformation = this.product.productNutrientsInformation
-      this.$http.patch('productMinerals/' + productMineral.id, productMineral, {
+      mineral.nutrientsInformation = this.product.nutrientsInformation
+      this.$http.patch('minerals/' + mineral.id, mineral, {
         transformRequest: [function (data, headers) {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProductMinerals()
+        this.refreshMinerals()
         this.success(this.$messages.successAction)
       })
     },
-    updateVitamin (productVitamin) {
+    updateVitamin (vitamin) {
       let _self = this
-      productVitamin.productNutrientsInformation = this.product.productNutrientsInformation
-      this.$http.patch('productVitamins/' + productVitamin.id, productVitamin, {
+      vitamin.nutrientsInformation = this.product.nutrientsInformation
+      this.$http.patch('vitamins/' + vitamin.id, vitamin, {
         transformRequest: [function (data, headers) {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProductVitamins()
+        this.refreshVitamins()
         this.success(this.$messages.successAction)
       })
     },
-    updateLipid (productLipid) {
+    updateLipid (lipid) {
       let _self = this
-      productLipid.productNutrientsInformation = this.product.productNutrientsInformation
-      this.$http.patch('productLipids/' + productLipid.id, productLipid, {
+      lipid.nutrientsInformation = this.product.nutrientsInformation
+      this.$http.patch('lipids/' + lipid.id, lipid, {
         transformRequest: [function (data, headers) {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProductLipids()
+        this.refreshLipids()
         this.success(this.$messages.successAction)
       })
     },
-    updateProximate (productProximate) {
+    updateProximate (proximate) {
       let _self = this
-      productProximate.productNutrientsInformation = this.product.productNutrientsInformation
-      this.$http.patch('productProximates/' + productProximate.id, productProximate, {
+      proximate.nutrientsInformation = this.product.nutrientsInformation
+      this.$http.patch('proximates/' + proximate.id, proximate, {
         transformRequest: [function (data, headers) {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProductProximates()
+        this.refreshProximates()
         this.success(this.$messages.successAction)
       })
     },
-    updateOtherNutrient (productOtherNutrient) {
+    updateOtherNutrient (otherNutrient) {
       let _self = this
-      this.$http.patch('productOtherNutrients/' + productOtherNutrient.id, productOtherNutrient, {
+      this.$http.patch('otherNutrients/' + otherNutrient.id, otherNutrient, {
         transformRequest: [function (data, headers) {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProductOtherNutrients()
+        this.refreshOtherNutrients()
         this.success(this.$messages.successAction)
       })
     },
@@ -431,7 +431,7 @@ function initProduct () {
     name: '',
     ingredient: null,
     photoPath: null,
-    productNutrientsInformation: null,
+    nutrientsInformation: null,
     availableForm: null
   }
 }
