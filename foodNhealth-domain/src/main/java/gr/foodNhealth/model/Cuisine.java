@@ -7,7 +7,7 @@ import java.util.Collection;
 @Entity
 public class Cuisine extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "cuisine")
     private Collection<Recipe> recipes;
 
     public Collection<Recipe> getRecipes() {
