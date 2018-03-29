@@ -46,9 +46,15 @@ public class MineralService {
         return minerals;
     }
 
-    public Collection<Mineral> initProductMinerals (NutrientsInformation productNutrientsInformation) {
-        Collection<Mineral> productMinerals = initMinerals(productNutrientsInformation);
+    public Collection<Mineral> initProductMinerals (NutrientsInformation nutrientsInformation) {
+        Collection<Mineral> productMinerals = initMinerals(nutrientsInformation);
         mineralRepository.save(productMinerals);
         return productMinerals;
+    }
+
+    public Collection<Mineral> initRecipeMinerals (NutrientsInformation nutrientsInformation) {
+        Collection<Mineral> recipeMinerals = initMinerals(nutrientsInformation);
+        mineralRepository.save(recipeMinerals);
+        return recipeMinerals;
     }
 }

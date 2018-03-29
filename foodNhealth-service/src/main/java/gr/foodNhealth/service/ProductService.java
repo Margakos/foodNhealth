@@ -34,19 +34,20 @@ public class ProductService {
 
     @Transactional
     public Product initNewProduct (Product product, Ingredient ingredient) {
-        NutrientsInformation productNutrientsInformation = new NutrientsInformation();
-        productNutrientsInformation.setDeleted(false);
-        productNutrientsInformation.setIsActive(true);
-        productNutrientsInformation = nutrientsInformationRepository.save(productNutrientsInformation);
+        NutrientsInformation nutrientsInformation = new NutrientsInformation();
+        nutrientsInformation.setTitle("Product");
+        nutrientsInformation.setDeleted(false);
+        nutrientsInformation.setIsActive(true);
+        nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
 
-        productNutrientsInformation.setLipids(lipidService.initProductLipids(productNutrientsInformation));
-        productNutrientsInformation.setProximates(proximateService.initProductProximates(productNutrientsInformation));
-        productNutrientsInformation.setMinerals(mineralService.initProductMinerals(productNutrientsInformation));
-        productNutrientsInformation.setVitamins(vitaminService.initProductVitamins(productNutrientsInformation));
-        productNutrientsInformation.setOtherNutrients(otherNutrientService.initProductOtherNutrients(productNutrientsInformation));
-        productNutrientsInformation = utils.propagateNutrientsInformationToProduct(productNutrientsInformation, ingredient.getNutrientsInformation());
+        nutrientsInformation.setLipids(lipidService.initProductLipids(nutrientsInformation));
+        nutrientsInformation.setProximates(proximateService.initProductProximates(nutrientsInformation));
+        nutrientsInformation.setMinerals(mineralService.initProductMinerals(nutrientsInformation));
+        nutrientsInformation.setVitamins(vitaminService.initProductVitamins(nutrientsInformation));
+        nutrientsInformation.setOtherNutrients(otherNutrientService.initProductOtherNutrients(nutrientsInformation));
+        nutrientsInformation = utils.propagateNutrientsInformationToProduct(nutrientsInformation, ingredient.getNutrientsInformation());
 
-        product.setNutrientsInformation(productNutrientsInformation);
+        product.setNutrientsInformation(nutrientsInformation);
         return product;
     }
 }

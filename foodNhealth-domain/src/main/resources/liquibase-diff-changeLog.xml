@@ -651,4 +651,29 @@
     <changeSet author="vasilis (generated)" id="1522309807823-34">
         <dropColumn columnName="productNutrientsInformation_id" tableName="Product"/>
     </changeSet>
+    <changeSet author="vasilis (generated)" id="1522319469730-1">
+        <addColumn tableName="Recipe">
+            <column name="instruction" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522319469730-2">
+        <addColumn tableName="Recipe">
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522319469730-3">
+        <addColumn tableName="Recipe">
+            <column name="nutrientsInformation_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522319469730-4">
+        <addColumn tableName="Recipe">
+            <column name="photoPath" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="vasilis (generated)" id="1522319469730-5">
+        <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Recipe" constraintName="FKjx2xu45lfw8ywk9trchbxdyak" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
+    </changeSet>
 </databaseChangeLog>

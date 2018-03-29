@@ -31,7 +31,7 @@ public class VitaminService {
         vitamins.add(new Vitamin("Vitamin D", nutrientsInformation));
         vitamins.add(new Vitamin("Vitamin E", nutrientsInformation));
         vitamins.add(new Vitamin("Vitamin K", nutrientsInformation));
-        vitamins.add(new Vitamin("Choline, nutrientsInformation", nutrientsInformation));
+        vitamins.add(new Vitamin("Choline", nutrientsInformation));
         vitamins.add(new Vitamin("Carotenoids", nutrientsInformation));
         vitamins.forEach(vitamin -> {
             vitamin.setIsActive(true);
@@ -46,9 +46,15 @@ public class VitaminService {
         return vitamins;
     }
 
-    public Collection<Vitamin> initProductVitamins (NutrientsInformation productNutrientsInformation) {
-        Collection<Vitamin> productVitamins = initVitamins(productNutrientsInformation);
+    public Collection<Vitamin> initProductVitamins (NutrientsInformation nutrientsInformation) {
+        Collection<Vitamin> productVitamins = initVitamins(nutrientsInformation);
         vitaminRepository.save(productVitamins);
         return productVitamins;
+    }
+
+    public Collection<Vitamin> initRecipeVitamins (NutrientsInformation nutrientsInformation) {
+        Collection<Vitamin> recipeVitamins = initVitamins(nutrientsInformation);
+        vitaminRepository.save(recipeVitamins);
+        return recipeVitamins;
     }
 }

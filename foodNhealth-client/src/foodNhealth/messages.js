@@ -13,7 +13,6 @@ const messages = {
   warningUserChanged: 'Ο λογαρισμός χρήστη με τον οποίο είστε συνδεδεμένος/η τροποποιήθηκε. Παρακαλούμε πραγματοποιήστε εκ νέου είσοδο στην εφαρμογή, προκειμένου να εφαρμοστούν οι αλλαγές.',
   confirmActionTitle: 'Επιβεβαίωση Ενέργειας',
   confirmAction: 'Η ενέργεια αυτή είναι αμετάκλητη. Θέλετε να συνεχίσετε;',
-  fieldMoreThanZero: 'Το πεδίο πρέπει να είναι μεγαλύτερο του μηδενός',
   selected: 'Επιλεγμένο',
   setSelection: 'Πιέστε Enter για επιλογή',
   removeSelection: 'Πιέστε Enter για αφαίρεση',
@@ -23,7 +22,10 @@ const messages = {
   ok: 'Οκ',
   warning: 'Προειδοποίηση',
   required: 'Το πεδίο δεν έχει συμπληρωθεί.',
-  // Ddata Base Entities
+  // Custom Errors
+  fieldMoreThanZero: 'Το πεδίο πρέπει να είναι μεγαλύτερο του μηδενός',
+  productsEmpty: 'Το πεδόπ θα πρέπει να περιέχει τουλάχιστον μια εγγραφή',
+  // Data Base Entities
   Ingredients: 'Συστατικά',
   Ingredient: 'Συστατικό',
   // NutrientsInformation

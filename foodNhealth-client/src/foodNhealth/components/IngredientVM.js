@@ -294,7 +294,6 @@ export default {
         closeOnPressEscape: false,
         type: 'warning'
       }).then(() => {
-        // delete commitee
         this.$http.delete('ingredients/' + this.ingredient.id).then(response => {
           this.visible = false
           this.success(this.$messages.successAction)

@@ -16,6 +16,11 @@ export default {
       icon: 'icon-puzzle'
     },
     {
+      name: 'Συνταγές',
+      url: '/recipes',
+      icon: 'icon-puzzle'
+    },
+    {
       name: 'Διαχείριση',
       url: '/admin',
       icon: 'fa fa-wrench',
@@ -43,6 +48,16 @@ export default {
         {
           name: 'Supermarkets',
           url: '/admin/supermarkets',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κουζίνες',
+          url: '/admin/cuisines',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Κατηγορίες Συνταγών',
+          url: '/admin/recipeCategories',
           icon: 'icon-puzzle'
         }
       ]

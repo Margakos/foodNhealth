@@ -36,9 +36,15 @@ public class LipidService {
         return lipids;
     }
 
-    public Collection<Lipid> initProductLipids (NutrientsInformation productNutrientsInfo) {
-        Collection<Lipid> productLipids = initLipids(productNutrientsInfo);
+    public Collection<Lipid> initProductLipids (NutrientsInformation nutrientsInformation) {
+        Collection<Lipid> productLipids = initLipids(nutrientsInformation);
         lipidRepository.save(productLipids);
         return productLipids;
+    }
+
+    public Collection<Lipid> initRecipeLipids (NutrientsInformation nutrientsInformation) {
+        Collection<Lipid> recipeLipids = initLipids(nutrientsInformation);
+        lipidRepository.save(recipeLipids);
+        return recipeLipids;
     }
 }

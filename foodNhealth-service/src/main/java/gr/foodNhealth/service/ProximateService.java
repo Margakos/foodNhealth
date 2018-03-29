@@ -40,9 +40,15 @@ public class ProximateService {
         return proximates;
     }
 
-    public Collection<Proximate> initProductProximates (NutrientsInformation productNutrientsInformation) {
-        Collection<Proximate> productProximates = initProximates(productNutrientsInformation);
+    public Collection<Proximate> initProductProximates (NutrientsInformation nutrientsInformation) {
+        Collection<Proximate> productProximates = initProximates(nutrientsInformation);
         proximateRepository.save(productProximates);
         return productProximates;
+    }
+
+    public Collection<Proximate> initRecipeProximates (NutrientsInformation nutrientsInformation) {
+        Collection<Proximate> recipeProximates = initProximates(nutrientsInformation);
+        proximateRepository.save(recipeProximates);
+        return recipeProximates;
     }
 }

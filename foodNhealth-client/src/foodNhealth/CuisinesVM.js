@@ -1,30 +1,30 @@
 import DataTable from '@/foodNhealth/components/DataTable'
-import Supermarket from '@/foodNhealth/components/Supermarket'
+import Cuisine from '@/foodNhealth/components/Cuisine'
 
 export default {
   components: {
     DataTable,
-    Supermarket
+    Cuisine
   },
   created () {
-    console.log('Supermarket created')
+    console.log('Cuisine created')
   },
   mounted () {
     // subscribe to the 'row-selected' event (wherever it may come from, should come from the child table component)
-    this.$events.$on('row-selected', eventData => this.onSupermarketSelected(eventData))
-    this.$events.$on('supermarket-edited', eventData => this.onSupermarketEdited(eventData))
-    console.log('Supermarket mounted')
+    this.$events.$on('row-selected', eventData => this.onCuisineSelected(eventData))
+    this.$events.$on('cuisine-edited', eventData => this.onCuisineEdited(eventData))
+    console.log('Cuisine mounted')
   },
   beforeDestroy: function () {
     this.$events.$off('row-selected')
-    this.$events.$off('supermarket-edited')
+    this.$events.$off('cuisine-edited')
   },
   destroyed: function () {
-    console.log('Supermarket destroyed')
+    console.log('Cuisine destroyed')
   },
   data: function () {
     return {
-      url: 'supermarkets/search/findByQuery',
+      url: 'cuisines/search/findByQuery',
       fields: [
         {
           name: 'id',
@@ -45,15 +45,15 @@ export default {
     }
   },
   methods: {
-    createSupermarket (event) {
-      console.log('fire edit-supermarket event')
-      this.$events.fire('edit-supermarket', null)
+    createCuisine (event) {
+      console.log('fire edit-cuisine event')
+      this.$events.fire('edit-cuisine', null)
     },
-    onSupermarketSelected (dataItem) {
-      console.log('fire edit-supermarket event')
-      this.$events.fire('edit-supermarket', dataItem)
+    onCuisineSelected (dataItem) {
+      console.log('fire edit-cuisine event')
+      this.$events.fire('edit-cuisine', dataItem)
     },
-    onSupermarketEdited (dataItem) {
+    onCuisineEdited (dataItem) {
       console.log('fire data-changed event')
       this.$events.fire('data-changed')
     }

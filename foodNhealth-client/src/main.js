@@ -150,6 +150,15 @@ Vue.mixin({
     getIngredients () {
       return this.$http.get('ingredients?projection=inlinedIngredient&size=' + Vue.prototype.$maxPageSize)
     },
+    getProducts () {
+      return this.$http.get('products?projection=inlinedProduct&size=' + Vue.prototype.$maxPageSize)
+    },
+    getCuisines () {
+      return this.$http.get('cuisines?projection=simpleRole&size=' + Vue.prototype.$maxPageSize)
+    },
+    getRecipeCategories () {
+      return this.$http.get('recipeCategories?projection=simpleRole&size=' + Vue.prototype.$maxPageSize)
+    },
     getFoodCategoryCoreTypes () {
       return this.$http.get('foodCategoryCoreTypes?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },

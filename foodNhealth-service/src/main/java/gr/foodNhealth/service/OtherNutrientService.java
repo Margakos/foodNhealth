@@ -33,9 +33,15 @@ public class OtherNutrientService {
         return otherNutrients;
     }
 
-    public Collection<OtherNutrient> initProductOtherNutrients (NutrientsInformation productNutrientsInformation) {
-        Collection<OtherNutrient> productOtherNutrients = initOtherNutrients(productNutrientsInformation);
+    public Collection<OtherNutrient> initProductOtherNutrients (NutrientsInformation nutrientsInformation) {
+        Collection<OtherNutrient> productOtherNutrients = initOtherNutrients(nutrientsInformation);
         otherNutrientRepository.save(productOtherNutrients);
         return productOtherNutrients;
+    }
+
+    public Collection<OtherNutrient> initRecipeOtherNutrients (NutrientsInformation nutrientsInformation) {
+        Collection<OtherNutrient> recipeOtherNutrients = initOtherNutrients(nutrientsInformation);
+        otherNutrientRepository.save(recipeOtherNutrients);
+        return recipeOtherNutrients;
     }
 }

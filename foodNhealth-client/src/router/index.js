@@ -30,12 +30,15 @@ import Register from '@/views/pages/Register'
 // Views - FoodNHealth
 import Persons from '@/foodNhealth/Persons'
 import Login from '@/foodNhealth/Login'
-import Ingredients from '@/foodNhealth/Ingredients'
-import Products from '@/foodNhealth/Products'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
 import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
 import Supermarkets from '@/foodNhealth/Supermarkets'
+import Ingredients from '@/foodNhealth/Ingredients'
+import Products from '@/foodNhealth/Products'
+import Recipes from '@/foodNhealth/Recipes'
+import Cuisines from '@/foodNhealth/Cuisines'
+import RecipeCategories from '@/foodNhealth/RecipeCategories'
 
 Vue.use(Router)
 
@@ -76,6 +79,11 @@ export default new Router({
           component: Products
         },
         {
+          path: 'recipes',
+          name: 'Recipes',
+          component: Recipes
+        },
+        {
           path: 'admin',
           redirect: '/admin/persons',
           name: 'Διαχείριση',
@@ -110,6 +118,16 @@ export default new Router({
               path: 'supermarkets',
               name: 'Supermarkets',
               component: Supermarkets
+            },
+            {
+              path: 'cuisines',
+              name: 'Cuisines',
+              component: Cuisines
+            },
+            {
+              path: 'recipeCategories',
+              name: 'RecipeCategories',
+              component: RecipeCategories
             }
           ]
         },

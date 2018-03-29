@@ -32,18 +32,19 @@ public class IngredientService {
 
     @Transactional
     public Ingredient initNewIngredient (Ingredient ingredient) {
-        NutrientsInformation nutrientsInfo = new NutrientsInformation();
-        nutrientsInfo.setDeleted(false);
-        nutrientsInfo.setIsActive(true);
-        nutrientsInfo = nutrientsInformationRepository.save(nutrientsInfo);
+        NutrientsInformation nutrientsInformation = new NutrientsInformation();
+        nutrientsInformation.setTitle("Ingredient");
+        nutrientsInformation.setDeleted(false);
+        nutrientsInformation.setIsActive(true);
+        nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
 
-        lipidService.initIngredientLipids(nutrientsInfo);
-        proximateService.initIngredientProximates(nutrientsInfo);
-        mineralService.initIngredientMinerals(nutrientsInfo);
-        vitaminService.initIngredientVitamins(nutrientsInfo);
-        otherNutrientService.initIngredientOtherNutrients(nutrientsInfo);
+        lipidService.initIngredientLipids(nutrientsInformation);
+        proximateService.initIngredientProximates(nutrientsInformation);
+        mineralService.initIngredientMinerals(nutrientsInformation);
+        vitaminService.initIngredientVitamins(nutrientsInformation);
+        otherNutrientService.initIngredientOtherNutrients(nutrientsInformation);
 
-        ingredient.setNutrientsInformation(nutrientsInfo);
+        ingredient.setNutrientsInformation(nutrientsInformation);
         return ingredient;
     }
 }
