@@ -35,6 +35,7 @@ import Products from '@/foodNhealth/Products'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
 import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
+import Supermarkets from '@/foodNhealth/Supermarkets'
 
 Vue.use(Router)
 
@@ -76,7 +77,7 @@ export default new Router({
         },
         {
           path: 'admin',
-          redirect: '/admin/foodCategoryCoreTypes',
+          redirect: '/admin/persons',
           name: 'Διαχείριση',
           component: {
             render (c) {
@@ -104,6 +105,11 @@ export default new Router({
               path: 'meatCategoryTypes',
               name: 'MeatCategoryTypes',
               component: MeatCategoryTypes
+            },
+            {
+              path: 'supermarkets',
+              name: 'Supermarkets',
+              component: Supermarkets
             }
           ]
         },

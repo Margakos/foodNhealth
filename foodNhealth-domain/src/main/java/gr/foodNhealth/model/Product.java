@@ -29,6 +29,9 @@ public class Product extends BaseEntity {
     @OneToOne(cascade = CascadeType.REMOVE)
     private ProductNutrientsInformation productNutrientsInformation;
 
+    @ManyToMany
+    private Collection<Recipe> recipes;
+
 
     public String getName() {
         return name;
@@ -76,6 +79,14 @@ public class Product extends BaseEntity {
 
     public void setProductNutrientsInformation(ProductNutrientsInformation productNutrientsInformation) {
         this.productNutrientsInformation = productNutrientsInformation;
+    }
+
+    public Collection<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Collection<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     public enum AvailableForm {

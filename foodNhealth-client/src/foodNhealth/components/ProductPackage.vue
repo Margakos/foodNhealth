@@ -83,11 +83,6 @@
           </div>
 
           <div class="form action text-right">
-            <div class="pull-left">
-              <!-- Quantified -->
-              <b-form-checkbox name="recurring" v-model="quantified" ></b-form-checkbox>
-              Κομμάτια: <strong>{{quantified ? getMessage('yes') : getMessage('no')}}</strong>
-            </div>
             <b-button size="sm" variant="success" @click="save" :disabled="errors.any('generalForm')"><i
               class="fa fa-dot-circle-o"></i> Αποθήκευση
             </b-button>

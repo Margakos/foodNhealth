@@ -1,6 +1,10 @@
+import constants from '@/foodNhealth/constants'
+
 export default {
   name: 'productPackage',
-  components: {},
+  components: {
+    constants
+  },
   data: function () {
     return {
       visible: false,
@@ -68,6 +72,7 @@ export default {
       if (eventData.id != null) {
         this.getProductPackage(eventData).then(response => {
           this.productPackage = response.data
+          this.quantified = eventData.product.availableForm !== constants.AvailableForms.Grams
           this.visible = true
         })
       } else {

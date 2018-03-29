@@ -1,9 +1,11 @@
 import ProductPackage from '@/foodNhealth/components/ProductPackage'
+import constants from '@/foodNhealth/constants'
 
 export default {
   name: 'product',
   components: {
-    ProductPackage
+    ProductPackage,
+    constants
   },
   data: function () {
     return {
@@ -21,12 +23,16 @@ export default {
       productOtherNutrientTypes: [],
       productPackages: [],
       ingredients: [],
+      availableForms: [constants.AvailableForms.Grams, constants.AvailableForms.Pieces, constants.AvailableForms.Slices],
       rules: {
         name: {
           required: true,
           max: 255
         },
         ingredient: {
+          required: true
+        },
+        availableForm: {
           required: true
         },
         quantity: {
@@ -425,6 +431,7 @@ function initProduct () {
     name: '',
     ingredient: null,
     photoPath: null,
-    productNutrientsInformation: null
+    productNutrientsInformation: null,
+    availableForm: null
   }
 }

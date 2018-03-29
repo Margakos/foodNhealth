@@ -39,6 +39,11 @@ export default {
           name: 'Υποκατηγορίες Κρεατικών',
           url: '/admin/meatCategoryTypes',
           icon: 'icon-puzzle'
+        },
+        {
+          name: 'Supermarkets',
+          url: '/admin/supermarkets',
+          icon: 'icon-puzzle'
         }
       ]
     }
