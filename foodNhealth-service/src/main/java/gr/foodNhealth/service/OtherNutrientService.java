@@ -20,6 +20,8 @@ public class OtherNutrientService {
         List<OtherNutrient> otherNutrients = new ArrayList<>();
         otherNutrients.add(new OtherNutrient("Alcohol", nutrientsInformation));
         otherNutrients.add(new OtherNutrient("Caffeine", nutrientsInformation));
+        otherNutrients.add(new OtherNutrient("Gluten", nutrientsInformation));
+        otherNutrients.add(new OtherNutrient("Lactose", nutrientsInformation));
         otherNutrients.forEach(otherNutrient -> {
             otherNutrient.setIsActive(true);
             otherNutrient.setDeleted(false);
