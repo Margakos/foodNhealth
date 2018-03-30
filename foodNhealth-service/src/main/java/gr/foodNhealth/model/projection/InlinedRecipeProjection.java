@@ -15,6 +15,4 @@ public interface InlinedRecipeProjection extends SimpleRoleProjection {
     SimpleRoleProjection getRecipeCategory();
 
     SimpleRoleProjection getCuisine();
-
-    SimpleRoleProjection getNutrientsInformation();
 }

@@ -45,7 +45,7 @@ export default {
       console.log('Edit FoodCategorySubType:' + eventData)
       this.invalidate()
       if (eventData != null) {
-        this.$http.get('foodCategorySubTypes/' + eventData).then(response => {
+        this.$http.get('foodCategorySubTypes/' + eventData + '?projection=inlinedFoodCategorySubType').then(response => {
           this.foodCategorySubType = response.data
           this.visible = true
         }).catch(e => {

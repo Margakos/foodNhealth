@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   name: 'recipe',
   components: {},
@@ -5,29 +7,23 @@ export default {
     return {
       visible: false,
       recipe: initRecipe(),
-      minerals: [],
-      mineralTypes: [],
-      vitamins: [],
-      vitaminTypes: [],
-      lipids: [],
-      lipidTypes: [],
-      proximates: [],
-      proximateTypes: [],
-      otherNutrients: [],
-      otherNutrientTypes: [],
-      products: [],
+      ingredients: [],
       cuisines: [],
       recipeCategories: [],
+      ingredientPortions: [],
+      quantityShown: [],
+      piecesShown: [],
       rules: {
         name: {
           required: true,
           max: 255
         },
-        products: {
+        ingredient: {
           required: false
         },
-        availableForm: {
-          required: true
+        pieces: {
+          required: true,
+          min_value: 0
         },
         cuisine: {
           required: true
@@ -43,116 +39,32 @@ export default {
           min_value: 0
         }
       },
-      mineralsFields: [
+      ingredientPortionsFields: [
         {
           key: 'index',
           label: '#'
         },
         {
-          key: 'mineralType',
-          label: 'Τίτλος'
+          key: 'ingredient',
+          label: 'Συστατικό'
+        },
+
+        {
+          key: 'quantity_slices',
+          label: ' Ποσότητα'
         },
         {
-          key: 'quantity',
-          label: ' Ποσότητα',
-          callback: 'formatGrams'
-        },
-        {
-          key: 'unit',
-          label: 'Μονάδα Μέτρησης',
+          key: 'actions',
+          label: 'Ενέργειες',
           thClass: 'text-right',
-          tdClass: 'text-center'
-        }
-      ],
-      vitaminsFields: [
-        {
-          key: 'index',
-          label: '#'
-        },
-        {
-          key: 'vitaminType',
-          label: 'Τίτλος'
-        },
-        {
-          key: 'quantity',
-          label: ' Ποσότητα',
-          callback: 'formatGrams'
-        },
-        {
-          key: 'unit',
-          label: 'Μονάδα Μέτρησης',
-          thClass: 'text-right',
-          tdClass: 'text-center'
-        }
-      ],
-      lipidsFields: [
-        {
-          key: 'index',
-          label: '#'
-        },
-        {
-          key: 'lipidType',
-          label: 'Τίτλος'
-        },
-        {
-          key: 'quantity',
-          label: ' Ποσότητα',
-          callback: 'formatGrams'
-        },
-        {
-          key: 'unit',
-          label: 'Μονάδα Μέτρησης',
-          thClass: 'text-right',
-          tdClass: 'text-center'
-        }
-      ],
-      proximatesFields: [
-        {
-          key: 'index',
-          label: '#'
-        },
-        {
-          key: 'proximateType',
-          label: 'Τίτλος'
-        },
-        {
-          key: 'quantity',
-          label: ' Ποσότητα',
-          callback: 'formatGrams'
-        },
-        {
-          key: 'unit',
-          label: 'Μονάδα Μέτρησης',
-          thClass: 'text-right',
-          tdClass: 'text-center'
-        }
-      ],
-      otherNutrientsFields: [
-        {
-          key: 'index',
-          label: '#'
-        },
-        {
-          key: 'otherNutrientType',
-          label: 'Τίτλος'
-        },
-        {
-          key: 'quantity',
-          label: ' Ποσότητα',
-          callback: 'formatGrams'
-        },
-        {
-          key: 'unit',
-          label: 'Μονάδα Μέτρησης',
-          thClass: 'text-right',
-          tdClass: 'text-center'
+          tdClass: 'text-right'
         }
       ]
     }
   },
   created () {
-    Promise.all([this.getProducts(), this.getCuisines(), this.getRecipeCategories()]).then(([products, cuisines, recipeCategories]) => {
-      this.products = products.data._embedded.products
+    Promise.all([this.getIngredients(), this.getCuisines(), this.getRecipeCategories()]).then(([ingredients, cuisines, recipeCategories]) => {
+      this.ingredients = ingredients.data._embedded.ingredients
       this.cuisines = cuisines.data._embedded.cuisines
       this.recipeCategories = recipeCategories.data._embedded.recipeCategories
     })
@@ -172,61 +84,18 @@ export default {
     }
   },
   methods: {
-    refreshNutrientsInformation () {
-      this.refreshMinerals()
-      this.refreshVitamins()
-      this.refreshLipids()
-      this.refreshProximates()
-      this.refreshOtherNutrients()
-    },
-    refreshMinerals () {
+    refreshIngredientPortions () {
       let _self = this
-      this.$http.get(this.recipe.nutrientsInformation._links.minerals.href + '?projection=inlinedMineral').then(response => {
-        this.minerals = response.data._embedded.minerals
-        this.minerals.forEach(function (mineral, index) {
-          _self.mineralTypes.push(mineral.mineralType)
+      this.ingredientPortions = []
+      this.quantityShown = []
+      this.piecesShown = []
+      this.$http.get(this.recipe._links.ingredientPortions.href + '?projection=inlinedIngredientPortions').then(response => {
+        this.ingredientPortions = response.data._embedded.ingredientPortions
+        this.ingredientPortions.forEach(function (ingredientPortion, index) {
+          let quantified = ingredientPortion.ingredient.quantified
+          _self.quantityShown.push(!quantified)
+          _self.piecesShown.push(quantified)
         })
-      })
-    },
-    refreshVitamins () {
-      let _self = this
-      this.$http.get(this.recipe.nutrientsInformation._links.vitamins.href + '?projection=inlinedVitamin').then(response => {
-        this.vitamins = response.data._embedded.vitamins
-        this.vitamins.forEach(function (vitamin, index) {
-          _self.vitaminTypes.push(vitamin.vitaminType)
-        })
-      })
-    },
-    refreshLipids () {
-      let _self = this
-      this.$http.get(this.recipe.nutrientsInformation._links.lipids.href + '?projection=inlinedLipid').then(response => {
-        this.lipids = response.data._embedded.lipids
-        this.lipids.forEach(function (lipid, index) {
-          _self.lipidTypes.push(lipid.lipidType)
-        })
-      })
-    },
-    refreshProximates () {
-      let _self = this
-      this.$http.get(this.recipe.nutrientsInformation._links.proximates.href + '?projection=inlinedProximate').then(response => {
-        this.proximates = response.data._embedded.proximates
-        this.proximates.forEach(function (proximate, index) {
-          _self.proximateTypes.push(proximate.proximateType)
-        })
-      })
-    },
-    refreshOtherNutrients () {
-      let _self = this
-      this.$http.get(this.recipe.nutrientsInformation._links.otherNutrients.href + '?projection=inlinedOtherNutrient').then(response => {
-        this.otherNutrients = response.data._embedded.otherNutrients
-        this.otherNutrients.forEach(function (otherNutrient, index) {
-          _self.otherNutrientTypes.push(otherNutrient.otherNutrientType)
-        })
-      })
-    },
-    refreshProducts () {
-      this.$http.get(this.recipe._links.products.href + '?projection=inlinedProduct').then(response => {
-        this.recipe.products = response.data._embedded.products
       })
     },
     onEditRecipe (eventData) {
@@ -235,8 +104,7 @@ export default {
         // Edit existing row
         this.$http.get('recipes/' + eventData + '?projection=inlinedRecipe').then(response => {
           this.recipe = response.data
-          this.refreshNutrientsInformation()
-          this.refreshProducts()
+          this.refreshIngredientPortions()
           this.visible = true
         }).catch(e => {
           console.log(e)
@@ -253,8 +121,8 @@ export default {
         if (!result) {
           return
         }
-        if (this.recipe.products.length === 0) {
-          this.$validator.errors.add({field: 'products', msg: this.$messages.productsEmpty, scope: 'generalForm'})
+        if (this.ingredientPortions.length === 0) {
+          this.$validator.errors.add({field: 'ingredientPortions', msg: this.$messages.ingredientPortionsEmpty, scope: 'generalForm'})
         }
         let _self = this
         let tempRecipe = Object.assign({}, this.recipe)
@@ -272,7 +140,10 @@ export default {
               return _self.transformRequest(data, headers)
             }]
           }).then(response => {
-            this.handleSuccess(response)
+            let tempIngredientPortions = Object.assign([{}], this.ingredientPortions)
+            this.$http.post('recipes/' + response.data.id + '/saveIngredientPortions', tempIngredientPortions).then(resp => {
+              this.handleSuccess(response)
+            }).catch(e => this.handleError(e))
           }).catch(e => this.handleError(e))
         }
       })
@@ -310,21 +181,40 @@ export default {
       this.$validator.reset().then(() => {
         this.errors.clear('generalForm')
       })
+      this.ingredientPortions = []
     },
     handleSuccess (response) {
       this.recipe = response.data
       this.success(this.$messages.successAction)
-      this.refreshProducts()
-      this.refreshNutrientsInformation()
+      this.refreshIngredientPortions()
       console.log('fire recipe-edited event')
       this.$events.fire('recipe-edited', this.recipe)
     },
     transformRequest (data, headers) {
       data.cuisine = this.convertEntityToURI(data.cuisine)
       data.recipeCategory = this.convertEntityToURI(data.recipeCategory)
-      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
-      data.products = this.convertEntitiesToURIs(data.products)
+      data.ingredientPortions = data.ingredientPortions != null ? this.convertEntitiesToURIs(data.ingredientPortions) : null
       return JSON.stringify(data)
+    },
+    addIngredientPortion () {
+      this.ingredientPortions.push(initIngredientPortion())
+      this.quantityShown.push(false)
+      this.piecesShown.push(false)
+    },
+    deleteIngredientPortion (ingredientPortion) {
+      this.ingredientPortions.splice(this.ingredientPortions.indexOf(ingredientPortion), 1)
+      this.quantityShown.splice(this.ingredientPortions.indexOf(ingredientPortion), 1)
+      this.piecesShown.splice(this.ingredientPortions.indexOf(ingredientPortion), 1)
+    },
+    ingredientChanged (index) {
+      let ingredient = this.ingredientPortions[index].ingredient
+      if (ingredient.quantified) {
+        this.quantityShown[index] = false
+        this.piecesShown[index] = true
+      } else {
+        this.quantityShown[index] = true
+        this.piecesShown[index] = false
+      }
     }
   }
 }
@@ -336,9 +226,16 @@ function initRecipe () {
     photoPath: null,
     instruction: '',
     recipeCategory: null,
-    cuisine: null,
-    nutrientsInformation: null,
-    availableForm: null,
-    products: []
+    cuisine: null
+  }
+}
+
+function initIngredientPortion () {
+  return {
+    id: null,
+    recipe: null,
+    ingredient: null,
+    quantity: 0,
+    pieces: 0
   }
 }

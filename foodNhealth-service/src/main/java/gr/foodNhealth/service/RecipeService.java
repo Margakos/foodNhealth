@@ -1,11 +1,11 @@
 package gr.foodNhealth.service;
 
-import gr.foodNhealth.model.*;
+import gr.foodNhealth.model.IngredientPortion;
 import gr.foodNhealth.model.Recipe;
-import gr.foodNhealth.repository.NutrientsInformationRepository;
+import gr.foodNhealth.repository.IngredientPortionRepository;
+import gr.foodNhealth.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -13,43 +13,16 @@ import java.util.Collection;
 public class RecipeService {
 
     @Autowired
-    private UtilsService utils;
+    private IngredientPortionRepository ingredientPortionRepository;
 
-    @Autowired
-    private NutrientsInformationRepository nutrientsInformationRepository;
+    public void linkIngredientPortion (Collection<IngredientPortion> ingredientPortions, Recipe recipe) {
+        ingredientPortions.forEach(ingredientPortion -> {
+            ingredientPortion.setRecipe(recipe);
+            ingredientPortion.setIsActive(true);
+            ingredientPortion.setDeleted(false);
+        });
+        ingredientPortions = ingredientPortionRepository.save(ingredientPortions);
 
-    @Autowired
-    private ProximateService proximateService;
-
-    @Autowired
-    private MineralService mineralService;
-
-    @Autowired
-    private VitaminService vitaminService;
-
-    @Autowired
-    private LipidService lipidService;
-
-    @Autowired
-    private OtherNutrientService otherNutrientService;
-
-    @Transactional
-    public Recipe initNewRecipe (Recipe recipe, Collection<Product> products) {
-        NutrientsInformation nutrientsInformation = new NutrientsInformation();
-        nutrientsInformation.setTitle("Recipe");
-        nutrientsInformation.setDeleted(false);
-        nutrientsInformation.setIsActive(true);
-        nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
-
-        nutrientsInformation.setLipids(lipidService.initRecipeLipids(nutrientsInformation));
-        nutrientsInformation.setProximates(proximateService.initRecipeProximates(nutrientsInformation));
-        nutrientsInformation.setMinerals(mineralService.initRecipeMinerals(nutrientsInformation));
-        nutrientsInformation.setVitamins(vitaminService.initRecipeVitamins(nutrientsInformation));
-        nutrientsInformation.setOtherNutrients(otherNutrientService.initRecipeOtherNutrients(nutrientsInformation));
-        nutrientsInformation = utils.propagateNutrientsInformationToRecipe(nutrientsInformation, products);
-//        nutrientsInformationRepository.save(nutrientsInformation);
-
-        recipe.setNutrientsInformation(nutrientsInformation);
-        return recipe;
+        recipe.setIngredientPortions(ingredientPortions);
     }
 }

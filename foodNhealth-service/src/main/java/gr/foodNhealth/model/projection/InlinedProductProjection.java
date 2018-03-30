@@ -10,8 +10,6 @@ public interface InlinedProductProjection extends SimpleRoleProjection {
 
     String getPhotoPath();
 
-    Product.AvailableForm getAvailableForm();
-
     SimpleRoleProjection getNutrientsInformation();
 
     InlinedIngredientProjection getIngredient();

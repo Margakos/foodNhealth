@@ -81,6 +81,14 @@
             </b-input-group>
           </b-form-group>
 
+          <!--Quantified-->
+          <b-form-group description="Είναι το Συστατικό σε τεμάχια">
+            <b-form-checkbox data-vv-scope="generalForm" name="quantified"
+                             v-model="ingredient.quantified" v-validate="rules.quantified"
+                             :state="isValid('quantified', 'generalForm')"></b-form-checkbox>
+            Τεμάχια: <strong>{{ ingredient.quantified ? getMessage('yes') : getMessage('no') }}</strong>
+          </b-form-group>
+
           <div class="form action text-right">
             <b-button size="sm" variant="success" @click="save" :disabled="errors.any('generalForm')"><i class="fa fa-dot-circle-o"></i> Αποθήκευση</b-button>
             <b-button size="sm" variant="danger" @click="confirmDelete" v-show="isDeletable"><i class="fa fa-remove"></i> Διαγραφή</b-button>

@@ -15,8 +15,17 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    @Basic
     @Column
     private String photoPath;
+
+    @Basic
+    @NotNull
+    @Column(nullable = false)
+    private Boolean quantified;
+
+    @ManyToMany
+    private Collection<Recipe> recipes;
 
     @ManyToOne(optional = false)
     private FoodCategoryCoreType foodCategoryCoreType;
@@ -33,6 +42,9 @@ public class Ingredient extends BaseEntity {
     @OneToMany(mappedBy = "ingredient")
     private Collection<Product> products;
 
+    @OneToMany(mappedBy = "ingredient")
+    private Collection<IngredientPortion> ingredientPortions;
+
 
     public String getName() {
         return name;
@@ -48,6 +60,22 @@ public class Ingredient extends BaseEntity {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public Boolean getQuantified() {
+        return quantified;
+    }
+
+    public void setQuantified(Boolean chopped) {
+        this.quantified = chopped;
+    }
+
+    public Collection<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Collection<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     public FoodCategoryCoreType getFoodCategoryCoreType() {
@@ -88,5 +116,13 @@ public class Ingredient extends BaseEntity {
 
     public void setProducts(Collection<Product> products) {
         this.products = products;
+    }
+
+    public Collection<IngredientPortion> getIngredientPortions() {
+        return ingredientPortions;
+    }
+
+    public void setIngredientPortions(Collection<IngredientPortion> ingredientPortions) {
+        this.ingredientPortions = ingredientPortions;
     }
 }

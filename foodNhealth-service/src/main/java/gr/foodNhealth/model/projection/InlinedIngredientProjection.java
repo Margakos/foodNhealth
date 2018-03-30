@@ -12,6 +12,8 @@ public interface InlinedIngredientProjection extends SimpleRoleProjection {
 
     String getPhotoPath();
 
+    Boolean getQuantified();
+
     SimpleRoleProjection getFoodCategoryCoreType();
 
     SimpleRoleProjection getFoodCategorySubType();

@@ -68,11 +68,10 @@ export default {
       this.$validator.reset().then(() => {
         this.errors.clear('generalForm')
       })
-      // If the eventData is AwardDecisionStep or ProductPackage
+      this.quantified = eventData.product.ingredient.quantified
       if (eventData.id != null) {
         this.getProductPackage(eventData).then(response => {
           this.productPackage = response.data
-          this.quantified = eventData.product.availableForm !== constants.AvailableForms.Grams
           this.visible = true
         })
       } else {

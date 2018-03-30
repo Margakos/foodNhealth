@@ -413,6 +413,7 @@ function initIngredient () {
     nutrientsInformation: null,
     foodCategoryCoreType: null,
     foodCategorySubType: null,
-    meatCategoryType: null
+    meatCategoryType: null,
+    quantified: false
   }
 }

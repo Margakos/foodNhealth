@@ -14,11 +14,6 @@ public class Product extends BaseEntity {
     @Column
     private String photoPath;
 
-    @Basic
-    @Enumerated(EnumType.STRING)
-    @Column
-    private AvailableForm availableForm;
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Collection<ProductPackage> productPackages;
 
@@ -28,9 +23,6 @@ public class Product extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private NutrientsInformation nutrientsInformation;
-
-    @ManyToMany
-    private Collection<Recipe> recipes;
 
 
     public String getName() {
@@ -47,14 +39,6 @@ public class Product extends BaseEntity {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
-    }
-
-    public AvailableForm getAvailableForm() {
-        return availableForm;
-    }
-
-    public void setAvailableForm(AvailableForm availableForm) {
-        this.availableForm = availableForm;
     }
 
     public Collection<ProductPackage> getProductPackages() {
@@ -79,17 +63,5 @@ public class Product extends BaseEntity {
 
     public void setNutrientsInformation(NutrientsInformation nutrientsInformation) {
         this.nutrientsInformation = nutrientsInformation;
-    }
-
-    public Collection<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Collection<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-
-    public enum AvailableForm {
-        GRAMS, PIECES, SLICES
     }
 }

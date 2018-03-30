@@ -43,23 +43,6 @@
               </b-input-group>
             </b-form-group>
 
-            <!-- Available Form -->
-            <b-form-group description="Επιλέξτε Μορφή"
-                          :feedback="errors.first('availableForm', 'generalForm')"
-                          :state="isValid('availableForm', 'generalForm')">
-              <b-input-group>
-                <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
-                             data-vv-scope="generalForm" name="availableForm" id="availableForm"
-                             v-model="product.availableForm" :options="availableForms"
-                             :searchable="true" placeholder="Μορφή"
-                             :custom-label="getMessage"
-                             v-validate="rules.availableForm"
-                             :state="isValid('availableForm', 'generalForm')"
-                             :class="{'is-invalid': errors.has('availableForm', 'generalForm')}">
-                </multiselect>
-              </b-input-group>
-            </b-form-group>
-
             <div class="form action text-right">
               <b-button size="sm" variant="success" @click="save" :disabled="errors.any('generalForm')"><i class="fa fa-dot-circle-o"></i> Αποθήκευση</b-button>
               <b-button size="sm" variant="danger" @click="confirmDelete" v-show="isDeletable"><i class="fa fa-remove"></i> Διαγραφή</b-button>

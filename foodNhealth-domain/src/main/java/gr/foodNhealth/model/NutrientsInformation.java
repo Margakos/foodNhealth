@@ -20,9 +20,6 @@ public class NutrientsInformation extends BaseEntity {
     @OneToOne(mappedBy = "nutrientsInformation")
     private Product product;
 
-    @OneToOne(mappedBy = "nutrientsInformation")
-    private Recipe recipe;
-
     @OneToMany(mappedBy = "nutrientsInformation", cascade = CascadeType.REMOVE)
     private Collection<Mineral> minerals;
 
@@ -53,14 +50,6 @@ public class NutrientsInformation extends BaseEntity {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
     }
 
     public Collection<Mineral> getMinerals() {

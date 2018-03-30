@@ -50,7 +50,7 @@ export default {
       console.log('Edit MeatCategoryType:' + eventData)
       this.invalidate()
       if (eventData != null) {
-        this.$http.get('meatCategoryTypes/' + eventData).then(response => {
+        this.$http.get('meatCategoryTypes/' + eventData + '?projection=inlinedMeatCategoryType').then(response => {
           this.meatCategoryType = response.data
           this.visible = true
         }).catch(e => {

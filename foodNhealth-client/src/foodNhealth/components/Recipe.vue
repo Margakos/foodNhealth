@@ -60,24 +60,74 @@
               </b-input-group>
             </b-form-group>
 
-            <!-- Products-->
-            <b-form-group description="Επιλέξτε Προϊόντα"
-                          :feedback="errors.first('products', 'generalForm')"
-                          :state="isValid('products', 'generalForm')">
-              <b-input-group>
-                <multiselect data-vv-scope="generalForm" :selected-label="$messages.selected" :deselect-label="$messages.removeSelection"
-                             :select-label="$messages.setSelection" name="studySections" id="studySections"
-                             :multiple="true"
-                             v-model="recipe.products"
-                             :options="products"
-                             :searchable="true" placeholder="Προϊόντα"
-                             label="name" track-by="id" v-validate="rules.products"
-                             :state="isValid('products', 'generalForm')"
-                             :class="{'is-invalid': errors.has('products', 'generalForm')}"
-                             :disabled="recipe.id !== null">
-                </multiselect>
-              </b-input-group>
-            </b-form-group>
+            <!-- Ingredient Portions -->
+            <b-table striped hover :items="ingredientPortions" :fields="ingredientPortionsFields">
+              <!-- virtual index column -->
+              <template slot="index" slot-scope="data">
+                {{data.index + 1}}
+              </template>
+              <template slot="ingredient" slot-scope="data">
+                <div v-show="recipe.id !== null">{{(ingredientPortions[data.index] && ingredientPortions[data.index].ingredient) != null ? ingredientPortions[data.index].ingredient.name : '-'}}</div>
+                <div class="col-8 center" v-show="recipe.id === null">
+                  <!-- Ingredient -->
+                  <b-form-group description="Επιλέξτε Συστατικό"
+                                :feedback="errors.first('ingredient_' + data.index, 'generalForm_' + data.index)"
+                                :state="isValid('ingredient', 'generalForm')">
+                    <b-input-group>
+                      <multiselect data-vv-scope="generalForm" :selected-label="$messages.selected" :deselect-label="$messages.removeSelection"
+                                   :select-label="$messages.setSelection" :name="'ingredient_' + data.index" :id="'ingredient_' + data.index"
+                                   v-model="ingredientPortions[data.index].ingredient"
+                                   :options="ingredients"
+                                   placeholder="Συστατικό"
+                                   label="name" track-by="id" v-validate="rules.ingredient"
+                                   :state="isValid('ingredient_' + data.index, 'generalForm_' + data.index)"
+                                   :class="{'is-invalid': errors.has('ingredient_' + data.index, 'generalForm_' + data.index)}"
+                                   :disabled="recipe.id !== null" @input="ingredientChanged(data.index)">
+                      </multiselect>
+                    </b-input-group>
+                  </b-form-group>
+                </div>
+              </template>
+              <template slot="quantity_slices" slot-scope="data">
+                <div v-show="recipe.id !== null && quantityShown[data.index]">{{ingredientPortions[data.index] != null ? ingredientPortions[data.index].quantity + '  gr' : '-'}}</div>
+                <div v-show="recipe.id !== null && piecesShown[data.index]">{{ingredientPortions[data.index] != null ? ingredientPortions[data.index].pieces + '  τεμάχια' : '-'}}</div>
+                <div class="col-8 center" v-show="recipe.id === null">
+                  <!-- Quantity -->
+                  <b-form-group description="Ποσότητα Συστατικού (grams)"
+                                :feedback="errors.first('quantity_' + data.index, 'generalForm_' + data.index)"
+                                :state="isValid('quantity_' + data.index, 'generalForm_' + data.index)"
+                                v-show="quantityShown[data.index]">
+                    <b-form-input :data-vv-scope="'generalForm_' + data.index" type="number" :name="'quantity_' + data.index" :id="'quantity_' + data.index"
+                                  v-model="ingredientPortions[data.index].quantity" :value="data.value"
+                                  v-validate="rules.quantity"
+                                  :state="isValid('quantity_' + data.index, 'generalForm_' + data.index)"
+                                  :class="{'is-invalid': errors.has('quantity_' + data.index, 'generalForm_' + data.index)}"
+                                  :disabled="!quantityShown[data.index] || recipe.id !== null">
+                    </b-form-input>
+                  </b-form-group>
+
+                  <!-- Pieces -->
+                  <b-form-group description="Κομμάτια Συστατικού"
+                                :feedback="errors.first('pieces_' + data.index, 'generalForm_' + data.index)"
+                                :state="isValid('pieces_' + data.index, 'generalForm_' + data.index)"
+                                v-show="piecesShown[data.index]">
+                    <b-form-input :data-vv-scope="'generalForm_' + data.index" type="number" :name="'pieces_' + data.index" :id="'pieces_' + data.index"
+                                  v-model="ingredientPortions[data.index].pieces" :value="data.value"
+                                  v-validate="rules.pieces"
+                                  :state="isValid('pieces_' + data.index, 'generalForm_' + data.index)"
+                                  :class="{'is-invalid': errors.has('pieces_' + data.index, 'generalForm_' + data.index)}"
+                                  :disabled="!piecesShown[data.index] || recipe.id !== null">
+                    </b-form-input>
+                  </b-form-group>
+                </div>
+              </template>
+              <template slot="actions" slot-scope="row">
+                <!-- We use click.stop here to prevent a 'row-clicked' event from also happening -->
+                <b-button variant="danger" @click.stop="deleteIngredientPortion(row.item)" :disabled="errors.any('generalForm_' + row.index) || recipe.id !== null" v-show="recipe.id === null"><i
+                  class="fa fa-remove"></i></b-button>
+              </template>
+            </b-table>
+            <b-button class="float-right" size="sm" variant="primary" @click="addIngredientPortion" v-show="recipe.id === null"><i class="fa fa-plus"></i></b-button><br/><br/>
 
             <!-- Instruction -->
             <b-form-group description="Εισάγετε την εκτέλεση της Συνταγής"
@@ -101,116 +151,6 @@
               <b-button size="sm" variant="success" @click="save" :disabled="errors.any('generalForm')"><i class="fa fa-dot-circle-o"></i> Αποθήκευση</b-button>
               <b-button size="sm" variant="danger" @click="confirmDelete" v-show="isDeletable"><i class="fa fa-remove"></i> Διαγραφή</b-button>
             </div>
-          </b-tab>
-
-          <b-tab title="Θρεπτικά Συστατικά" :disabled="recipe.id == null">
-            <b-tabs pills vertical card>
-
-              <b-tab title="Θρεπτικά Συστατικά" active>
-                <div class="row">
-
-                  <b-table striped hover :items="proximates" :fields="proximatesFields">
-                    <!-- virtual index column -->
-                    <template slot="index" slot-scope="data">
-                      {{data.index + 1}}
-                    </template>
-                    <template slot="proximateType" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="quantity" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="unit" slot-scope="data">
-                      gr
-                    </template>
-                  </b-table>
-                </div>
-
-              </b-tab>
-
-              <b-tab title="Ιχνοστοιχεία">
-                <div class="row">
-                  <b-table striped hover :items="minerals" :fields="mineralsFields">
-                     virtual index column
-                    <template slot="index" slot-scope="data">
-                      {{data.index + 1}}
-                    </template>
-                    <template slot="mineralType" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="quantity" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="unit" slot-scope="data">
-                      gr
-                    </template>
-                  </b-table>
-                </div>
-              </b-tab>
-
-              <b-tab title="Βιταμίνες">
-                <div class="row">
-                  <b-table striped hover :items="vitamins" :fields="vitaminsFields">
-                     virtual index column
-                    <template slot="index" slot-scope="data">
-                      {{data.index + 1}}
-                    </template>
-                    <template slot="vitaminType" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="quantity" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="unit" slot-scope="data">
-                      gr
-                    </template>
-                  </b-table>
-                </div>
-              </b-tab>
-
-              <b-tab title="Λιπίδια">
-                <div class="row">
-                  <b-table striped hover :items="lipids" :fields="lipidsFields">
-                     virtual index column
-                    <template slot="index" slot-scope="data">
-                      {{data.index + 1}}
-                    </template>
-                    <template slot="lipidType" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="quantity" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="unit" slot-scope="data">
-                      gr
-                    </template>
-                  </b-table>
-                </div>
-              </b-tab>
-
-              <b-tab title="Λοιπά">
-                <div class="row">
-                  <b-table striped hover :items="otherNutrients" :fields="otherNutrientsFields">
-                     virtual index column
-                    <template slot="index" slot-scope="data">
-                      {{data.index + 1}}
-                    </template>
-                    <template slot="otherNutrientType" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="quantity" slot-scope="data">
-                      {{data.value}}
-                    </template>
-                    <template slot="unit" slot-scope="data">
-                      gr
-                    </template>
-                  </b-table>
-                </div>
-              </b-tab>
-
-            </b-tabs>
-
-
           </b-tab>
         </b-tabs>
 

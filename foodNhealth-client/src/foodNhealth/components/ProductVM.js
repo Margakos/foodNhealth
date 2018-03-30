@@ -23,16 +23,12 @@ export default {
       otherNutrientTypes: [],
       productPackages: [],
       ingredients: [],
-      availableForms: [constants.AvailableForms.Grams, constants.AvailableForms.Pieces, constants.AvailableForms.Slices],
       rules: {
         name: {
           required: true,
           max: 255
         },
         ingredient: {
-          required: true
-        },
-        availableForm: {
           required: true
         },
         quantity: {
@@ -268,6 +264,7 @@ export default {
       } else {
         // Add new Product
         Object.assign(this.$data.product, initProduct())
+        this.productPackages = []
         this.visible = true
       }
     },
@@ -430,7 +427,6 @@ function initProduct () {
     name: '',
     ingredient: null,
     photoPath: null,
-    nutrientsInformation: null,
-    availableForm: null
+    nutrientsInformation: null
   }
 }
