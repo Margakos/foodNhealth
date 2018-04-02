@@ -4,6 +4,8 @@ import gr.foodNhealth.model.NutrientsInformation;
 import gr.foodNhealth.model.nutrientsInformation.Vitamin;
 import gr.foodNhealth.repository.VitaminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.rest.core.event.BeforeCreateEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class VitaminService {
 
     @Autowired
     private VitaminRepository vitaminRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     private Collection<Vitamin> initVitamins (NutrientsInformation nutrientsInformation) {
         List<Vitamin> vitamins = new ArrayList<>();
@@ -33,10 +38,7 @@ public class VitaminService {
         vitamins.add(new Vitamin("Vitamin K", nutrientsInformation));
         vitamins.add(new Vitamin("Choline", nutrientsInformation));
         vitamins.add(new Vitamin("Carotenoids", nutrientsInformation));
-        vitamins.forEach(vitamin -> {
-            vitamin.setIsActive(true);
-            vitamin.setDeleted(false);
-        });
+        vitamins.forEach(vitamin -> publisher.publishEvent(new BeforeCreateEvent(vitamin)));
         return vitamins;
     }
 
@@ -50,11 +52,5 @@ public class VitaminService {
         Collection<Vitamin> productVitamins = initVitamins(nutrientsInformation);
         vitaminRepository.save(productVitamins);
         return productVitamins;
-    }
-
-    public Collection<Vitamin> initRecipeVitamins (NutrientsInformation nutrientsInformation) {
-        Collection<Vitamin> recipeVitamins = initVitamins(nutrientsInformation);
-        vitaminRepository.save(recipeVitamins);
-        return recipeVitamins;
     }
 }

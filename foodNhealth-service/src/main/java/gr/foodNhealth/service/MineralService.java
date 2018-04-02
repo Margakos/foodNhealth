@@ -4,6 +4,8 @@ import gr.foodNhealth.model.NutrientsInformation;
 import gr.foodNhealth.model.nutrientsInformation.Mineral;
 import gr.foodNhealth.repository.MineralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.rest.core.event.BeforeCreateEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class MineralService {
     
     @Autowired
     private MineralRepository mineralRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     private Collection<Mineral> initMinerals (NutrientsInformation nutrientsInformation) {
         List<Mineral> minerals = new ArrayList<>();
@@ -33,10 +38,7 @@ public class MineralService {
         minerals.add(new Mineral("Potassium", nutrientsInformation));
         minerals.add(new Mineral("Sodium", nutrientsInformation));
         minerals.add(new Mineral("Chloride", nutrientsInformation));
-        minerals.forEach(mineral -> {
-            mineral.setIsActive(true);
-            mineral.setDeleted(false);
-        });
+        minerals.forEach(mineral -> publisher.publishEvent(new BeforeCreateEvent(mineral)));
         return minerals;
     }
 
@@ -50,11 +52,5 @@ public class MineralService {
         Collection<Mineral> productMinerals = initMinerals(nutrientsInformation);
         mineralRepository.save(productMinerals);
         return productMinerals;
-    }
-
-    public Collection<Mineral> initRecipeMinerals (NutrientsInformation nutrientsInformation) {
-        Collection<Mineral> recipeMinerals = initMinerals(nutrientsInformation);
-        mineralRepository.save(recipeMinerals);
-        return recipeMinerals;
     }
 }

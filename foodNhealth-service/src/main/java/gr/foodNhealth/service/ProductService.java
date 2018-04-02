@@ -5,6 +5,8 @@ import gr.foodNhealth.model.NutrientsInformation;
 import gr.foodNhealth.model.Product;
 import gr.foodNhealth.repository.NutrientsInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.rest.core.event.BeforeCreateEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,12 +34,14 @@ public class ProductService {
     @Autowired
     private OtherNutrientService otherNutrientService;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     @Transactional
     public Product initNewProduct (Product product, Ingredient ingredient) {
         NutrientsInformation nutrientsInformation = new NutrientsInformation();
         nutrientsInformation.setTitle("Product");
-        nutrientsInformation.setDeleted(false);
-        nutrientsInformation.setIsActive(true);
+        publisher.publishEvent(new BeforeCreateEvent( nutrientsInformation));
         nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
 
         nutrientsInformation.setLipids(lipidService.initProductLipids(nutrientsInformation));
