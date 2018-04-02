@@ -41,7 +41,7 @@ public class PersonController {
         Person person = personRepository.findByEmailAndPasswordAndIsActive(user.getEmail(), user.getPassword(), true);
 
         if (person != null) {
-            LOGGER.info("Login attempt successful for Emai: {}", user.getEmail());
+            LOGGER.info("Login attempt successful for Email: {}", user.getEmail());
             loginAttemptService.loginSucceeded(clientIP);
             PersistentEntityResource resource = persistentEntityResourceAssembler.toResource(person);
             return new ResponseEntity<PersistentEntityResource>(

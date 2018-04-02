@@ -27,6 +27,9 @@ public class Recipe extends BaseEntity {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private Collection<IngredientPortion> ingredientPortions;
 
+    @OneToMany(mappedBy = "recipe")
+    private Collection<SelectedRecipe> selectedRecipe;
+
 
     public String getName() {
         return name;
@@ -74,5 +77,13 @@ public class Recipe extends BaseEntity {
 
     public void setIngredientPortions(Collection<IngredientPortion> ingredientPortions) {
         this.ingredientPortions = ingredientPortions;
+    }
+
+    public Collection<SelectedRecipe> getSelectedRecipe() {
+        return selectedRecipe;
+    }
+
+    public void setSelectedRecipe(Collection<SelectedRecipe> selectedRecipe) {
+        this.selectedRecipe = selectedRecipe;
     }
 }

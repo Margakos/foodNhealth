@@ -10,17 +10,22 @@ public class Person extends BaseEntity{
 
     @Basic
     private String firstName;
+
     @Basic
     private String lastName;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
     @Basic
     @Size(min = 6, max=20)
     private String password;
+
     @Basic
     @Email
     @Column(unique = true)
     private String email;
+
     @Basic
     private String comments;
 

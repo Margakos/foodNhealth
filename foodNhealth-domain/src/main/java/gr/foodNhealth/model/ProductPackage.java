@@ -1,12 +1,10 @@
 package gr.foodNhealth.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 @Entity
 public class ProductPackage extends BaseEntity {
@@ -32,6 +30,9 @@ public class ProductPackage extends BaseEntity {
     @Min(0)
     @Column
     private Integer numPieces;
+
+    @OneToMany(mappedBy = "productPackage")
+    private Collection<SelectedProductPackage> selectedProductPackages;
 
 
     public Supermarket getSupermarket() {
@@ -72,5 +73,13 @@ public class ProductPackage extends BaseEntity {
 
     public void setNumPieces(Integer numPieces) {
         this.numPieces = numPieces;
+    }
+
+    public Collection<SelectedProductPackage> getSelectedProductPackages() {
+        return selectedProductPackages;
+    }
+
+    public void setSelectedProductPackages(Collection<SelectedProductPackage> selectedProductPackages) {
+        this.selectedProductPackages = selectedProductPackages;
     }
 }

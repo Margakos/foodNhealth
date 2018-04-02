@@ -26,7 +26,8 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @PostMapping(value = "{id}/saveIngredientPortions")
-    public ResponseEntity<?> saveIngredientPortions(@RequestBody Collection<IngredientPortion> ingredientPortions, @PathVariable("id") Long recipeId) {
+    public ResponseEntity<?> saveIngredientPortions(@PathVariable("id") Long recipeId,
+                                                    @RequestBody Collection<IngredientPortion> ingredientPortions) {
         Recipe recipe = recipeRepository.findOne(recipeId);
         try {
             recipeService.linkIngredientPortion(ingredientPortions, recipe);
