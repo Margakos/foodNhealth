@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default {
   name: 'recipe',
   components: {},
@@ -89,7 +87,7 @@ export default {
       this.ingredientPortions = []
       this.quantityShown = []
       this.piecesShown = []
-      this.$http.get(this.recipe._links.ingredientPortions.href + '?projection=inlinedIngredientPortions').then(response => {
+      this.$http.get(this.recipe._links.ingredientPortions.href + '?projection=inlinedIngredientPortion').then(response => {
         this.ingredientPortions = response.data._embedded.ingredientPortions
         this.ingredientPortions.forEach(function (ingredientPortion, index) {
           let quantified = ingredientPortion.ingredient.quantified
@@ -141,7 +139,7 @@ export default {
             }]
           }).then(response => {
             let tempIngredientPortions = Object.assign([{}], this.ingredientPortions)
-            this.$http.post('recipes/' + response.data.id + '/saveIngredientPortions', tempIngredientPortions).then(resp => {
+            this.$http.post('recipes/' + response.data.id + '/ingredientPortions', tempIngredientPortions).then(resp => {
               this.handleSuccess(response)
             }).catch(e => this.handleError(e))
           }).catch(e => this.handleError(e))

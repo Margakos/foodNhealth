@@ -31,7 +31,7 @@ public class ProductPackage extends BaseEntity {
     @Column
     private Integer numPieces;
 
-    @OneToMany(mappedBy = "productPackage")
+    @OneToMany(mappedBy = "productPackage", cascade = CascadeType.REMOVE)
     private Collection<SelectedProductPackage> selectedProductPackages;
 
 

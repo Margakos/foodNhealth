@@ -27,7 +27,7 @@ public class Recipe extends BaseEntity {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private Collection<IngredientPortion> ingredientPortions;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private Collection<SelectedRecipe> selectedRecipe;
 
 

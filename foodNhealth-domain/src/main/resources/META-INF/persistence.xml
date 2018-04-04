@@ -20,7 +20,8 @@
         <class>gr.foodNhealth.model.Product</class>
         <class>gr.foodNhealth.model.ProductPackage</class>
         <class>gr.foodNhealth.model.Supermarket</class>
-        <class>gr.foodNhealth.model.Client</class>
+        <class>gr.foodNhealth.model.SelectedRecipe</class>
+        <class>gr.foodNhealth.model.SelectedProductPackage</class>
 
         <!--TODO Change below properties according to our need-->
         <properties>

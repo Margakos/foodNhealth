@@ -153,6 +153,9 @@ Vue.mixin({
     getProducts () {
       return this.$http.get('products?projection=inlinedProduct&size=' + Vue.prototype.$maxPageSize)
     },
+    getRecipes () {
+      return this.$http.get('recipes?projection=inlinedRecipe&size=' + Vue.prototype.$maxPageSize)
+    },
     getCuisines () {
       return this.$http.get('cuisines?projection=simpleRole&size=' + Vue.prototype.$maxPageSize)
     },

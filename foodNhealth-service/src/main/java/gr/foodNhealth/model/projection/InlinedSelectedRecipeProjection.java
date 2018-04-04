@@ -6,9 +6,9 @@ import org.springframework.data.rest.core.config.Projection;
 @Projection(name = "inlinedSelectedRecipe", types = SelectedRecipe.class)
 public interface InlinedSelectedRecipeProjection extends SimpleRoleProjection {
 
-    InlinedRecipeProjection getRecipe();
+    String getName();
 
-    LoginPersonProjection getClient();
+    InlinedRecipeProjection getRecipe();
 
     SimpleRoleProjection getNutrientsInformation();
 }

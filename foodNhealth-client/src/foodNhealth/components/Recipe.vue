@@ -72,7 +72,7 @@
                   <!-- Ingredient -->
                   <b-form-group description="Επιλέξτε Συστατικό"
                                 :feedback="errors.first('ingredient_' + data.index, 'generalForm_' + data.index)"
-                                :state="isValid('ingredient', 'generalForm')">
+                                :state="isValid('ingredient_' + data.index, 'generalForm_' + data.index)">
                     <b-input-group>
                       <multiselect data-vv-scope="generalForm" :selected-label="$messages.selected" :deselect-label="$messages.removeSelection"
                                    :select-label="$messages.setSelection" :name="'ingredient_' + data.index" :id="'ingredient_' + data.index"

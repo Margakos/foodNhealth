@@ -35,6 +35,9 @@ export default {
         quantity: {
           required: true,
           min_value: 0
+        },
+        quantified: {
+          required: false
         }
       },
       mineralsFields: [

@@ -21,6 +21,11 @@ export default {
       icon: 'icon-puzzle'
     },
     {
+      name: 'Συνταγές προς Ενδιαφερόμενο',
+      url: '/selectedRecipes',
+      icon: 'icon-puzzle'
+    },
+    {
       name: 'Διαχείριση',
       url: '/admin',
       icon: 'fa fa-wrench',

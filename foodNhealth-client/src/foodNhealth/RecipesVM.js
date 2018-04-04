@@ -24,7 +24,7 @@ export default {
   },
   data: function () {
     return {
-      url: 'recipes/search/findByQuery?projection=inlinedRecipe',
+      url: 'recipes/search/findByQuery',
       fields: [
         {
           name: 'id',
@@ -36,7 +36,8 @@ export default {
         }
       ],
       append_params: {
-        query: ''
+        query: '',
+        projection: 'inlinedRecipe'
       }
     }
   },

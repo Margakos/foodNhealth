@@ -7,11 +7,14 @@ import java.util.Collection;
 @Entity
 public class SelectedRecipe extends BaseEntity {
 
-    @ManyToOne
-    private Recipe recipe;
+    @Basic
+    @NotNull
+    @Column(nullable = false)
+    private String name;
 
-    @ManyToOne
-    private Client client;
+    @NotNull
+    @ManyToOne(optional = false)
+    private Recipe recipe;
 
     @OneToMany(mappedBy = "selectedRecipe", cascade = CascadeType.REMOVE)
     private Collection<SelectedProductPackage> selectedProductPackages;
@@ -20,20 +23,20 @@ public class SelectedRecipe extends BaseEntity {
     private NutrientsInformation nutrientsInformation;
 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Recipe getRecipe() {
         return recipe;
     }
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public Collection<SelectedProductPackage> getSelectedProductPackages() {

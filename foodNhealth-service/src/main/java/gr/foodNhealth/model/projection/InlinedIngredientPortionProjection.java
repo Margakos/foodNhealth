@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.math.BigDecimal;
 
-@Projection(name = "inlinedIngredientPortions", types = IngredientPortion.class)
+@Projection(name = "inlinedIngredientPortion", types = IngredientPortion.class)
 public interface InlinedIngredientPortionProjection extends SimpleRoleProjection {
 
     BigDecimal getQuantity();
