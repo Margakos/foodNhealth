@@ -61,26 +61,6 @@
               </multiselect>
             </b-input-group>
           </b-form-group>
-
-          <!-- Meat Category Type -->
-          <b-form-group description="Επιλέξτε την Υποκατηγορία Κρέατος που ανήκει το Συστατικό"
-                        :feedback="errors.first('meatCategoryType', 'generalForm')"
-                        :state="isValid('meatCategoryType', 'generalForm')"
-                        v-show="ingredient.foodCategorySubType != null && ingredient.foodCategorySubType.title.split(' ')[1] === 'Fat'">
-            <b-input-group>
-              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
-                           data-vv-scope="generalForm" name="meatCategoryType" id="meatCategoryType"
-                           v-model="ingredient.meatCategoryType" :options="meatCategoryTypes"
-                           :searchable="true" placeholder="Υποκατηγορία Κρέατος"
-                           track-by="id" label="title"
-                           v-validate="rules.meatCategoryType"
-                           :state="isValid('meatCategoryType', 'generalForm')"
-                           :class="{'is-invalid': errors.has('meatCategoryType', 'generalForm')}"
-                           :disabled="isMeatCategoryTypeDisabled">
-              </multiselect>
-            </b-input-group>
-          </b-form-group>
-
           <!--Quantified-->
           <b-form-group description="Είναι το Συστατικό σε τεμάχια">
             <b-form-checkbox data-vv-scope="generalForm" name="quantified"

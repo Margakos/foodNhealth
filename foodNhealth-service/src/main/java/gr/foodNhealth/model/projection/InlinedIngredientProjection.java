@@ -18,7 +18,5 @@ public interface InlinedIngredientProjection extends SimpleRoleProjection {
 
     SimpleRoleProjection getFoodCategorySubType();
 
-    SimpleRoleProjection getMeatCategoryType();
-
     SimpleRoleProjection getNutrientsInformation();
 }

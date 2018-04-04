@@ -32,7 +32,6 @@ import Persons from '@/foodNhealth/Persons'
 import Login from '@/foodNhealth/Login'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
-import MeatCategoryTypes from '@/foodNhealth/MeatCategoryTypes'
 import Supermarkets from '@/foodNhealth/Supermarkets'
 import Ingredients from '@/foodNhealth/Ingredients'
 import Products from '@/foodNhealth/Products'
@@ -114,11 +113,6 @@ export default new Router({
               path: 'foodCategorySubTypes',
               name: 'FoodCategorySubTypes',
               component: FoodCategorySubTypes
-            },
-            {
-              path: 'meatCategoryTypes',
-              name: 'MeatCategoryTypes',
-              component: MeatCategoryTypes
             },
             {
               path: 'supermarkets',

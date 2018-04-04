@@ -16,7 +16,6 @@
         <class>gr.foodNhealth.model.nutrientsInformation.Vitamin</class>
         <class>gr.foodNhealth.model.foodCategory.FoodCategoryCoreType</class>
         <class>gr.foodNhealth.model.foodCategory.FoodCategorySubType</class>
-        <class>gr.foodNhealth.model.foodCategory.MeatCategoryType</class>
         <class>gr.foodNhealth.model.Product</class>
         <class>gr.foodNhealth.model.ProductPackage</class>
         <class>gr.foodNhealth.model.Supermarket</class>

@@ -2,7 +2,6 @@ package gr.foodNhealth.model;
 
 import gr.foodNhealth.model.foodCategory.FoodCategoryCoreType;
 import gr.foodNhealth.model.foodCategory.FoodCategorySubType;
-import gr.foodNhealth.model.foodCategory.MeatCategoryType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,9 +31,6 @@ public class Ingredient extends BaseEntity {
 
     @ManyToOne(optional = false)
     private FoodCategorySubType foodCategorySubType;
-
-    @ManyToOne
-    private MeatCategoryType meatCategoryType;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private NutrientsInformation nutrientsInformation;
@@ -92,14 +88,6 @@ public class Ingredient extends BaseEntity {
 
     public void setFoodCategorySubType(FoodCategorySubType foodCategorySubType) {
         this.foodCategorySubType = foodCategorySubType;
-    }
-
-    public MeatCategoryType getMeatCategoryType() {
-        return meatCategoryType;
-    }
-
-    public void setMeatCategoryType(MeatCategoryType meatCategoryType) {
-        this.meatCategoryType = meatCategoryType;
     }
 
     public NutrientsInformation getNutrientsInformation() {

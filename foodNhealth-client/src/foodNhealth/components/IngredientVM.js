@@ -16,8 +16,6 @@ export default {
       otherNutrientTypes: [],
       foodCategoryCoreTypes: [],
       foodCategorySubTypes: [],
-      meatCategoryTypes: [],
-      meatCategoryType: null,
       rules: {
         name: {
           required: true,
@@ -27,9 +25,6 @@ export default {
           required: true
         },
         foodCategorySubType: {
-          required: true
-        },
-        meatCategoryType: {
           required: true
         },
         quantity: {
@@ -166,9 +161,6 @@ export default {
     isDeletable () {
       return this.ingredient.id != null
     },
-    isMeatCategoryTypeDisabled () {
-      return this.ingredient.foodCategorySubType != null && this.ingredient.foodCategorySubType.title.split(' ')[1] !== 'Fat'
-    },
     isFoodCategorySubTypeDisabled () {
       return this.ingredient.foodCategoryCoreType == null
     }
@@ -229,11 +221,6 @@ export default {
     refreshFoodCategorySubTypes (foodCategoryCoreType) {
       this.getFoodCategorySubTypes(foodCategoryCoreType.id).then(response => {
         this.foodCategorySubTypes = response.data._embedded.foodCategorySubTypes
-      })
-    },
-    refreshMeatCategoryTypes (foodCategorySubType) {
-      this.getMeatCategoryTypes(foodCategorySubType.id).then(response => {
-        this.meatCategoryTypes = response.data._embedded.meatCategoryTypes
       })
     },
     onEditIngredient (eventData) {
@@ -324,7 +311,6 @@ export default {
     transformRequest (data, headers) {
       data.foodCategoryCoreType = this.convertEntityToURI(data.foodCategoryCoreType)
       data.foodCategorySubType = this.convertEntityToURI(data.foodCategorySubType)
-      data.meatCategoryType = data.meatCategoryType != null ? this.convertEntityToURI(data.meatCategoryType) : null
       data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
       return JSON.stringify(data)
     },
@@ -397,13 +383,6 @@ export default {
         this.foodCategorySubTypes = []
       }
       this.refreshFoodCategorySubTypes(foodCategoryCoreType)
-    },
-    foodCategorySubTypeChanged (foodCategorySubType) {
-      if (foodCategorySubType == null) {
-        this.ingredient.meatCategoryType = null
-        this.meatCategoryTypes = []
-      }
-      this.refreshMeatCategoryTypes(foodCategorySubType)
     }
   }
 }
@@ -416,7 +395,6 @@ function initIngredient () {
     nutrientsInformation: null,
     foodCategoryCoreType: null,
     foodCategorySubType: null,
-    meatCategoryType: null,
     quantified: false
   }
 }
