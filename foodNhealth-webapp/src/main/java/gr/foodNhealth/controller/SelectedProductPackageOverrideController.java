@@ -33,6 +33,7 @@ public class SelectedProductPackageOverrideController {
         SelectedRecipe selectedRecipe = selectedRecipeRepository.findOne(selectedRecipeId);
         try {
             selectedRecipeService.linkSelectedProductPackages(selectedProductPackages, selectedRecipe);
+            selectedRecipeService.propagateNutrientsInformation(selectedProductPackages, selectedRecipe);
         } catch (Exception e) {
             e.printStackTrace();
             selectedRecipeRepository.delete(selectedRecipeId);

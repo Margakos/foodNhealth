@@ -8,6 +8,7 @@ export default {
       selectedRecipe: initSelectedRecipe(),
       selectedRecipeRows: [],
       ingredients: [],
+      ingredientPortions: [],
       productPackages: [],
       selectedProductPackages: [],
       minerals: [],
@@ -192,7 +193,7 @@ export default {
         }
       })
       let selectedRecipeRow = initSelectedRecipeRow()
-      selectedRecipeRow.products = subProducts
+      selectedRecipeRow.products = this.copyProducts(subProducts)
       selectedRecipeRows.push(selectedRecipeRow)
       return selectedRecipeRows
     },
@@ -210,6 +211,7 @@ export default {
         this.$http.get('selectedRecipes/' + eventData + '?projection=inlinedSelectedRecipe').then(response => {
           this.selectedRecipe = response.data
           this.refreshSelectedProductPackages()
+          this.refreshNutrientsInformation()
           this.visible = true
         }).catch(e => {
           console.log(e)
@@ -222,21 +224,8 @@ export default {
       }
     },
     beforeSave () {
-      let _self = this
       this.$validator.validateAll('generalForm').then((result) => {
         if (!result) {
-          return
-        }
-        // Custom Quantity validation
-        let quantityValid = true
-        this.selectedRecipeRows.forEach(function (row, index) {
-        // eslint-disable-next-line
-          if (row.quantity == 0) {
-            _self.$validator.errors.add({field: 'quantity_' + index, msg: _self.$messages.fieldMoreThanZero, scope: 'generalForm'})
-            quantityValid = false
-          }
-        })
-        if (!quantityValid) {
           return
         }
         this.getSelectedProductPackages()
@@ -314,6 +303,7 @@ export default {
     handleSuccess (response) {
       this.selectedRecipe = response.data
       this.success(this.$messages.successAction)
+      this.refreshNutrientsInformation()
       console.log('fire selectedRecipe-edited event')
       this.$events.fire('selectedRecipe-edited', this.selectedRecipe)
     },
@@ -327,8 +317,11 @@ export default {
         this.selectedProductPackages = []
         return
       }
-      this.selectedRecipe.name = recipe.name
-      this.refreshProducts(recipe)
+      this.$http.get(recipe._links.ingredientPortions.href + '?projection=inlinedIngredientPortion').then(response => {
+        this.ingredientPortions = response.data._embedded.ingredientPortions
+        this.selectedRecipe.name = recipe.name
+        this.refreshProducts(recipe)
+      })
     },
     productChanged (selectedRecipeRow) {
       let index = this.selectedRecipeRows.indexOf(selectedRecipeRow)
@@ -341,6 +334,38 @@ export default {
     },
     customPackageLabel (productPackage) {
       return productPackage.title + ' - ' + productPackage.quantity + ' gr - ' + this.formatAmount(productPackage.price) + ' - ' + productPackage.supermarket.title
+    },
+    refreshNutrientsInformation () {
+      this.refreshMinerals()
+      this.refreshVitamins()
+      this.refreshLipids()
+      this.refreshProximates()
+      this.refreshOtherNutrients()
+    },
+    refreshMinerals () {
+      this.$http.get(this.selectedRecipe.nutrientsInformation._links.minerals.href + '?projection=inlinedMineral').then(response => {
+        this.minerals = response.data._embedded.minerals
+      })
+    },
+    refreshVitamins () {
+      this.$http.get(this.selectedRecipe.nutrientsInformation._links.vitamins.href + '?projection=inlinedVitamin').then(response => {
+        this.vitamins = response.data._embedded.vitamins
+      })
+    },
+    refreshLipids () {
+      this.$http.get(this.selectedRecipe.nutrientsInformation._links.lipids.href + '?projection=inlinedLipid').then(response => {
+        this.lipids = response.data._embedded.lipids
+      })
+    },
+    refreshProximates () {
+      this.$http.get(this.selectedRecipe.nutrientsInformation._links.proximates.href + '?projection=inlinedProximate').then(response => {
+        this.proximates = response.data._embedded.proximates
+      })
+    },
+    refreshOtherNutrients () {
+      this.$http.get(this.selectedRecipe.nutrientsInformation._links.otherNutrients.href + '?projection=inlinedOtherNutrient').then(response => {
+        this.otherNutrients = response.data._embedded.otherNutrients
+      })
     }
   }
 }

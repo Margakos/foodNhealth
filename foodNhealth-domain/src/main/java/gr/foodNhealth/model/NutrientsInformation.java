@@ -103,7 +103,16 @@ public class NutrientsInformation extends BaseEntity {
         this.otherNutrients = OtherNutrient;
     }
 
-    public NutrientsInformation add (NutrientsInformation nutrientsInformation) {
+    /**
+     * @param nutrientsInformation The NutrientsInformations to be added
+     * @param sourceQuantity The quantity of entity containing NutrientsInformation passed as argument
+     * @param targetQuantity The quantity of entity containing NutrientsInformation that called add method
+     * @return The NutrientsInformation as percentage sum of two NutrientsInformation
+     */
+    public NutrientsInformation add (NutrientsInformation nutrientsInformation, BigDecimal sourceQuantity, BigDecimal targetQuantity) {
+        final BigDecimal _sourceQuantity_ = sourceQuantity.divide(new BigDecimal(100), 12, BigDecimal.ROUND_HALF_UP);
+        final BigDecimal _targetQuantity_ = targetQuantity.divide(new BigDecimal(100), 12, BigDecimal.ROUND_HALF_UP);
+
         Map<String, BigDecimal> sourceMineralMap = new HashMap<>();
         nutrientsInformation.getMinerals().forEach(mineral -> sourceMineralMap.put(mineral.getMineralType(), mineral.getQuantity()));
         Map<String, BigDecimal> sourceProximateMap = new HashMap<>();
@@ -117,27 +126,47 @@ public class NutrientsInformation extends BaseEntity {
 
         this.getMinerals().forEach(targetMineral -> {
             if (sourceMineralMap.containsKey(targetMineral.getMineralType())) {
-                targetMineral.setQuantity(targetMineral.getQuantity().add(sourceMineralMap.get(targetMineral.getMineralType())));
+                BigDecimal sourcePercentageQuantity = sourceMineralMap.get(targetMineral.getMineralType()).multiply(_sourceQuantity_);
+                BigDecimal targetPercentageQuantity = targetMineral.getQuantity().multiply(_targetQuantity_);
+                BigDecimal sum = sourcePercentageQuantity.add(targetPercentageQuantity);
+                sum = sum.divide(_sourceQuantity_.add(_targetQuantity_), 12, BigDecimal.ROUND_HALF_UP);
+                targetMineral.setQuantity(sum);
             }
         });
         this.getProximates().forEach(targetProximate -> {
             if (sourceProximateMap.containsKey(targetProximate.getProximateType())) {
-                targetProximate.setQuantity(targetProximate.getQuantity().add(sourceProximateMap.get(targetProximate.getProximateType())));
+                BigDecimal sourcePercentageQuantity = sourceProximateMap.get(targetProximate.getProximateType()).multiply(_sourceQuantity_);
+                BigDecimal targetPercentageQuantity = targetProximate.getQuantity().multiply(_targetQuantity_);
+                BigDecimal sum = sourcePercentageQuantity.add(targetPercentageQuantity);
+                sum = sum.divide(_sourceQuantity_.add(_targetQuantity_), 12, BigDecimal.ROUND_HALF_UP);
+                targetProximate.setQuantity(sum);
             }
         });
         this.getLipids().forEach(targetLipid -> {
             if (sourceLipidMap.containsKey(targetLipid.getLipidType())) {
-                targetLipid.setQuantity(targetLipid.getQuantity().add(sourceLipidMap.get(targetLipid.getLipidType())));
+                BigDecimal sourcePercentageQuantity = sourceLipidMap.get(targetLipid.getLipidType()).multiply(_sourceQuantity_);
+                BigDecimal targetPercentageQuantity = targetLipid.getQuantity().multiply(_targetQuantity_);
+                BigDecimal sum = sourcePercentageQuantity.add(targetPercentageQuantity);
+                sum = sum.divide(_sourceQuantity_.add(_targetQuantity_), 12, BigDecimal.ROUND_HALF_UP);
+                targetLipid.setQuantity(sum);
             }
         });
         this.getVitamins().forEach(targetVitamin -> {
             if (sourceVitaminMap.containsKey(targetVitamin.getVitaminType())) {
-                targetVitamin.setQuantity(targetVitamin.getQuantity().add(sourceVitaminMap.get(targetVitamin.getVitaminType())));
+                BigDecimal sourcePercentageQuantity = sourceVitaminMap.get(targetVitamin.getVitaminType()).multiply(_sourceQuantity_);
+                BigDecimal targetPercentageQuantity = targetVitamin.getQuantity().multiply(_targetQuantity_);
+                BigDecimal sum = sourcePercentageQuantity.add(targetPercentageQuantity);
+                sum = sum.divide(_sourceQuantity_.add(_targetQuantity_), 12, BigDecimal.ROUND_HALF_UP);
+                targetVitamin.setQuantity(sum);
             }
         });
         this.getOtherNutrients().forEach(targetOtherNutrient -> {
             if (sourceOtherNutrientMap.containsKey(targetOtherNutrient.getOtherNutrientType())) {
-                targetOtherNutrient.setQuantity(targetOtherNutrient.getQuantity().add(sourceOtherNutrientMap.get(targetOtherNutrient.getOtherNutrientType())));
+                BigDecimal sourcePercentageQuantity = sourceOtherNutrientMap.get(targetOtherNutrient.getOtherNutrientType()).multiply(_sourceQuantity_);
+                BigDecimal targetPercentageQuantity = targetOtherNutrient.getQuantity().multiply(_targetQuantity_);
+                BigDecimal sum = sourcePercentageQuantity.add(targetPercentageQuantity);
+                sum = sum.divide(_sourceQuantity_.add(_targetQuantity_), 12, BigDecimal.ROUND_HALF_UP);
+                targetOtherNutrient.setQuantity(sum);
             }
         });
 

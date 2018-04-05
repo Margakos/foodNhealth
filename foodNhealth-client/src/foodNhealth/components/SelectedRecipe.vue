@@ -52,18 +52,17 @@
                 <th>Συστατικό</th>
                 <th>Προϊόν</th>
                 <th>Συσκευασία</th>
-                <th>Ποσότητα (grams)</th>
               </tr>
               </thead>
 
               <tbody>
                 <tr v-for="(selectedRecipeRow, index) in selectedRecipeRows">
-                  <td style="width:5%">{{index + 1}}</td>
-                  <td style="width:15%">
+                  <td>{{index + 1}}</td>
+                  <td>
                     <div v-if="selectedRecipe.id !== null">{{selectedProductPackages[index].productPackage.product.ingredient.name}}</div>
                     <div v-if="selectedRecipe.id === null">{{(selectedRecipeRow.products[0].ingredient) ? selectedRecipeRow.products[0].ingredient.name : '-'}}</div>
                   </td>
-                  <td style="width:25%">
+                  <td>
                     <!-- Product -->
                     <div v-if="selectedRecipe.id !== null">{{selectedProductPackages[index].productPackage.product.name}}</div>
                     <b-form-group description="Επιλέξτε Προϊόν"
@@ -83,7 +82,7 @@
                       </b-input-group>
                     </b-form-group>
                   </td>
-                  <td style="width:35%">
+                  <td>
                     <!-- Product Package -->
                     <div v-if="selectedRecipe.id !== null">{{customPackageLabel(selectedProductPackages[index].productPackage)}}</div>
                     <b-form-group description="Επιλέξτε Συσκευασία"
@@ -101,22 +100,6 @@
                                      :disabled="selectedRecipeRow.product === null">
                         </multiselect>
                       </b-input-group>
-                    </b-form-group>
-                  </td>
-                  <td style="width:20%">
-                    <!-- Quantity -->
-                    <div v-if="selectedRecipe.id !== null">{{selectedProductPackages[index].quantity + '  gr'}}</div>
-                    <b-form-group description="Ποσότητα Προϊόντος (grams)"
-                                  :feedback="errors.first('quantity_' + index, 'generalForm')"
-                                  :state="isValid('quantity_' + index, 'generalForm')"
-                                  v-if="selectedRecipe.id === null">
-                      <b-form-input :data-vv-scope="'generalForm'" type="number" :name="'quantity_' + index" :id="'quantity_' + index"
-                                    v-model="selectedRecipeRow.quantity"
-                                    v-validate="rules.quantity"
-                                    :state="isValid('quantity_' + index, 'generalForm')"
-                                    :class="{'is-invalid': errors.has('quantity_' + index, 'generalForm')}"
-                                    v-if="selectedRecipe.id === null">
-                      </b-form-input>
                     </b-form-group>
                   </td>
                 </tr>

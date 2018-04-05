@@ -47,4 +47,10 @@ public class ProximateService {
         proximateRepository.save(productProximates);
         return productProximates;
     }
+
+    public Collection<Proximate> initSelectedRecipeProximates (NutrientsInformation nutrientsInformation) {
+        Collection<Proximate> selectedRecipeProximates = initProximates(nutrientsInformation);
+        proximateRepository.save(selectedRecipeProximates);
+        return selectedRecipeProximates;
+    }
 }

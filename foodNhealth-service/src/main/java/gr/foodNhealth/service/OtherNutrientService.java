@@ -42,4 +42,10 @@ public class OtherNutrientService {
         otherNutrientRepository.save(productOtherNutrients);
         return productOtherNutrients;
     }
+
+    public Collection<OtherNutrient> initSelectedRecipeOtherNutrients (NutrientsInformation nutrientsInformation) {
+        Collection<OtherNutrient> selectedRecipeOtherNutrients = initOtherNutrients(nutrientsInformation);
+        otherNutrientRepository.save(selectedRecipeOtherNutrients);
+        return selectedRecipeOtherNutrients;
+    }
 }

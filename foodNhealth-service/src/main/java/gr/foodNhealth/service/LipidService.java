@@ -42,4 +42,10 @@ public class LipidService {
         lipidRepository.save(productLipids);
         return productLipids;
     }
+
+    public Collection<Lipid> initSelectedRecipeLipids (NutrientsInformation nutrientsInformation) {
+        Collection<Lipid> selectedRecipeLipids = initLipids(nutrientsInformation);
+        lipidRepository.save(selectedRecipeLipids);
+        return selectedRecipeLipids;
+    }
 }

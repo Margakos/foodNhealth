@@ -53,4 +53,10 @@ public class VitaminService {
         vitaminRepository.save(productVitamins);
         return productVitamins;
     }
+
+    public Collection<Vitamin> initSelectedRecipeVitamins (NutrientsInformation nutrientsInformation) {
+        Collection<Vitamin> selectedRecipeVitamins = initVitamins(nutrientsInformation);
+        vitaminRepository.save(selectedRecipeVitamins);
+        return selectedRecipeVitamins;
+    }
 }
