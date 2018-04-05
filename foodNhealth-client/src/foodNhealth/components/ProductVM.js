@@ -156,6 +156,10 @@ export default {
           callback: 'formatGrams'
         },
         {
+          key: 'numPieces',
+          label: 'Κομμάτια'
+        },
+        {
           key: 'price',
           label: 'Τιμή',
           callback: 'formatAmount'

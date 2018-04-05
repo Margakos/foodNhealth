@@ -112,7 +112,7 @@
             </div>
           </b-tab>
 
-          <b-tab title="Θρεπτικά Συστατικά">
+          <b-tab title="Θρεπτικά Συστατικά" :disabled="selectedRecipe.id === null">
             <b-tabs pills vertical card>
               <b-tab title="Θρεπτικά Συστατικά" active>
                 <div class="row">

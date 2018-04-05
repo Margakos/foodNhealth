@@ -1,11 +1,11 @@
 package gr.foodNhealth.service;
 
+import gr.foodNhealth.model.IngredientPortion;
 import gr.foodNhealth.model.NutrientsInformation;
 import gr.foodNhealth.model.SelectedProductPackage;
 import gr.foodNhealth.repository.NutrientsInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -22,7 +22,6 @@ public class UtilsService {
         return productNutrientsInformation.add(nutrientsInformation, sourceQuantity, targetQuantity);
     }
 
-    @Transactional
     public NutrientsInformation propagateNutrientsInformationToSelectedRecipe (NutrientsInformation selectedRecipeNutrientsInformation,
                                                                        Collection<SelectedProductPackage> selectedProductPackages) {
         NutrientsInformation nutrientsInformation;
@@ -35,5 +34,16 @@ public class UtilsService {
             selectedRecipeNutrientsInformation = selectedRecipeNutrientsInformation.add(nutrientsInformation, sourceQuantity, targetQuantity);
         }
         return selectedRecipeNutrientsInformation;
+    }
+
+    public BigDecimal getQuantity (SelectedProductPackage selectedProductPackage, IngredientPortion ingredientPortion) {
+        if (ingredientPortion.getQuantity().doubleValue() != BigDecimal.ZERO.doubleValue()) {
+            return ingredientPortion.getQuantity();
+        }
+
+        Integer productPieces = ingredientPortion.getPieces();
+        BigDecimal productPackageGrams = selectedProductPackage.getProductPackage().getQuantity();
+        BigDecimal quantity = productPackageGrams.divide(new BigDecimal(productPieces), 12, BigDecimal.ROUND_HALF_UP);
+        return quantity;
     }
 }

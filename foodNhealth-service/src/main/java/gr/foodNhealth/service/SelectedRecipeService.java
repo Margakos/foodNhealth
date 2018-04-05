@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.rest.core.event.BeforeCreateEvent;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Service
@@ -47,6 +49,22 @@ public class SelectedRecipeService {
 
     @Autowired
     private UtilsService utils;
+    @Transactional
+    public SelectedRecipe initNewSelectedRecipe (SelectedRecipe selectedRecipe) {
+        NutrientsInformation nutrientsInformation = new NutrientsInformation();
+        nutrientsInformation.setTitle("SelectedRecipe");
+        publisher.publishEvent(new BeforeCreateEvent(nutrientsInformation));
+        nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
+
+        nutrientsInformation.setLipids(lipidService.initSelectedRecipeLipids(nutrientsInformation));
+        nutrientsInformation.setProximates(proximateService.initSelectedRecipeProximates(nutrientsInformation));
+        nutrientsInformation.setMinerals(mineralService.initSelectedRecipeMinerals(nutrientsInformation));
+        nutrientsInformation.setVitamins(vitaminService.initSelectedRecipeVitamins(nutrientsInformation));
+        nutrientsInformation.setOtherNutrients(otherNutrientService.initSelectedRecipeOtherNutrients(nutrientsInformation));
+
+        selectedRecipe.setNutrientsInformation(nutrientsInformation);
+        return selectedRecipe;
+    }
 
     public void linkSelectedProductPackages (Collection<SelectedProductPackage> selectedProductPackages, SelectedRecipe selectedRecipe) {
         selectedProductPackages.forEach(selectedProductPackage -> {
@@ -58,32 +76,15 @@ public class SelectedRecipeService {
         // Find quantities
         selectedProductPackages.forEach(selectedProductPackage -> {
             IngredientPortion ingredientPortion = ingredientPortionRepository.findBySelectedProductPackage(selectedProductPackage);
-            selectedProductPackage.setQuantity(ingredientPortion.getQuantity());
+            BigDecimal quantity = utils.getQuantity(selectedProductPackage, ingredientPortion);
+            selectedProductPackage.setQuantity(quantity);
         });
-        selectedProductPackages = selectedProductPackageRepository.save(selectedProductPackages);
-//        selectedRecipe.setSelectedProductPackages(selectedProductPackages);
+        selectedProductPackageRepository.save(selectedProductPackages);
     }
 
     public void propagateNutrientsInformation (Collection<SelectedProductPackage> selectedProductPackages, SelectedRecipe selectedRecipe) throws Exception {
-        NutrientsInformation nutrientsInformation = new NutrientsInformation();
-        try {
-            nutrientsInformation.setTitle("SelectedRecipe");
-            publisher.publishEvent(new BeforeCreateEvent(nutrientsInformation));
-            nutrientsInformation = nutrientsInformationRepository.save(nutrientsInformation);
-
-            nutrientsInformation.setLipids(lipidService.initSelectedRecipeLipids(nutrientsInformation));
-            nutrientsInformation.setProximates(proximateService.initSelectedRecipeProximates(nutrientsInformation));
-            nutrientsInformation.setMinerals(mineralService.initSelectedRecipeMinerals(nutrientsInformation));
-            nutrientsInformation.setVitamins(vitaminService.initSelectedRecipeVitamins(nutrientsInformation));
-            nutrientsInformation.setOtherNutrients(otherNutrientService.initSelectedRecipeOtherNutrients(nutrientsInformation));
-            nutrientsInformation = utils.propagateNutrientsInformationToSelectedRecipe(nutrientsInformation, selectedProductPackages);
-
-            selectedRecipe.setNutrientsInformation(nutrientsInformation);
-            selectedRecipeRepository.save(selectedRecipe);
-        } catch (Exception e) {
-            e.printStackTrace();
-            nutrientsInformationRepository.delete(nutrientsInformation);
-            throw new Exception();
-        }
+        NutrientsInformation nutrientsInformation = selectedRecipe.getNutrientsInformation();
+        nutrientsInformation = utils.propagateNutrientsInformationToSelectedRecipe(nutrientsInformation, selectedProductPackages);
+        nutrientsInformationRepository.save(nutrientsInformation);
     }
 }

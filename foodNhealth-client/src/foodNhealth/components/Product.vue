@@ -63,6 +63,9 @@
                   <template slot="quantity" slot-scope="data">
                     {{formatGrams(data.value)}}
                   </template>
+                  <template slot="numPieces" slot-scope="data">
+                    {{data.value}}
+                  </template>
                   <template slot="price" slot-scope="data">
                     {{formatAmount(data.value)}}
                   </template>

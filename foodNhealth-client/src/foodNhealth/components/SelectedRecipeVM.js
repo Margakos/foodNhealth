@@ -228,6 +228,7 @@ export default {
         if (!result) {
           return
         }
+        console.log(this.selectedRecipe)
         this.getSelectedProductPackages()
         this.save()
       })
@@ -374,7 +375,8 @@ function initSelectedRecipe () {
   return {
     id: null,
     name: '',
-    recipe: null
+    recipe: null,
+    nutrientsInformation: null
   }
 }
 
