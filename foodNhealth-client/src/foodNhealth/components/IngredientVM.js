@@ -326,7 +326,6 @@ export default {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshMinerals()
         this.success(this.$messages.successAction)
       })
     },
@@ -338,7 +337,6 @@ export default {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshVitamins()
         this.success(this.$messages.successAction)
       })
     },
@@ -350,7 +348,6 @@ export default {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshLipids()
         this.success(this.$messages.successAction)
       })
     },
@@ -362,7 +359,6 @@ export default {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshProximates()
         this.success(this.$messages.successAction)
       })
     },
@@ -373,7 +369,6 @@ export default {
           return _self.transformNutrientsRequest(data, headers)
         }]
       }).then(response => {
-        this.refreshOtherNutrients()
         this.success(this.$messages.successAction)
       })
     },
