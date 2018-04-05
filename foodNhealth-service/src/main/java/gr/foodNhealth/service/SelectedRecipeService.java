@@ -1,30 +1,22 @@
 package gr.foodNhealth.service;
 
-import gr.foodNhealth.model.*;
+import gr.foodNhealth.model.NutrientsInformation;
+import gr.foodNhealth.model.SelectedProductPackage;
+import gr.foodNhealth.model.SelectedRecipe;
 import gr.foodNhealth.repository.IngredientPortionRepository;
 import gr.foodNhealth.repository.NutrientsInformationRepository;
 import gr.foodNhealth.repository.SelectedProductPackageRepository;
-import gr.foodNhealth.repository.SelectedRecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.rest.core.event.BeforeCreateEvent;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 @Service
 public class SelectedRecipeService {
-
-    @Autowired
-    private SelectedRecipeRepository selectedRecipeRepository;
-
-    @Autowired
-    private IngredientPortionRepository ingredientPortionRepository;
-
-    @Autowired
-    private SelectedProductPackageRepository selectedProductPackageRepository;
 
     @Autowired
     private NutrientsInformationRepository nutrientsInformationRepository;
@@ -49,6 +41,7 @@ public class SelectedRecipeService {
 
     @Autowired
     private UtilsService utils;
+
     @Transactional
     public SelectedRecipe initNewSelectedRecipe (SelectedRecipe selectedRecipe) {
         NutrientsInformation nutrientsInformation = new NutrientsInformation();
@@ -66,23 +59,8 @@ public class SelectedRecipeService {
         return selectedRecipe;
     }
 
-    public void linkSelectedProductPackages (Collection<SelectedProductPackage> selectedProductPackages, SelectedRecipe selectedRecipe) {
-        selectedProductPackages.forEach(selectedProductPackage -> {
-
-            selectedProductPackage.setSelectedRecipe(selectedRecipe);
-            publisher.publishEvent(new BeforeCreateEvent(selectedProductPackage));
-        });
-        selectedProductPackages = selectedProductPackageRepository.save(selectedProductPackages);
-        // Find quantities
-        selectedProductPackages.forEach(selectedProductPackage -> {
-            IngredientPortion ingredientPortion = ingredientPortionRepository.findBySelectedProductPackage(selectedProductPackage);
-            BigDecimal quantity = utils.getQuantity(selectedProductPackage, ingredientPortion);
-            selectedProductPackage.setQuantity(quantity);
-        });
-        selectedProductPackageRepository.save(selectedProductPackages);
-    }
-
-    public void propagateNutrientsInformation (Collection<SelectedProductPackage> selectedProductPackages, SelectedRecipe selectedRecipe) throws Exception {
+    @Transactional
+    public void propagateNutrientsInformation (Collection<SelectedProductPackage> selectedProductPackages, SelectedRecipe selectedRecipe) {
         NutrientsInformation nutrientsInformation = selectedRecipe.getNutrientsInformation();
         nutrientsInformation = utils.propagateNutrientsInformationToSelectedRecipe(nutrientsInformation, selectedProductPackages);
         nutrientsInformationRepository.save(nutrientsInformation);

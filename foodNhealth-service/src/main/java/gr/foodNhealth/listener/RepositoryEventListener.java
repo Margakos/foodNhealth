@@ -15,6 +15,16 @@ public class RepositoryEventListener extends AbstractRepositoryEventListener<Obj
     @Override
     protected void onBeforeCreate(Object entity) {
         log.debug("Event BeforeCreate for entity: " + entity.getClass().getSimpleName());
+        initEntity(entity);
+    }
+
+    @Override
+    protected void onBeforeSave(Object entity) {
+        log.debug("Event BeforeCreate for entity: " + entity.getClass().getSimpleName());
+        initEntity(entity);
+    }
+
+    private void initEntity (Object entity) {
         if (entity instanceof BaseEntityNoId) {
             BaseEntityNoId baseEntity = (BaseEntityNoId) entity;
             baseEntity.setDeleted(Boolean.FALSE);

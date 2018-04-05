@@ -8,7 +8,6 @@ export default {
       selectedRecipe: initSelectedRecipe(),
       selectedRecipeRows: [],
       ingredients: [],
-      ingredientPortions: [],
       productPackages: [],
       selectedProductPackages: [],
       minerals: [],
@@ -138,20 +137,28 @@ export default {
         _self.selectedProductPackages[index].quantity = row.quantity
       })
     },
+    // todo make the following more beautiful
     refreshSelectedProductPackages () {
       let _self = this
       this.$http.get(this.selectedRecipe._links.selectedProductPackages.href + '?projection=inlinedSelectedProductPackage').then(response => {
         this.selectedProductPackages = response.data._embedded.selectedProductPackages
-        // Need below in order for the table to create rows
         this.selectedProductPackages.forEach(function (selectedProductPackage, index) {
-          _self.selectedRecipeRows.push([])
+          _self.$http.get('products/search/findByIngredientId?ingredientId=' + selectedProductPackage.productPackage.product.ingredient.id + '&projection=inlinedProduct').then(products => {
+            _self.$http.get(selectedProductPackage.productPackage.product._links.productPackages.href + '?projection=inlinedProductPackage').then(productPackages => {
+              let selectedRecipeRow = initSelectedRecipeRow()
+              selectedRecipeRow.products = products.data._embedded.products
+              selectedRecipeRow.product = selectedRecipeRow.products[0]
+              selectedRecipeRow.productPackages = productPackages.data._embedded.productPackages
+              selectedRecipeRow.productPackage = selectedRecipeRow.productPackages[0]
+              _self.selectedRecipeRows.push(selectedRecipeRow)
+            })
+          })
         })
       })
     },
     refreshProducts (recipe) {
-      let _self = this
       this.$http.get('products/search/findProductsByRecipe?recipeId=' + recipe.id + '&projection=inlinedProduct').then(response => {
-        _self.selectedRecipeRows = this.separateProducts(this.sortProducts(response.data._embedded.products))
+        this.selectedRecipeRows = this.separateProducts(this.sortProducts(response.data._embedded.products))
         this.initSelectedProductPackages()
       })
     },
@@ -242,7 +249,12 @@ export default {
           transformRequest: [function (data, headers) {
             return _self.transformRequest(data, headers)
           }]
-        }).then(response => this.handleSuccess(response))
+        }).then(response => {
+          let tempSelectedProductPackages = Object.assign([{}], this.selectedProductPackages)
+          this.$http.patch('selectedRecipes/' + response.data.id + '/selectedProductPackages', tempSelectedProductPackages).then(resp => {
+            this.handleSuccess(response)
+          }).catch(e => this.handleError(e))
+        })
           .catch(e => this.handleError(e))
       } else {
         this.$http.post('selectedRecipes?projection=inlinedSelectedRecipe', tempSelectedRecipe, {
@@ -309,6 +321,7 @@ export default {
       this.$events.fire('selectedRecipe-edited', this.selectedRecipe)
     },
     transformRequest (data, headers) {
+      data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
       data.recipe = this.convertEntityToURI(data.recipe)
       return JSON.stringify(data)
     },
@@ -318,11 +331,8 @@ export default {
         this.selectedProductPackages = []
         return
       }
-      this.$http.get(recipe._links.ingredientPortions.href + '?projection=inlinedIngredientPortion').then(response => {
-        this.ingredientPortions = response.data._embedded.ingredientPortions
-        this.selectedRecipe.name = recipe.name
-        this.refreshProducts(recipe)
-      })
+      this.selectedRecipe.name = recipe.name
+      this.refreshProducts(recipe)
     },
     productChanged (selectedRecipeRow) {
       let index = this.selectedRecipeRows.indexOf(selectedRecipeRow)

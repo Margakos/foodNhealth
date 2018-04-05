@@ -59,16 +59,13 @@
                 <tr v-for="(selectedRecipeRow, index) in selectedRecipeRows">
                   <td>{{index + 1}}</td>
                   <td>
-                    <div v-if="selectedRecipe.id !== null">{{selectedProductPackages[index].productPackage.product.ingredient.name}}</div>
-                    <div v-if="selectedRecipe.id === null">{{(selectedRecipeRow.products[0].ingredient) ? selectedRecipeRow.products[0].ingredient.name : '-'}}</div>
+                    <div>{{(selectedRecipeRow.products[0].ingredient) ? selectedRecipeRow.products[0].ingredient.name : '-'}}</div>
                   </td>
                   <td>
                     <!-- Product -->
-                    <div v-if="selectedRecipe.id !== null">{{selectedProductPackages[index].productPackage.product.name}}</div>
                     <b-form-group description="Επιλέξτε Προϊόν"
                                   :feedback="errors.first('product_' + index, 'generalForm')"
-                                  :state="isValid('product_' + index, 'generalForm')"
-                                  v-if="selectedRecipe.id === null">
+                                  :state="isValid('product_' + index, 'generalForm')">
                       <b-input-group>
                         <multiselect data-vv-scope="generalForm" :showLabels="false" :name="'productPackage_' + index" :id="'productPackage_' + index"
                                      v-model="selectedRecipeRow.product"
@@ -84,11 +81,9 @@
                   </td>
                   <td>
                     <!-- Product Package -->
-                    <div v-if="selectedRecipe.id !== null">{{customPackageLabel(selectedProductPackages[index].productPackage)}}</div>
                     <b-form-group description="Επιλέξτε Συσκευασία"
                                   :feedback="errors.first('productPackage_' + index, 'generalForm')"
-                                  :state="isValid('productPackage_' + index, 'generalForm')"
-                                  v-if="selectedRecipe.id === null">
+                                  :state="isValid('productPackage_' + index, 'generalForm')">
                       <b-input-group>
                         <multiselect data-vv-scope="generalForm" :showLabels="false" :name="'productPackage_' + index" :id="'productPackage_' + index"
                                      v-model="selectedRecipeRow.productPackage"
@@ -112,7 +107,7 @@
             </div>
           </b-tab>
 
-          <b-tab title="Θρεπτικά Συστατικά" :disabled="selectedRecipe.id === null">
+          <b-tab title="Θρεπτικά Συστατικά" >
             <b-tabs pills vertical card>
               <b-tab title="Θρεπτικά Συστατικά" active>
                 <div class="row">
