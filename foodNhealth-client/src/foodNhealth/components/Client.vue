@@ -10,15 +10,16 @@
       <div class="row">
         <div class="col-lg-12">
           <!-- Client -->
-          <b-form-group description="Πληκτρολογήστε το email"
+          <b-form-group description="Πληκτρολογήστε το Χρήστη"
                         :feedback="errors.first('email', 'generalForm')"
                         :state="isValid('email', 'generalForm')">
             <multiselect data-vv-scope="generalForm" id="client" name="client"
-                         v-model="client" track-by="id" placeholder=""
+                         v-model="client" track-by="id" placeholder="Χρήστης"
                          :custom-label="clientCustomLabel"
                          open-direction="bottom" :options="clients" :multiple="false"
                          :searchable="true" :loading="isLoading" :internal-search="false"
                          :close-on-select="true" :options-limit="50"
+                         v-validate="rules.client"
                          :max-height="600" :show-no-results="true" :hide-selected="true" @search-change="searchClients"
                          :class="{'is-invalid': errors.has('email', 'generalForm')}">
               <span slot="noResult">Δε βρέθηκαν αποτελέσματα, δοκιμάστε μια διαφορετική αναζήτηση</span>

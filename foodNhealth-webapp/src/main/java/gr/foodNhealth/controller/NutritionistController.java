@@ -79,8 +79,8 @@ public class NutritionistController {
         if (client == null) {
             return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
         }
-        nutritionistService.addClient(client);
-        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+        boolean added = nutritionistService.addClient(client);
+        return added ? new ResponseEntity<HttpStatus>(HttpStatus.OK) : new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
     }
 
     @DeleteMapping(value = "nutritionists/removeClient")
@@ -89,7 +89,7 @@ public class NutritionistController {
         if (client == null) {
             return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
         }
-        nutritionistService.removeClient(client);
-        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+        boolean removed = nutritionistService.removeClient(client);
+        return removed ? new ResponseEntity<HttpStatus>(HttpStatus.OK) : new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
     }
 }

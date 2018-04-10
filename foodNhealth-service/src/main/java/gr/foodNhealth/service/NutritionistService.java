@@ -18,7 +18,7 @@ public class NutritionistService {
     private NutritionistRepository nutritionistRepository;
 
     @Transactional
-    public void addClient (Client client) {
+    public boolean addClient (Client client) {
         String activeNutritionistEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Nutritionist nutritionist = nutritionistRepository.findByEmail(activeNutritionistEmail);
         nutritionist.getClients().size();
@@ -27,15 +27,16 @@ public class NutritionistService {
             clients = new ArrayList<>();
         }
         if (clients.contains(client)) {
-            return;
+            return false;
         }
         clients.add(client);
         nutritionist.setClients(clients);
         nutritionistRepository.save(nutritionist);
+        return true;
     }
 
     @Transactional
-    public void removeClient (Client client) {
+    public boolean removeClient (Client client) {
         String activeNutritionistEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Nutritionist nutritionist = nutritionistRepository.findByEmail(activeNutritionistEmail);
         nutritionist.getClients().size();
@@ -44,10 +45,11 @@ public class NutritionistService {
             clients = new ArrayList<>();
         }
         if (!clients.contains(client)) {
-            return;
+            return false;
         }
         clients.remove(client);
         nutritionist.setClients(clients);
         nutritionistRepository.save(nutritionist);
+        return true;
     }
 }

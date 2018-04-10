@@ -12,6 +12,9 @@ export default {
       insertionMode: false,
       clients: [],
       rules: {
+        client: {
+          required: true
+        },
         firstName: {
           required: true
         },
@@ -81,6 +84,10 @@ export default {
           // validation failed, nothing special to do
           return
         }
+        if (this.client.email == null || this.client.email === '') {
+          _self.$validator.errors.add({field: 'client', msg: _self.$messages.required, scope: 'generalForm'})
+          return
+        }
         let tempClient = Object.assign({}, this.client)
         this.$http.post('nutritionists/addClient', tempClient, {
           transformRequest: [function (data, headers) {
@@ -90,7 +97,11 @@ export default {
           this.insertionMode = false
           this.handleSuccess(response)
         })
-          .catch(e => this.handleError(e))
+          .catch(e => {
+            if (e.response && e.response.status === 409) {
+              this.error(this.$messages.duplicateClient)
+            }
+          })
       })
     },
     transformRequest (data, headers) {
@@ -137,7 +148,7 @@ export default {
       })
     },
     clientCustomLabel (client) {
-      return client != null ? client.firstName + ' ' + client.lastName + ' - ' + client.email : ''
+      return client.email !== '' ? client.firstName + ' ' + client.lastName + ' - ' + client.email : ''
     }
   }
 }

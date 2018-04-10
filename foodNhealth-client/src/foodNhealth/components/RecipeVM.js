@@ -46,7 +46,6 @@ export default {
           key: 'ingredient',
           label: 'Συστατικό'
         },
-
         {
           key: 'quantity_slices',
           label: ' Ποσότητα'
@@ -120,7 +119,7 @@ export default {
           return
         }
         if (this.ingredientPortions.length === 0) {
-          this.$validator.errors.add({field: 'ingredientPortions', msg: this.$messages.ingredientPortionsEmpty, scope: 'generalForm'})
+          this.$validator.errors.add({field: 'ingredientPortions', msg: this.$messages.fieldInsertsEmpty, scope: 'generalForm'})
         }
         let _self = this
         let tempRecipe = Object.assign({}, this.recipe)
