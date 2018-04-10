@@ -5,15 +5,8 @@
 # IntelliJ project files
 .idea
 *.iml
-foodNhealth-domain/*.iml
-foodNhealth-service/*.iml
-foodNhealth-webapp/*.iml
 out
 gen
-
-# target files
-*/target/**
-
 ### Node template
 # Logs
 logs
