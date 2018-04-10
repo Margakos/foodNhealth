@@ -1,11 +1,11 @@
 package gr.foodNhealth.model.projection;
 
-import gr.foodNhealth.model.Person;
-import gr.foodNhealth.model.Person.Gender;
+import gr.foodNhealth.model.Nutritionist;
+import gr.foodNhealth.model.Nutritionist.Gender;
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(name = "loginPerson", types = Person.class)
-public interface LoginPersonProjection {
+@Projection(name = "nutritionistSafe", types = Nutritionist.class)
+public interface NutritionistSafeProjection {
 
     Long getId();
 

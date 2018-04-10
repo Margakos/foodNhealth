@@ -1,10 +1,10 @@
 export default {
-  name: 'person',
+  name: 'nutritionist',
   components: {},
   data: function () {
     return {
       visible: false,
-      person: initPerson(),
+      nutritionist: initNutritionist(),
       rules: {
         firstName: {
           required: true,
@@ -34,31 +34,31 @@ export default {
     }
   },
   created () {
-    console.log('Person created')
+    console.log('Nutritionist created')
   },
   mounted () {
-    this.$events.$on('edit-person', eventData => this.onEditPerson(eventData))
-    console.log('Person mounted')
+    this.$events.$on('edit-nutritionist', eventData => this.onEditNutritionist(eventData))
+    console.log('Nutritionist mounted')
   },
   destroyed: function () {
-    this.$events.$off('edit-person')
-    console.log('Person destroyed')
+    this.$events.$off('edit-nutritionist')
+    console.log('Nutritionist destroyed')
   },
   computed: {
     isDeletable: function () {
-      return this.person.id != null && this.$auth.check('Lookup_D')
+      return this.nutritionist.id != null && this.$auth.check('Lookup_D')
     }
   },
   methods: {
-    onEditPerson (eventData) {
-      console.log('Edit Person:' + eventData)
+    onEditNutritionist (eventData) {
+      console.log('Edit Nutritionist:' + eventData)
       if (eventData != null) {
-        this.$http.get('persons/' + eventData + '?projection=loginPerson').then(response => {
-          this.person = response.data
+        this.$http.get('nutritionists/' + eventData + '?projection=loginNutritionist').then(response => {
+          this.nutritionist = response.data
           this.visible = true
         })
       } else {
-        Object.assign(this.$data.person, initPerson())
+        Object.assign(this.$data.nutritionist, initNutritionist())
         this.$validator.reset().then(() => {
           this.errors.clear()
         })
@@ -72,15 +72,15 @@ export default {
           return
         }
         let _self = this
-        if (this.person.id != null) {
-          // existing person, update
-          this.$http.patch('persons/' + this.person.id + '?projection=loginPerson', this.person, {
+        if (this.nutritionist.id != null) {
+          // existing nutritionist, update
+          this.$http.patch('nutritionists/' + this.nutritionist.id + '?projection=loginNutritionist', this.nutritionist, {
             // transform the selected roles into URIs, before sending
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data)
             }]
           }).then(response => {
-            if (this.$auth.user().id === this.person.id) {
+            if (this.$auth.user().id === this.nutritionist.id) {
               this.warning(this.$messages.warningUserChanged)
               this.logout()
             } else {
@@ -89,8 +89,8 @@ export default {
           })
             .catch(e => this.handleError(e))
         } else {
-          // new person, create
-          this.$http.post('persons?projection=loginPerson', this.person, {
+          // new nutritionist, create
+          this.$http.post('nutritionists?projection=loginNutritionist', this.nutritionist, {
             // transform the selected roles into URIs, before sending
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data)
@@ -106,8 +106,8 @@ export default {
     handleSuccess (response) {
       this.visible = false
       this.success(this.$messages.successAction)
-      console.log('fire person-edited event')
-      this.$events.fire('person-edited', this.person)
+      console.log('fire nutritionist-edited event')
+      this.$events.fire('nutritionist-edited', this.nutritionist)
     },
     handleError (e) {
       console.log(e)
@@ -123,8 +123,8 @@ export default {
         closeOnPressEscape: false,
         type: 'warning'
       }).then(() => {
-        // delete person
-        this.$http.delete('persons/' + this.person.id).then(response => this.handleSuccess(response))
+        // delete nutritionist
+        this.$http.delete('nutritionists/' + this.nutritionist.id).then(response => this.handleSuccess(response))
           .catch(e => this.handleError(e))
       })
     },
@@ -137,7 +137,7 @@ export default {
   }
 }
 
-function initPerson () {
+function initNutritionist () {
   return {
     id: null,
     firstName: '',

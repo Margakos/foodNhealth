@@ -49,17 +49,17 @@ Vue.use(require('@websanova/vue-auth'), {
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
   loginData: {
-    url: 'login?projection=loginPerson',
+    url: 'login?projection=nutritionistSafe',
     method: 'POST',
     redirect: '/ingredients',
     fetchUser: false
   },
   fetchData: {
-    url: 'refreshUser?projection=loginPerson',
+    url: 'refreshUser?projection=loginNutritionist',
     enabled: true
   },
   refreshData: {
-    url: 'refreshUser?projection=loginPerson',
+    url: 'refreshUser?projection=loginNutritionist',
     enabled: false,
     interval: 0
   },
@@ -215,8 +215,8 @@ Vue.mixin({
     limitReachedText (count) {
       return 'και ' + count + ' ακόμα αποτελέσματα'
     },
-    getPersonFullName (person) {
-      return person.firstName + ' ' + person.lastName
+    getNutritionistFullName (nutritionist) {
+      return nutritionist.firstName + ' ' + nutritionist.lastName
     },
     handleSuccess (response) {
       this.success(this.$messages.successAction)

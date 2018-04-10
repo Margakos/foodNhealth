@@ -12,7 +12,7 @@
                         :append-params="append_params"
                         :per-page="rowsPerPage"></data-table>
             <div slot="footer">
-              <b-button size="lg" variant="primary" class="pull-right" @click="createPerson"><i class="fa fa-plus"></i>
+              <b-button size="lg" variant="primary" class="pull-right" @click="createNutritionist"><i class="fa fa-plus"></i>
                 Δημιουργία
               </b-button>
             </div>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <person></person>
+    <nutritionist></nutritionist>
   </div>
 </template>
-<script src="./PersonsVM.js"></script>
+<script src="./NutritionistsVM.js"></script>

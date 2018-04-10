@@ -1,6 +1,6 @@
 package gr.foodNhealth.repository;
 
-import gr.foodNhealth.model.Person;
+import gr.foodNhealth.model.Nutritionist;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,22 +10,22 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @RepositoryRestResource
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface NutritionistRepository extends JpaRepository<Nutritionist, Long> {
 
-    @Query("SELECT u FROM Person u WHERE" +
+    @Query("SELECT u FROM Nutritionist u WHERE" +
             " u.email LIKE CONCAT('%',?1,'%') OR u.firstName LIKE CONCAT('%',?1,'%')" +
             " OR u.lastName LIKE CONCAT('%',?1,'%') OR u.description LIKE CONCAT('%',?1,'%') ")
-    Page<Person> findByQuery(@Param("query") String query, Pageable pageable);
+    Page<Nutritionist> findByQuery(@Param("query") String query, Pageable pageable);
 
     //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
     @RestResource(exported = false)
-    Person findByEmail(String email);
+    Nutritionist findByEmail(String email);
 
     //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
     @RestResource(exported = false)
-    Person findByEmailAndIsActive(String email, boolean isActive);
+    Nutritionist findByEmailAndIsActive(String email, boolean isActive);
 
     //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
     @RestResource(exported = false)
-    Person findByEmailAndPasswordAndIsActive(String email, String password, boolean isActive);
+    Nutritionist findByEmailAndPasswordAndIsActive(String email, String password, boolean isActive);
 }

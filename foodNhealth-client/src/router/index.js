@@ -28,7 +28,7 @@ import Page500 from '@/views/pages/Page500'
 import Register from '@/views/pages/Register'
 
 // Views - FoodNHealth
-import Persons from '@/foodNhealth/Persons'
+import Nutritionists from '@/foodNhealth/Nutritionists'
 import Login from '@/foodNhealth/Login'
 import FoodCategoryCoreTypes from '@/foodNhealth/FoodCategoryCoreTypes'
 import FoodCategorySubTypes from '@/foodNhealth/FoodCategorySubTypes'
@@ -96,7 +96,7 @@ export default new Router({
         },
         {
           path: 'admin',
-          redirect: '/admin/persons',
+          redirect: '/admin/nutritionists',
           name: 'Διαχείριση',
           component: {
             render (c) {
@@ -106,9 +106,9 @@ export default new Router({
           },
           children: [
             {
-              path: 'persons',
-              name: 'Persons',
-              component: Persons
+              path: 'nutritionists',
+              name: 'Nutritionists',
+              component: Nutritionists
             },
             {
               path: 'foodCategoryCoreTypes',

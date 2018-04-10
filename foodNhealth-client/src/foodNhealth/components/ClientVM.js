@@ -82,7 +82,7 @@ export default {
           return
         }
         let tempClient = Object.assign({}, this.client)
-        this.$http.post('persons/addClient', tempClient, {
+        this.$http.post('nutritionists/addClient', tempClient, {
           transformRequest: [function (data, headers) {
             return _self.transformRequest(data, headers)
           }]
@@ -112,7 +112,7 @@ export default {
     confirmDelete () {
       let _self = this
       this.yesNoDialogue(this.$messages.confirmAction, this.$messages.confirmActionTitle, function () {
-        _self.$http.delete('persons/removeClient?email=' + _self.client.email).then(response => _self.handleSuccess(response)).catch(e => _self.handleError(e))
+        _self.$http.delete('nutritionists/removeClient?email=' + _self.client.email).then(response => _self.handleSuccess(response)).catch(e => _self.handleError(e))
       }, null)
     },
     invalidate () {

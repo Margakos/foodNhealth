@@ -20,9 +20,9 @@ import nav from '../_nav'
 import { Header as AppHeader, Sidebar, Aside as AppAside, Footer as AppFooter, Breadcrumb } from '../components/'
 import Multiselect from 'vue-multiselect'
 // Example: Register a component globally, using vue-router
-// import Person from '@/foodNhealth/components/Person'
+// import Nutritionist from '@/foodNhealth/components/Nutritionist'
 import Vue from 'vue'
-// Vue.component('person', Person)
+// Vue.component('nutritionist', Nutritionist)
 Vue.component('multiselect', Multiselect)
 
 export default {

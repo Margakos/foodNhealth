@@ -37,7 +37,7 @@ export default {
       children: [
         {
           name: 'Διατροφολόγοι',
-          url: '/admin/persons',
+          url: '/admin/nutritionists',
           icon: 'icon-puzzle'
         },
         {

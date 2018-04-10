@@ -37,7 +37,7 @@ public class Client extends BaseEntity {
     private String zipCode;
 
     @ManyToMany(mappedBy = "clients")
-    private Collection<Person> people;
+    private Collection<Nutritionist> people;
 
 
     public String getFirstName() {
@@ -104,11 +104,11 @@ public class Client extends BaseEntity {
         this.zipCode = zipCode;
     }
 
-    public Collection<Person> getPeople() {
+    public Collection<Nutritionist> getPeople() {
         return people;
     }
 
-    public void setPeople(Collection<Person> people) {
+    public void setPeople(Collection<Nutritionist> people) {
         this.people = people;
     }
 

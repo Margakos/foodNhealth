@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
-public class Person extends BaseEntity{
+public class Nutritionist extends BaseEntity{
 
     @Basic
     private String firstName;

@@ -1,7 +1,7 @@
 package gr.foodNhealth.config;
 
 import gr.foodNhealth.model.BaseEntityNoId;
-import gr.foodNhealth.model.Person;
+import gr.foodNhealth.model.Nutritionist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -44,7 +44,7 @@ public class RestConfig extends RepositoryRestConfigurerAdapter {
         // expose ID property for all entities, by performing reflection inside the domain package
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(true);
         provider.addIncludeFilter(new AssignableTypeFilter(BaseEntityNoId.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents(Person.class.getPackage().getName());
+        Set<BeanDefinition> components = provider.findCandidateComponents(Nutritionist.class.getPackage().getName());
         List<Class<?>> classes = new ArrayList<>();
 
         components.forEach(component -> {

@@ -1,8 +1,8 @@
 package gr.foodNhealth.security;
 
 import gr.foodNhealth.dto.CustomUserDetails;
-import gr.foodNhealth.model.Person;
-import gr.foodNhealth.repository.PersonRepository;
+import gr.foodNhealth.model.Nutritionist;
+import gr.foodNhealth.repository.NutritionistRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-    private PersonRepository userRepository;
+    private NutritionistRepository userRepository;
 
     @Autowired
     private LoginAttemptService loginAttemptService;
@@ -35,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("blocked");
         }
 
-        Person user = userRepository.findByEmailAndIsActive(email, true);
+        Nutritionist user = userRepository.findByEmailAndIsActive(email, true);
 
         if (user == null) {
             LOGGER.error("User not found or inactive, username: {}", email);

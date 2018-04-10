@@ -1,5 +1,5 @@
 <template>
-  <b-modal title="Διαχείριση Χρήστη" id="personModal" v-model="visible" :no-close-on-backdrop="true"
+  <b-modal title="Διαχείριση Χρήστη" id="nutritionistModal" v-model="visible" :no-close-on-backdrop="true"
            :no-close-on-esc="true" size="lg">
     <b-form :novalidate="false">
 
@@ -14,7 +14,7 @@
               <b-input-group-addon>
                 <i class='fa fa-user'></i>
               </b-input-group-addon>
-              <b-form-input name="firstName" type="text" placeholder="Όνομα" v-model="person.firstName"
+              <b-form-input name="firstName" type="text" placeholder="Όνομα" v-model="nutritionist.firstName"
                             v-validate="rules.firstName" :state="isValid('firstName')"></b-form-input>
             </b-input-group>
           </b-form-group>
@@ -25,7 +25,7 @@
               <b-input-group-addon>
                 <i class='fa fa-vcard-o'></i>
               </b-input-group-addon>
-              <b-form-input name="lastName" type="text" placeholder="Επώνυμο" v-model="person.lastName"
+              <b-form-input name="lastName" type="text" placeholder="Επώνυμο" v-model="nutritionist.lastName"
                             v-validate="rules.lastName" :state="isValid('lastName')"></b-form-input>
             </b-input-group>
           </b-form-group>
@@ -36,7 +36,7 @@
               <b-input-group-addon>
                 <i class='fa fa-envelope'></i>
               </b-input-group-addon>
-              <b-form-input name="email" type="email" placeholder="Email" v-model="person.email"
+              <b-form-input name="email" type="email" placeholder="Email" v-model="nutritionist.email"
                             v-validate="rules.email"
                             :state="isValid('email')">
               </b-form-input>
@@ -50,7 +50,7 @@
               <b-input-group-addon>
                 <i class='fa fa-question'></i>
               </b-input-group-addon>
-              <b-form-input name="password" type="password" placeholder="Συνθηματικό Χρήστη" v-model="person.password"
+              <b-form-input name="password" type="password" placeholder="Συνθηματικό Χρήστη" v-model="nutritionist.password"
                             v-validate="rules.password"
                             :state="isValid('password')">
               </b-form-input>
@@ -64,7 +64,7 @@
           <b-form-group label="Ενεργός" :feedback="errors.first('isActive')" :state="isValid('isActive')"
                         :horizontal="true">
             <b-input-group>
-              <b-form-checkbox name="isActive" v-model="person.isActive" v-validate="rules.isActive"
+              <b-form-checkbox name="isActive" v-model="nutritionist.isActive" v-validate="rules.isActive"
                                :state="isValid('isActive')">
               </b-form-checkbox>
             </b-input-group>
@@ -76,7 +76,7 @@
               <b-input-group-addon>
                 <i class='fa fa-comment-o'></i>
               </b-input-group-addon>
-              <b-form-textarea name="comments" placeholder="Σχόλια" v-model="person.comments"
+              <b-form-textarea name="comments" placeholder="Σχόλια" v-model="nutritionist.comments"
                                v-validate="rules.comments" :state="isValid('comments')" :rows="2"
                                :maxRows="2"></b-form-textarea>
             </b-input-group>
@@ -98,4 +98,4 @@
     </div>
   </b-modal>
 </template>
-<script src="./PersonVM.js"></script>
+<script src="./NutritionistVM.js"></script>

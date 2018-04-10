@@ -59,5 +59,5 @@ INSERT INTO foodnhealth.FoodCategorySubType (id, description, isActive, isDelete
 INSERT INTO foodnhealth.FoodCategorySubType (id, description, isActive, isDeleted, title, foodCategoryCoreType_id) VALUES (26, '', true, false, 'Ελεύθερα', 7);
 
 /* Users */
-INSERT INTO foodnhealth.Person (id, description, isActive, isDeleted, title, comments, email, firstName, gender, lastName, password)
+INSERT INTO foodnhealth.Nutritionist (id, description, isActive, isDeleted, title, comments, email, firstName, gender, lastName, password)
 VALUES (1, 'The first ever admin', true, false, null, 'First admin ever', 'admin@foodnhealth.gr', 'Food', null, 'Health', '123456');

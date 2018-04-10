@@ -8,7 +8,7 @@
 
         <class>gr.foodNhealth.model.Ingredient</class>
         <class>gr.foodNhealth.model.NutrientsInformation</class>
-        <class>gr.foodNhealth.model.Person</class>
+        <class>gr.foodNhealth.model.Nutritionist</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Lipid</class>
         <class>gr.foodNhealth.model.nutrientsInformation.Mineral</class>
         <class>gr.foodNhealth.model.nutrientsInformation.OtherNutrient</class>
