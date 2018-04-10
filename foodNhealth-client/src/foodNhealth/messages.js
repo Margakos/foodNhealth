@@ -22,6 +22,8 @@ const messages = {
   ok: 'Οκ',
   warning: 'Προειδοποίηση',
   required: 'Το πεδίο δεν έχει συμπληρωθεί.',
+  MALE: 'Άρρεν',
+  FEMALE: 'Θήλυ',
   // Custom Errors
   fieldMoreThanZero: 'Το πεδίο πρέπει να είναι μεγαλύτερο του μηδενός',
   ingredientPortionsEmpty: 'Το πεδίο θα πρέπει να περιέχει τουλάχιστον μια εγγραφή',

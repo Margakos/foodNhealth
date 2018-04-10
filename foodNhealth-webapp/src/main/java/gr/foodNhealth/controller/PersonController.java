@@ -1,8 +1,11 @@
 package gr.foodNhealth.controller;
 
+import gr.foodNhealth.model.Client;
 import gr.foodNhealth.model.Person;
+import gr.foodNhealth.repository.ClientRepository;
 import gr.foodNhealth.repository.PersonRepository;
 import gr.foodNhealth.security.LoginAttemptService;
+import gr.foodNhealth.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,7 @@ import org.springframework.data.rest.webmvc.PersistentEntityResourceAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -25,6 +26,12 @@ public class PersonController {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private PersonService personService;
 
     @Autowired
     private LoginAttemptService loginAttemptService;
@@ -65,5 +72,24 @@ public class PersonController {
         } else {
             return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping(value = "persons/addClient")
+    public ResponseEntity<?> addClient (@RequestBody Client client) {
+        if (client == null) {
+            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
+        }
+        personService.addClient(client);
+        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "persons/removeClient")
+    public ResponseEntity<?> removeClient (@RequestParam(value = "email") String email) {
+        Client client = clientRepository.findByEmail(email);
+        if (client == null) {
+            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
+        }
+        personService.removeClient(client);
+        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }
 }

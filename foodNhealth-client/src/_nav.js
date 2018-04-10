@@ -6,6 +6,11 @@ export default {
     //   icon: 'icon-speedometer'
     // },
     {
+      name: 'Άτομα',
+      url: '/clients',
+      icon: 'icon-puzzle'
+    },
+    {
       name: 'Συστατικά',
       url: '/ingredients',
       icon: 'icon-puzzle'
@@ -31,7 +36,7 @@ export default {
       icon: 'fa fa-wrench',
       children: [
         {
-          name: 'Χρήστες',
+          name: 'Διατροφολόγοι',
           url: '/admin/persons',
           icon: 'icon-puzzle'
         },

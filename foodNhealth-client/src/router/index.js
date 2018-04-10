@@ -39,6 +39,7 @@ import Recipes from '@/foodNhealth/Recipes'
 import Cuisines from '@/foodNhealth/Cuisines'
 import RecipeCategories from '@/foodNhealth/RecipeCategories'
 import SelectedRecipes from '@/foodNhealth/SelectedRecipes'
+import Clients from '@/foodNhealth/Clients'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ export default new Router({
           path: 'widgets',
           name: 'Widgets',
           component: Widgets
+        },
+        {
+          path: 'clients',
+          name: 'Clients',
+          component: Clients
         },
         {
           path: 'ingredients',

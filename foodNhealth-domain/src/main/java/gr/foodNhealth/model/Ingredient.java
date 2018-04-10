@@ -23,9 +23,6 @@ public class Ingredient extends BaseEntity {
     @Column(nullable = false)
     private Boolean quantified;
 
-    @ManyToMany
-    private Collection<Recipe> recipes;
-
     @ManyToOne(optional = false)
     private FoodCategoryCoreType foodCategoryCoreType;
 
@@ -64,14 +61,6 @@ public class Ingredient extends BaseEntity {
 
     public void setQuantified(Boolean chopped) {
         this.quantified = chopped;
-    }
-
-    public Collection<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Collection<Recipe> recipes) {
-        this.recipes = recipes;
     }
 
     public FoodCategoryCoreType getFoodCategoryCoreType() {

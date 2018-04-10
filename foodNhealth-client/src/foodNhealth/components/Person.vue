@@ -59,8 +59,8 @@
 
         </div>
 
+        <!--RIGHT COLUMN-->
         <div class="col-6">
-
           <b-form-group label="Ενεργός" :feedback="errors.first('isActive')" :state="isValid('isActive')"
                         :horizontal="true">
             <b-input-group>

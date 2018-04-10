@@ -57,10 +57,11 @@
                            v-validate="rules.foodCategorySubType"
                            :state="isValid('foodCategorySubType', 'generalForm')"
                            :class="{'is-invalid': errors.has('foodCategorySubType', 'generalForm')}"
-                           :disabled="isFoodCategorySubTypeDisabled" @input="foodCategorySubTypeChanged">
+                           :disabled="isFoodCategorySubTypeDisabled">
               </multiselect>
             </b-input-group>
           </b-form-group>
+
           <!--Quantified-->
           <b-form-group description="Είναι το Συστατικό σε τεμάχια">
             <b-form-checkbox data-vv-scope="generalForm" name="quantified"

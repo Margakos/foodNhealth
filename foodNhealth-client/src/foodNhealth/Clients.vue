@@ -1,0 +1,27 @@
+<template>
+  <div class="wrapper">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-lg-12">
+          <b-card>
+            <div slot="header">
+              <i class='icon-docs'></i> Clients
+            </div>
+            <data-table :api-url="url"
+                        :fields="fields"
+                        :append-params="append_params" :per-page="rowsPerPage"></data-table>
+            <div slot="footer">
+              <b-button size="lg" variant="primary" class="pull-right" @click="addClient"><i class="fa fa-plus"></i>
+                Προσθήκη
+              </b-button>
+            </div>
+          </b-card>
+        </div>
+      </div>
+    </div>
+    <client></client>
+  </div>
+</template>
+
+
+<script src="./ClientsVM.js"></script>

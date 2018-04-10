@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 public class Person extends BaseEntity{
@@ -28,6 +29,9 @@ public class Person extends BaseEntity{
 
     @Basic
     private String comments;
+
+    @ManyToMany
+    private Collection<Client> clients;
 
 
     public String getFirstName() {
@@ -76,6 +80,14 @@ public class Person extends BaseEntity{
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Collection<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Collection<Client> clients) {
+        this.clients = clients;
     }
 
     public enum Gender {

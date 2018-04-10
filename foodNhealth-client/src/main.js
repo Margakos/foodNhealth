@@ -259,6 +259,26 @@ Vue.mixin({
       // re-trim if we are in the middle of a word
       trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')))
       return trimmedString + '...'
+    },
+    /* When called all fields must be filled (if there is no action at some callback, then null is filled) */
+    yesNoDialogue (message, title, yesCallback, noCallback) {
+      this.$confirm(message, title, {
+        confirmButtonText: this.$messages.yes,
+        cancelButtonText: this.$messages.no,
+        cancelButtonClass: 'btn btn-warning',
+        confirmButtonClass: 'btn btn-danger',
+        closeOnClickModal: false,
+        closeOnPressEscape: false,
+        type: 'warning'
+      }).then(() => {
+        if (yesCallback != null) {
+          yesCallback()
+        }
+      }).catch(e => {
+        if (noCallback != null) {
+          noCallback()
+        }
+      })
     }
   }
 })

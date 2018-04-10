@@ -5,7 +5,6 @@ export default {
     return {
       visible: false,
       cuisine: initCuisine(),
-      foodCategorySubTypes: [],
       rules: {
         title: {
           required: true,

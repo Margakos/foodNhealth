@@ -21,6 +21,7 @@
         <class>gr.foodNhealth.model.Supermarket</class>
         <class>gr.foodNhealth.model.SelectedRecipe</class>
         <class>gr.foodNhealth.model.SelectedProductPackage</class>
+        <class>gr.foodNhealth.model.Client</class>
 
         <!--TODO Change below properties according to our need-->
         <properties>
