@@ -23,7 +23,7 @@ export default {
           required: true,
           min_value: 0
         },
-        cuisine: {
+        cuisines: {
           required: true
         },
         instruction: {
@@ -167,11 +167,10 @@ export default {
           this.success(this.$messages.successAction)
           console.log('fire recipe-edited event')
           this.$events.fire('recipe-edited', this.recipe)
+        }).catch(e => {
+          // only 409 errors should end up here
+          this.error(this.$messages.errorDeleteDependencies)
         })
-          .catch(e => {
-            // only 409 errors should end up here
-            this.error(this.$messages.errorDeleteDependencies)
-          })
       })
     },
     invalidateAll () {
@@ -188,9 +187,9 @@ export default {
       this.$events.fire('recipe-edited', this.recipe)
     },
     transformRequest (data, headers) {
-      data.cuisine = this.convertEntityToURI(data.cuisine)
+      data.cuisines = this.convertEntitiesToURIs(data.cuisines)
       data.recipeCategory = this.convertEntityToURI(data.recipeCategory)
-      data.ingredientPortions = data.ingredientPortions != null ? this.convertEntitiesToURIs(data.ingredientPortions) : null
+      data.ingredientPortions = this.convertEntitiesToURIs(data.ingredientPortions)
       return JSON.stringify(data)
     },
     addIngredientPortion () {
@@ -223,7 +222,7 @@ function initRecipe () {
     photoPath: null,
     instruction: '',
     recipeCategory: null,
-    cuisine: null
+    cuisines: []
   }
 }
 

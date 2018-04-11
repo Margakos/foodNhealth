@@ -3,6 +3,8 @@ package gr.foodNhealth.model.projection;
 import gr.foodNhealth.model.Recipe;
 import org.springframework.data.rest.core.config.Projection;
 
+import java.util.Collection;
+
 @Projection(name = "inlinedRecipe", types = Recipe.class)
 public interface InlinedRecipeProjection extends SimpleRoleProjection {
 
@@ -14,5 +16,5 @@ public interface InlinedRecipeProjection extends SimpleRoleProjection {
 
     SimpleRoleProjection getRecipeCategory();
 
-    SimpleRoleProjection getCuisine();
+    Collection<SimpleRoleProjection> getCuisines();
 }

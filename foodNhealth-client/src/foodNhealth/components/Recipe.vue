@@ -33,10 +33,11 @@
               <b-input-group>
                 <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
                              data-vv-scope="generalForm" name="cuisine" id="cuisine"
-                             v-model="recipe.cuisine" :options="cuisines"
+                             v-model="recipe.cuisines" :options="cuisines"
+                             :multiple="true"
                              :searchable="true" placeholder="Κουζίνα"
                              track-by="id" label="title"
-                             v-validate="rules.cuisine"
+                             v-validate="rules.cuisines"
                              :state="isValid('cuisine', 'generalForm')"
                              :class="{'is-invalid': errors.has('cuisine', 'generalForm')}">
                 </multiselect>

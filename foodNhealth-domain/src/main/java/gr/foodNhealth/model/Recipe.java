@@ -21,8 +21,8 @@ public class Recipe extends BaseEntity {
     @ManyToOne
     private RecipeCategory recipeCategory;
 
-    @ManyToOne
-    private Cuisine cuisine;
+    @ManyToMany
+    private Collection<Cuisine> cuisines;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private Collection<IngredientPortion> ingredientPortions;
@@ -63,12 +63,12 @@ public class Recipe extends BaseEntity {
         this.recipeCategory = recipeCategory;
     }
 
-    public Cuisine getCuisine() {
-        return cuisine;
+    public Collection<Cuisine> getCuisines() {
+        return cuisines;
     }
 
-    public void setCuisine(Cuisine cuisine) {
-        this.cuisine = cuisine;
+    public void setCuisines(Collection<Cuisine> cuisines) {
+        this.cuisines = cuisines;
     }
 
     public Collection<IngredientPortion> getIngredientPortions() {
