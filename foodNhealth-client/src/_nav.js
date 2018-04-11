@@ -41,6 +41,11 @@ export default {
           icon: 'icon-puzzle'
         },
         {
+          name: 'Αλλεργίες',
+          url: '/admin/allergies',
+          icon: 'icon-puzzle'
+        },
+        {
           name: 'Κύριες Κατηγορίες Συστατικών',
           url: '/admin/foodCategoryCoreTypes',
           icon: 'icon-puzzle'

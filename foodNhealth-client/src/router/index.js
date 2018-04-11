@@ -40,6 +40,7 @@ import Cuisines from '@/foodNhealth/Cuisines'
 import RecipeCategories from '@/foodNhealth/RecipeCategories'
 import SelectedRecipes from '@/foodNhealth/SelectedRecipes'
 import Clients from '@/foodNhealth/Clients'
+import Allergies from '@/foodNhealth/Allergies'
 
 Vue.use(Router)
 
@@ -109,6 +110,11 @@ export default new Router({
               path: 'nutritionists',
               name: 'Nutritionists',
               component: Nutritionists
+            },
+            {
+              path: 'allergies',
+              name: 'Allergies',
+              component: Allergies
             },
             {
               path: 'foodCategoryCoreTypes',
