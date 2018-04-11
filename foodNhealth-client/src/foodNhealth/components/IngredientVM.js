@@ -16,6 +16,7 @@ export default {
       otherNutrientTypes: [],
       foodCategoryCoreTypes: [],
       foodCategorySubTypes: [],
+      allergies: [],
       rules: {
         name: {
           required: true,
@@ -26,6 +27,9 @@ export default {
         },
         foodCategorySubType: {
           required: true
+        },
+        allergies: {
+          required: false
         },
         quantity: {
           required: true,
@@ -143,9 +147,10 @@ export default {
     }
   },
   created () {
-    Promise.all([this.getFoodCategoryCoreTypes()])
-      .then(([foodCategoryCoreTypes]) => {
+    Promise.all([this.getFoodCategoryCoreTypes(), this.getAllergies()])
+      .then(([foodCategoryCoreTypes, allergies]) => {
         this.foodCategoryCoreTypes = foodCategoryCoreTypes.data._embedded.foodCategoryCoreTypes
+        this.allergies = allergies.data._embedded.allergies
       })
     console.log('Ingredient created')
   },
@@ -309,6 +314,7 @@ export default {
       this.$events.fire('ingredient-edited', this.ingredient)
     },
     transformRequest (data, headers) {
+      data.allergies = this.convertEntitiesToURIs(data.allergies)
       data.foodCategoryCoreType = this.convertEntityToURI(data.foodCategoryCoreType)
       data.foodCategorySubType = this.convertEntityToURI(data.foodCategorySubType)
       data.nutrientsInformation = this.convertEntityToURI(data.nutrientsInformation)
@@ -390,6 +396,7 @@ function initIngredient () {
     nutrientsInformation: null,
     foodCategoryCoreType: null,
     foodCategorySubType: null,
+    allergies: [],
     quantified: false
   }
 }

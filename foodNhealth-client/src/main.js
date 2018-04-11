@@ -171,6 +171,9 @@ Vue.mixin({
     getAllFoodCategorySubTypes () {
       return this.$http.get('foodCategorySubTypes?projection=inlinedFoodCategorySubType&size=' + Vue.prototype.$maxPageSize)
     },
+    getAllergies () {
+      return this.$http.get('allergies?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
+    },
     getSupermarkets () {
       return this.$http.get('supermarkets?projection=simpleRoleProjection&size=' + Vue.prototype.$maxPageSize)
     },

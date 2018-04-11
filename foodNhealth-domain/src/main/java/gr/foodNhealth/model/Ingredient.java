@@ -38,6 +38,9 @@ public class Ingredient extends BaseEntity {
     @OneToMany(mappedBy = "ingredient")
     private Collection<IngredientPortion> ingredientPortions;
 
+    @ManyToMany
+    private Collection<Allergy> allergies;
+
 
     public String getName() {
         return name;
@@ -101,5 +104,13 @@ public class Ingredient extends BaseEntity {
 
     public void setIngredientPortions(Collection<IngredientPortion> ingredientPortions) {
         this.ingredientPortions = ingredientPortions;
+    }
+
+    public Collection<Allergy> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(Collection<Allergy> allergies) {
+        this.allergies = allergies;
     }
 }

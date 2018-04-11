@@ -58,6 +58,10 @@ INSERT INTO foodnhealth.FoodCategorySubType (id, description, isActive, isDelete
 INSERT INTO foodnhealth.FoodCategorySubType (id, description, isActive, isDeleted, title, foodCategoryCoreType_id) VALUES (25, '', true, false, 'Μολυακόρεστα', 6);
 INSERT INTO foodnhealth.FoodCategorySubType (id, description, isActive, isDeleted, title, foodCategoryCoreType_id) VALUES (26, '', true, false, 'Ελεύθερα', 7);
 
+/* Food Category Core Types */
+INSERT INTO foodnhealth.Allergy (id, description, isActive, isDeleted, title) VALUES (1, '', true, false, 'Ξηροί Καρποί');
+INSERT INTO foodnhealth.Allergy (id, description, isActive, isDeleted, title) VALUES (2, '', true, false, 'Φράουλες');
+
 /* Users */
 INSERT INTO foodnhealth.Nutritionist (id, description, isActive, isDeleted, title, comments, email, firstName, gender, lastName, password)
 VALUES (1, 'The first ever admin', true, false, null, 'First admin ever', 'admin@foodnhealth.gr', 'Food', null, 'Health', '123456');

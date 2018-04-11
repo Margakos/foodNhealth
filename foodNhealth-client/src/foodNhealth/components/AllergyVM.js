@@ -1,10 +1,10 @@
 export default {
-  name: 'supermarket',
+  name: 'allergy',
   components: {},
   data: function () {
     return {
       visible: false,
-      supermarket: initSupermarket(),
+      allergy: initAllergy(),
       rules: {
         title: {
           required: true,
@@ -18,35 +18,35 @@ export default {
     }
   },
   created () {
-    console.log('Supermarket created')
+    console.log('Allergy created')
   },
   mounted () {
-    this.$events.$on('edit-supermarket', eventData => this.onEditSupermarket(eventData))
-    console.log('Supermarket mounted')
+    this.$events.$on('edit-allergy', eventData => this.onEditAllergy(eventData))
+    console.log('Allergy mounted')
   },
   destroyed: function () {
-    this.$events.$off('edit-supermarket')
-    console.log('Supermarket destroyed')
+    this.$events.$off('edit-allergy')
+    console.log('Allergy destroyed')
   },
   computed: {
     isDeletable: function () {
-      return this.supermarket.id != null
+      return this.allergy.id != null
     }
   },
   methods: {
-    onEditSupermarket (eventData) {
-      console.log('Edit Supermarket:' + eventData)
+    onEditAllergy (eventData) {
+      console.log('Edit Allergy:' + eventData)
       this.invalidate()
       if (eventData != null) {
-        this.$http.get('supermarkets/' + eventData).then(response => {
-          this.supermarket = response.data
+        this.$http.get('allergies/' + eventData).then(response => {
+          this.allergy = response.data
           this.visible = true
         }).catch(e => {
           console.log(e)
           this.error(this.$messages.errorLoad)
         })
       } else {
-        this.$data.supermarket = initSupermarket()
+        this.$data.allergy = initAllergy()
         this.visible = true
       }
     },
@@ -57,17 +57,17 @@ export default {
           // validation failed, nothing special to do
           return
         }
-        if (this.supermarket.id != null) {
-          // existing supermarket, update
-          this.$http.patch('supermarkets/' + this.supermarket.id, this.supermarket, {
+        if (this.allergy.id != null) {
+          // existing allergy, update
+          this.$http.patch('allergies/' + this.allergy.id, this.allergy, {
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data, headers)
             }]
           }).then(response => this.handleSuccess(response))
             .catch(e => this.handleError(e))
         } else {
-          // new supermarket, create
-          this.$http.post('supermarkets', this.supermarket, {
+          // new allergy, create
+          this.$http.post('allergies', this.allergy, {
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data, headers)
             }]
@@ -85,8 +85,8 @@ export default {
     handleSuccess (response) {
       this.success(this.$messages.successAction)
       this.visible = false
-      console.log('fire supermarket-edited event')
-      this.$events.fire('supermarket-edited', this.supermarket)
+      console.log('fire allergy-edited event')
+      this.$events.fire('allergy-edited', this.allergy)
     },
     handleError (e) {
       console.log(e)
@@ -102,8 +102,8 @@ export default {
         closeOnPressEscape: false,
         type: 'warning'
       }).then(() => {
-        // delete supermarket
-        this.$http.delete('supermarkets/' + this.supermarket.id)
+        // delete allergy
+        this.$http.delete('allergies/' + this.allergy.id)
           .then(response => this.handleSuccess(response))
           .catch(e => this.handleError(e))
       })
@@ -116,7 +116,7 @@ export default {
   }
 }
 
-function initSupermarket () {
+function initAllergy () {
   return {
     id: null,
     title: '',

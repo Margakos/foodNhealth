@@ -62,6 +62,24 @@
             </b-input-group>
           </b-form-group>
 
+          <!-- Allergies -->
+          <b-form-group description="Επιλέξτε τις κατηγορίες Αλλεργίας"
+                        :feedback="errors.first('allergies', 'generalForm')"
+                        :state="isValid('allergies', 'generalForm')">
+            <b-input-group>
+              <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
+                           data-vv-scope="generalForm" name="allergies" id="allergies"
+                           v-model="ingredient.allergies" :options="allergies"
+                           :multiple="true" :hideSelected="true"
+                           :searchable="true" placeholder="Αλλεργίες"
+                           track-by="id" label="title"
+                           v-validate="rules.allergies"
+                           :state="isValid('allergies', 'generalForm')"
+                           :class="{'is-invalid': errors.has('allergies', 'generalForm')}">
+              </multiselect>
+            </b-input-group>
+          </b-form-group>
+
           <!--Quantified-->
           <b-form-group description="Είναι το Συστατικό σε τεμάχια">
             <b-form-checkbox data-vv-scope="generalForm" name="quantified"

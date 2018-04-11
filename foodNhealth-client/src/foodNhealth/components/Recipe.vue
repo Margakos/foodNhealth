@@ -28,18 +28,18 @@
           <b-tab title="Γενικά Στοιχεία" active>
             <!-- Cuisine -->
             <b-form-group description="Επιλέξτε την Κουζίνα που ανήκει η Συνταγή"
-                          :feedback="errors.first('cuisine', 'generalForm')"
-                          :state="isValid('cuisine', 'generalForm')">
+                          :feedback="errors.first('cuisines', 'generalForm')"
+                          :state="isValid('cuisines', 'generalForm')">
               <b-input-group>
                 <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
-                             data-vv-scope="generalForm" name="cuisine" id="cuisine"
+                             data-vv-scope="generalForm" name="cuisines" id="cuisines"
                              v-model="recipe.cuisines" :options="cuisines"
-                             :multiple="true"
+                             :multiple="true" :hideSelected="true"
                              :searchable="true" placeholder="Κουζίνα"
                              track-by="id" label="title"
                              v-validate="rules.cuisines"
-                             :state="isValid('cuisine', 'generalForm')"
-                             :class="{'is-invalid': errors.has('cuisine', 'generalForm')}">
+                             :state="isValid('cuisines', 'generalForm')"
+                             :class="{'is-invalid': errors.has('cuisines', 'generalForm')}">
                 </multiselect>
               </b-input-group>
             </b-form-group>
