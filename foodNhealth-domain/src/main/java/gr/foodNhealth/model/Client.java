@@ -39,6 +39,9 @@ public class Client extends BaseEntity {
     @ManyToMany(mappedBy = "clients")
     private Collection<Nutritionist> people;
 
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private Preference preference;
+
 
     public String getFirstName() {
         return firstName;
@@ -110,6 +113,14 @@ public class Client extends BaseEntity {
 
     public void setPeople(Collection<Nutritionist> people) {
         this.people = people;
+    }
+
+    public Preference getPreference() {
+        return preference;
+    }
+
+    public void setPreference(Preference preference) {
+        this.preference = preference;
     }
 
     public enum Gender {

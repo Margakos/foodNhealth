@@ -23,4 +23,6 @@ public interface ClientSafeProjection {
     String getCity();
 
     String getZipCode();
+
+    InlinedPreferenceProjection getPreference();
 }

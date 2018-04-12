@@ -10,6 +10,9 @@ public class Allergy extends BaseEntity {
     @ManyToMany(mappedBy = "allergies")
     private Collection<Ingredient> ingredients;
 
+    @ManyToMany
+    private Collection<Preference> preferences;
+
 
     public Collection<Ingredient> getIngredients() {
         return ingredients;
@@ -17,5 +20,13 @@ public class Allergy extends BaseEntity {
 
     public void setIngredients(Collection<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Collection<Preference> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(Collection<Preference> preferences) {
+        this.preferences = preferences;
     }
 }

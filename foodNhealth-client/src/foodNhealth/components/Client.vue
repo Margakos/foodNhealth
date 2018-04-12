@@ -2,7 +2,7 @@
   <b-modal title="Διαχείριση Ατόμου" id="clientModal" v-model="visible" :no-close-on-backdrop="true" :no-close-on-esc="true" size="lg">
     <b-form :novalidate="false">
 
-      <b-alert variant="info" v-show="client.email !== null">
+      <b-alert variant="info" v-show="client.email === ''">
         <i class="fa fa-info-circle"></i>
         Επιλέξτε email ατόμου προκειμένου να το προσθέσετε στη λίστα σας
       </b-alert>
@@ -114,20 +114,80 @@
                                   v-validate="rules.zipCode" :state="isValid('zipCode', 'generalForm')" :readonly="true"></b-form-input>
                   </b-input-group>
                 </b-form-group>
-
               </div>
             </div>
           </b-card>
+          <div class="form action text-right">
+            <b-button  size="sm" variant="success" @click="save" v-show="!isDeletable" :disabled="errors.any('generalForm')"><i
+              class="fa fa-dot-circle-o"></i> Προσθήκη
+            </b-button>
+            <b-button size="sm" variant="danger" @click="confirmDelete" v-show="isDeletable"><i class="fa fa-remove"></i> Αφαίρεση</b-button>
+          </div>
+        </b-tab>
+
+        <b-tab title="Προτιμήσεις" :disabled="!insertionMode">
+          <div class="row">
+            <div class="col-12">
+              <!-- Disliked Ingredients -->
+              <b-form-group description="Πληκτρολογήστε τα Ανεπιθύμητα Συστατικά"
+                            :feedback="errors.first('dislikedIngredients', 'preferenceForm')"
+                            :state="isValid('dislikedIngredients', 'preferenceForm')">
+                <multiselect data-vv-scope="preferenceForm" id="dislikedIngredients" name="dislikedIngredients"
+                             v-model="preference.dislikedIngredients"  placeholder="Ανεπιθύμητα Συστατικά"
+                             label="title" track-by="id"
+                             open-direction="bottom" :options="dislikedIngredients" :multiple="false"
+                             :searchable="true" :loading="isLoading" :internal-search="false"
+                             :close-on-select="true" :options-limit="50"
+                             v-validate="rules.client"
+                             :max-height="600" :show-no-results="true" :hide-selected="true" @search-change="searchIngredients"
+                             :class="{'is-invalid': errors.has('dislikedIngredients', 'preferenceForm')}">
+                  <span slot="noResult">Δε βρέθηκαν αποτελέσματα, δοκιμάστε μια διαφορετική αναζήτηση</span>
+                </multiselect>
+              </b-form-group>
+
+              <!-- Allergies -->
+              <b-form-group description="Επιλέξτε τις κατηγορίες Αλλεργίας"
+                            :feedback="errors.first('allergies', 'preferenceForm')"
+                            :state="isValid('allergies', 'preferenceForm')">
+                <b-input-group>
+                  <multiselect :selected-label="$messages.selected" :deselect-label="$messages.removeSelection" :select-label="$messages.setSelection"
+                               data-vv-scope="preferenceForm" name="allergies" id="allergies"
+                               v-model="preference.allergies" :options="allergies"
+                               :multiple="true" :hideSelected="true"
+                               :searchable="true" placeholder="Αλλεργίες"
+                               track-by="id" label="title"
+                               v-validate="rules.allergies"
+                               :state="isValid('allergies', 'preferenceForm')"
+                               :class="{'is-invalid': errors.has('allergies', 'preferenceForm')}">
+                  </multiselect>
+                </b-input-group>
+              </b-form-group>
+
+              <!-- Weight Per Week -->
+              <b-form-group description="Στόχος Απώλειας Βάρους"
+                            :feedback="errors.first('weightPerWeek', 'preferenceForm')"
+                            :state="isValid('weightPerWeek', 'preferenceForm')">
+                <b-form-input data-vv-scope="preferenceForm" type="number" name="weightPerWeek" id="weightPerWeek"
+                              v-model="preference.weightPerWeek"
+                              v-validate="rules.weightPerWeek"
+                              :state="isValid('weightPerWeek', 'preferenceForm')"
+                              :class="{'is-invalid': errors.has('weightPerWeek', 'preferenceForm')}">
+                </b-form-input>
+              </b-form-group>
+            </div>
+          </div>
+
+          <div class="form action text-right">
+            <b-button  size="sm" variant="success" @click="savePreference" :disabled="errors.any('preferenceForm')"><i
+              class="fa fa-dot-circle-o"></i> Ενημέρωση
+            </b-button>
+          </div>
         </b-tab>
       </b-tabs>
 
     </b-form>
 
     <div slot="modal-footer">
-      <b-button  size="sm" variant="success" @click="save" v-show="!isDeletable" :disabled="errors.any('generalForm')"><i
-        class="fa fa-dot-circle-o"></i> Προσθήκη
-      </b-button>
-      <b-button size="sm" variant="danger" @click="confirmDelete" v-show="isDeletable"><i class="fa fa-remove"></i> Αφαίρεση</b-button>
       <b-button type="reset" size="sm" variant="warning" @click="cancel"><i class="fa fa-ban"></i> Επιστροφή</b-button>
     </div>
 
