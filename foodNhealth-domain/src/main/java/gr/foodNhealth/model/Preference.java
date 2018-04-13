@@ -11,10 +11,10 @@ public class Preference extends BaseEntity {
     @OneToOne(mappedBy = "preference")
     private Client client;
 
-    @ManyToMany(mappedBy = "preferences")
+    @ManyToMany
     private Collection<Ingredient> dislikedIngredients;
 
-    @ManyToMany(mappedBy = "preferences")
+    @ManyToMany
     private Collection<Allergy> allergies;
 
     @Basic

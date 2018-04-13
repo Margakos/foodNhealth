@@ -10,7 +10,7 @@ public class Allergy extends BaseEntity {
     @ManyToMany(mappedBy = "allergies")
     private Collection<Ingredient> ingredients;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "allergies")
     private Collection<Preference> preferences;
 
 

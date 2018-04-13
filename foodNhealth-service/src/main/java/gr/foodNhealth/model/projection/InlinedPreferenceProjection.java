@@ -11,7 +11,7 @@ public interface InlinedPreferenceProjection extends SimpleRoleProjection {
 
     Collection<SimpleRoleProjection> getAllergies();
 
-    Collection<InlinedIngredientProjection> getIngredients();
+    Collection<SimpleRoleProjection> getDislikedIngredients();
 
     BigDecimal getWeightPerWeek();
 }

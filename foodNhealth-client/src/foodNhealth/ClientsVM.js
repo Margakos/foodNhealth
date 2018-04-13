@@ -46,21 +46,42 @@ export default {
       append_params: {
         query: '',
         email: this.$auth.user().email
-      }
+      },
+      clientAddTypeVisible: false,
+      clientAddType: 'CLIENT_FIND',
+      clientAddTypes: [
+        {
+          value: 'CLIENT_FIND',
+          text: this.getMessage('CLIENT_FIND')
+        },
+        {
+          value: 'CLIENT_ADD',
+          text: this.getMessage('CLIENT_ADD')
+        }
+      ]
     }
   },
   methods: {
     addClient (event) {
       console.log('fire edit-client event')
-      this.$events.fire('edit-client', null)
+      let addNew = this.clientAddType === 'CLIENT_ADD'
+      this.clientAddTypeVisible = false
+      this.$events.fire('edit-client', {item: null, addNew: addNew})
     },
     onClientSelected (dataItem) {
       console.log('fire edit-client event')
-      this.$events.fire('edit-client', dataItem)
+      this.$events.fire('edit-client', {item: dataItem, addNew: null})
     },
     onClientEdited (dataItem) {
       console.log('fire data-changed event')
       this.$events.fire('data-changed')
+    },
+    addClientChoice () {
+      this.clientAddTypeVisible = true
+      this.clientAddType = 'CLIENT_FIND'
+    },
+    cancel () {
+      this.clientAddTypeVisible = false
     }
   }
 }

@@ -24,5 +24,5 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     //do not export as rest end-point, to avoid disclosing sensitive information, such as password.
     @RestResource(exported = false)
-    Client findByEmail(String email);
+    Client findByEmail(@Param("email") String email);
 }

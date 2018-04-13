@@ -41,6 +41,11 @@ export default {
           icon: 'icon-puzzle'
         },
         {
+          name: 'Πελάτες',
+          url: '/admin/clients',
+          icon: 'icon-puzzle'
+        },
+        {
           name: 'Αλλεργίες',
           url: '/admin/allergies',
           icon: 'icon-puzzle'

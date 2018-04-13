@@ -55,11 +55,11 @@ Vue.use(require('@websanova/vue-auth'), {
     fetchUser: false
   },
   fetchData: {
-    url: 'refreshUser?projection=loginNutritionist',
+    url: 'refreshUser?projection=nutritionistSafe',
     enabled: true
   },
   refreshData: {
-    url: 'refreshUser?projection=loginNutritionist',
+    url: 'refreshUser?projection=nutritionistSafe',
     enabled: false,
     interval: 0
   },

@@ -1,10 +1,10 @@
 export default {
-  name: 'nutritionist',
+  name: 'adminClient',
   components: {},
   data: function () {
     return {
       visible: false,
-      nutritionist: initNutritionist(),
+      client: initClient(),
       rules: {
         firstName: {
           required: true,
@@ -34,31 +34,31 @@ export default {
     }
   },
   created () {
-    console.log('Nutritionist created')
+    console.log('Client created')
   },
   mounted () {
-    this.$events.$on('edit-nutritionist', eventData => this.onEditNutritionist(eventData))
-    console.log('Nutritionist mounted')
+    this.$events.$on('edit-adminClient', eventData => this.onEditClient(eventData))
+    console.log('Client mounted')
   },
   destroyed: function () {
-    this.$events.$off('edit-nutritionist')
-    console.log('Nutritionist destroyed')
+    this.$events.$off('edit-adminClient')
+    console.log('Client destroyed')
   },
   computed: {
     isDeletable: function () {
-      return this.nutritionist.id != null && this.$auth.check('Lookup_D')
+      return this.client.id != null && this.$auth.check('Lookup_D')
     }
   },
   methods: {
-    onEditNutritionist (eventData) {
-      console.log('Edit Nutritionist:' + eventData)
+    onEditClient (eventData) {
+      console.log('Edit Client:' + eventData)
       if (eventData != null) {
-        this.$http.get('nutritionists/' + eventData + '?projection=nutritionistSafe').then(response => {
-          this.nutritionist = response.data
+        this.$http.get('clients/' + eventData + '?projection=clientSafe').then(response => {
+          this.client = response.data
           this.visible = true
         })
       } else {
-        Object.assign(this.$data.nutritionist, initNutritionist())
+        Object.assign(this.$data.client, initClient())
         this.$validator.reset().then(() => {
           this.errors.clear()
         })
@@ -72,15 +72,15 @@ export default {
           return
         }
         let _self = this
-        if (this.nutritionist.id != null) {
-          // existing nutritionist, update
-          this.$http.patch('nutritionists/' + this.nutritionist.id + '?projection=nutritionistSafe', this.nutritionist, {
+        if (this.client.id != null) {
+          // existing client, update
+          this.$http.patch('clients/' + this.client.id + '?projection=clientSafe', this.client, {
             // transform the selected roles into URIs, before sending
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data)
             }]
           }).then(response => {
-            if (this.$auth.user().id === this.nutritionist.id) {
+            if (this.$auth.user().id === this.client.id) {
               this.warning(this.$messages.warningUserChanged)
               this.logout()
             } else {
@@ -89,8 +89,8 @@ export default {
           })
             .catch(e => this.handleError(e))
         } else {
-          // new nutritionist, create
-          this.$http.post('nutritionists?projection=nutritionistSafe', this.nutritionist, {
+          // new client, create
+          this.$http.post('clients?projection=clientSafe', this.client, {
             // transform the selected roles into URIs, before sending
             transformRequest: [function (data, headers) {
               return _self.transformRequest(data)
@@ -106,8 +106,8 @@ export default {
     handleSuccess (response) {
       this.visible = false
       this.success(this.$messages.successAction)
-      console.log('fire nutritionist-edited event')
-      this.$events.fire('nutritionist-edited', this.nutritionist)
+      console.log('fire adminClient-edited event')
+      this.$events.fire('adminClient-edited', this.client)
     },
     handleError (e) {
       console.log(e)
@@ -123,8 +123,8 @@ export default {
         closeOnPressEscape: false,
         type: 'warning'
       }).then(() => {
-        // delete nutritionist
-        this.$http.delete('nutritionists/' + this.nutritionist.id).then(response => this.handleSuccess(response))
+        // delete client
+        this.$http.delete('clients/' + this.client.id).then(response => this.handleSuccess(response))
           .catch(e => this.handleError(e))
       })
     },
@@ -137,7 +137,7 @@ export default {
   }
 }
 
-function initNutritionist () {
+function initClient () {
   return {
     id: null,
     firstName: '',
