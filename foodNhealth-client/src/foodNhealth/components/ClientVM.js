@@ -252,6 +252,7 @@ export default {
   }
 }
 
+// TODO do the initialization of preference on Server Side
 function initPreference () {
   return {
     id: null,

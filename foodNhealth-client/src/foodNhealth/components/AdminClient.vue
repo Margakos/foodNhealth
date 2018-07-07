@@ -82,6 +82,21 @@
             </b-input-group>
           </b-form-group>
 
+          <!-- Gender -->
+          <b-form-group description="" :feedback="errors.first('gender')"
+                        :state="isValid('gender')">
+            <div class="col-2">
+              Φύλο:
+            </div>
+            <div class="col-10">
+              <b-form-radio-group name="gender" id="gender" size="lg" :options="genderOptions"
+                                  v-model="client.gender"
+                                  v-validate="rules.gender"
+                                  :state="isValid('gender')">
+              </b-form-radio-group>
+            </div>
+          </b-form-group>
+
         </div>
       </div>
 

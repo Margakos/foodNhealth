@@ -30,7 +30,17 @@ export default {
           max: 255
         },
         gender: {}
-      }
+      },
+      genderOptions: [
+        {
+          value: 'MALE',
+          text: this.getMessage('MALE')
+        },
+        {
+          value: 'FEMALE',
+          text: this.getMessage('FEMALE')
+        }
+      ]
     }
   },
   created () {
