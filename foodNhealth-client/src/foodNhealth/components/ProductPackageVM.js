@@ -134,10 +134,10 @@ export default {
       this.visible = false
     },
     handleSuccess (response) {
-      this.productPackage = response.data
       this.success(this.$messages.successAction)
       console.log('fire productPackage-edited event')
       this.$events.fire('productPackage-edited', this.productPackage)
+      this.visible = false
     },
     handleError (e) {
       console.log(e)
