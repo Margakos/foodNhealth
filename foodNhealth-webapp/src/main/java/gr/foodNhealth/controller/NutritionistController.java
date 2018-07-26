@@ -42,22 +42,7 @@ public class NutritionistController {
     private NutritionistRepository nutritionistRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
-
-    @Autowired
-    private NutritionistService nutritionistService;
-
-    @Autowired
     private LoginAttemptService loginAttemptService;
-
-    @Autowired
-    private ClientService clientService;
-
-    @Autowired
-    private ProjectionFactory projectionFactory;
-
-    @Autowired
-    private RepositoryEntityLinks links;
 
     @PostMapping(value = "/login")
     @Transactional
@@ -94,38 +79,5 @@ public class NutritionistController {
         } else {
             return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @PostMapping(value = "nutritionists/addClient", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addClient (@RequestBody Client client, @RequestParam("newClient") Boolean createNewClient,
-                                        PersistentEntityResourceAssembler persistentEntityResourceAssembler) throws JSONException {
-        String password = null;
-        if (client == null) {
-            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
-        }
-        if (createNewClient) {
-            // TODO check for duplicate Client email
-            // TODO replace random password add with email invitation
-            password = UUID.randomUUID().toString().substring(0, 8);
-            client.setPassword(password);
-            try {
-                client = clientService.initNewClient(client);
-            } catch (DataIntegrityViolationException e) {
-                LOGGER.debug("Save attempt failed: {}", e.getMessage());
-                return new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
-            }
-        }
-        boolean added = nutritionistService.addClient(client);
-        return added ? ResponseEntity.ok(new Resource(client, links.linkToSingleResource(Preference.class, client.getId()))) : new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
-    }
-
-    @DeleteMapping(value = "nutritionists/removeClient")
-    public ResponseEntity<?> removeClient (@RequestParam(value = "email") String email) {
-        Client client = clientRepository.findByEmail(email);
-        if (client == null) {
-            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
-        }
-        boolean removed = nutritionistService.removeClient(client);
-        return removed ? new ResponseEntity<HttpStatus>(HttpStatus.OK) : new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
     }
 }

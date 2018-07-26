@@ -17,9 +17,6 @@ import org.springframework.stereotype.Component;
 public class SelectedRecipeEventHandler {
 
     @Autowired
-    private SelectedRecipeRepository selectedRecipeRepository;
-
-    @Autowired
     private SelectedRecipeService selectedRecipeService;
 
     @HandleBeforeCreate

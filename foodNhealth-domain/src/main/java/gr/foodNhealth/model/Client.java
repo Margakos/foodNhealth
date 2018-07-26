@@ -36,10 +36,10 @@ public class Client extends BaseEntity {
     @Basic
     private String zipCode;
 
-    @ManyToMany(mappedBy = "clients")
-    private Collection<Nutritionist> people;
+    @OneToMany(mappedBy = "client")
+    private Collection<ClientNutritionist> clientNutritionists;
 
-    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToOne(mappedBy = "client", cascade = CascadeType.REMOVE)
     private Preference preference;
 
 
@@ -107,12 +107,12 @@ public class Client extends BaseEntity {
         this.zipCode = zipCode;
     }
 
-    public Collection<Nutritionist> getPeople() {
-        return people;
+    public Collection<ClientNutritionist> getClientNutritionists() {
+        return clientNutritionists;
     }
 
-    public void setPeople(Collection<Nutritionist> people) {
-        this.people = people;
+    public void setClientNutritionists(Collection<ClientNutritionist> clientNutritionists) {
+        this.clientNutritionists = clientNutritionists;
     }
 
     public Preference getPreference() {

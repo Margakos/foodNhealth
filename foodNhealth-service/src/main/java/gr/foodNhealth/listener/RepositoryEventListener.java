@@ -1,11 +1,14 @@
 package gr.foodNhealth.listener;
 
 import gr.foodNhealth.model.BaseEntityNoId;
-import gr.foodNhealth.model.Nutritionist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.core.event.AbstractRepositoryEventListener;
 import org.springframework.stereotype.Component;
+
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 @Component
 public class RepositoryEventListener extends AbstractRepositoryEventListener<Object> {
@@ -15,24 +18,26 @@ public class RepositoryEventListener extends AbstractRepositoryEventListener<Obj
     @Override
     protected void onBeforeCreate(Object entity) {
         log.debug("Event BeforeCreate for entity: " + entity.getClass().getSimpleName());
-        initEntity(entity);
+        if (entity instanceof BaseEntityNoId) {
+            BaseEntityNoId baseEntity = (BaseEntityNoId) entity;
+            baseEntity.setDeleted(Boolean.FALSE);
+            baseEntity.setIsActive(Boolean.TRUE);
+            ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+            baseEntity.setCreateDate(Timestamp.from(utc.toInstant()));
+            baseEntity.setUpdateDate(Timestamp.from(utc.toInstant()));
+        } else {
+            // throw exception ??
+            log.debug("Not an {} object but {}", BaseEntityNoId.class, entity.getClass());
+        }
     }
 
     @Override
     protected void onBeforeSave(Object entity) {
         log.debug("Event BeforeCreate for entity: " + entity.getClass().getSimpleName());
-        initEntity(entity);
-    }
-
-    private void initEntity (Object entity) {
         if (entity instanceof BaseEntityNoId) {
             BaseEntityNoId baseEntity = (BaseEntityNoId) entity;
-            baseEntity.setDeleted(Boolean.FALSE);
-            if (entity instanceof Nutritionist) {
-                baseEntity.setIsActive(baseEntity.getIsActive() == null ? Boolean.FALSE : baseEntity.getIsActive());
-            } else {
-                baseEntity.setIsActive(Boolean.TRUE);
-            }
+            ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+            baseEntity.setUpdateDate(Timestamp.from(utc.toInstant()));
         } else {
             // throw exception ??
             log.debug("Not an {} object but {}", BaseEntityNoId.class, entity.getClass());

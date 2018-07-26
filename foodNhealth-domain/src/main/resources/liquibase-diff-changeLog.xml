@@ -1,10 +1,14 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="vasilis (generated)" id="1523614207873-1">
+
+    <changeSet author="VKordalis (generated)" id="1532638581601-1">
         <createTable tableName="Allergy">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="AllergyPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -13,13 +17,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-2">
+    <changeSet author="VKordalis (generated)" id="1532638581601-2">
         <createTable tableName="Client">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ClientPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -28,6 +38,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="address" type="VARCHAR(255)"/>
             <column name="city" type="VARCHAR(255)"/>
             <column name="email" type="VARCHAR(255)"/>
@@ -36,14 +49,40 @@
             <column name="lastName" type="VARCHAR(255)"/>
             <column name="password" type="VARCHAR(255)"/>
             <column name="zipCode" type="VARCHAR(255)"/>
-            <column name="preference_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-3">
+    <changeSet author="VKordalis (generated)" id="1532638581601-3">
+        <createTable tableName="ClientNutritionist">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ClientNutritionistPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="isActive" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isDeleted" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="nutritionist_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="VKordalis (generated)" id="1532638581601-4">
         <createTable tableName="Cuisine">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="CuisinePK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -52,13 +91,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-4">
+    <changeSet author="VKordalis (generated)" id="1532638581601-5">
         <createTable tableName="FoodCategoryCoreType">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="FoodCategoryCoreTypePK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -67,13 +112,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-5">
+    <changeSet author="VKordalis (generated)" id="1532638581601-6">
         <createTable tableName="FoodCategorySubType">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="FoodCategorySubTypePK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -82,15 +133,21 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="foodCategoryCoreType_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-6">
+    <changeSet author="VKordalis (generated)" id="1532638581601-7">
         <createTable tableName="Ingredient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="IngredientPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -100,6 +157,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -116,10 +176,13 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-7">
+    <changeSet author="VKordalis (generated)" id="1532638581601-8">
         <createTable tableName="IngredientPortion">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="IngredientPortionPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -129,6 +192,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="pieces" type="INT"/>
             <column name="quantity" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
@@ -141,7 +207,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-8">
+    <changeSet author="VKordalis (generated)" id="1532638581601-9">
         <createTable tableName="Ingredient_Allergy">
             <column name="ingredients_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -151,10 +217,13 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-9">
+    <changeSet author="VKordalis (generated)" id="1532638581601-10">
         <createTable tableName="Lipid">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="LipidPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -164,6 +233,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="lipidType" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -173,10 +245,13 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-10">
+    <changeSet author="VKordalis (generated)" id="1532638581601-11">
         <createTable tableName="Mineral">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="MineralPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -186,6 +261,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="mineralType" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -195,11 +273,14 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-11">
+    <changeSet author="VKordalis (generated)" id="1532638581601-12">
         <createTable tableName="NutrientsInformation">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="NutrientsInformationPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -208,13 +289,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-12">
+    <changeSet author="VKordalis (generated)" id="1532638581601-13">
         <createTable tableName="Nutritionist">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="NutritionistPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -223,6 +310,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="comments" type="VARCHAR(255)"/>
             <column name="email" type="VARCHAR(255)"/>
             <column name="firstName" type="VARCHAR(255)"/>
@@ -231,20 +321,13 @@
             <column name="password" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-13">
-        <createTable tableName="Nutritionist_Client">
-            <column name="people_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="clients_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-14">
+    <changeSet author="VKordalis (generated)" id="1532638581601-14">
         <createTable tableName="OtherNutrient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="OtherNutrientPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -254,6 +337,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="otherNutrientType" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -263,10 +349,13 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-15">
+    <changeSet author="VKordalis (generated)" id="1532638581601-15">
         <createTable tableName="Preference">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="PreferencePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -276,10 +365,14 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="weightPerWeek" type="DECIMAL(5, 2)"/>
+            <column name="client_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-16">
+    <changeSet author="VKordalis (generated)" id="1532638581601-16">
         <createTable tableName="Preference_Allergy">
             <column name="preferences_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -289,7 +382,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-17">
+    <changeSet author="VKordalis (generated)" id="1532638581601-17">
         <createTable tableName="Preference_Ingredient">
             <column name="preferences_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -299,10 +392,13 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-18">
+    <changeSet author="VKordalis (generated)" id="1532638581601-18">
         <createTable tableName="Product">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ProductPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -312,6 +408,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -322,10 +421,13 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-19">
+    <changeSet author="VKordalis (generated)" id="1532638581601-19">
         <createTable tableName="ProductPackage">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ProductPackagePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -335,6 +437,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="numPieces" type="INT"/>
             <column name="price" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
@@ -348,10 +453,13 @@
             <column name="supermarket_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-20">
+    <changeSet author="VKordalis (generated)" id="1532638581601-20">
         <createTable tableName="Proximate">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ProximatePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -361,6 +469,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="proximateType" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -370,10 +481,13 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-21">
+    <changeSet author="VKordalis (generated)" id="1532638581601-21">
         <createTable tableName="Recipe">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="RecipePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -383,6 +497,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="instruction" type="VARCHAR(255)"/>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -391,10 +508,13 @@
             <column name="recipeCategory_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-22">
+    <changeSet author="VKordalis (generated)" id="1532638581601-22">
         <createTable tableName="RecipeCategory">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="RecipeCategoryPK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -404,9 +524,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-23">
+    <changeSet author="VKordalis (generated)" id="1532638581601-23">
         <createTable tableName="Recipe_Cuisine">
             <column name="recipes_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -416,10 +539,13 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-24">
+    <changeSet author="VKordalis (generated)" id="1532638581601-24">
         <createTable tableName="SelectedProductPackage">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="SelectedProductPackagePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -429,6 +555,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="quantity" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
             </column>
@@ -436,10 +565,13 @@
             <column name="selectedRecipe_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-25">
+    <changeSet author="VKordalis (generated)" id="1532638581601-25">
         <createTable tableName="SelectedRecipe">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="SelectedRecipePK"/>
+            </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
@@ -449,6 +581,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -458,11 +593,14 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-26">
+    <changeSet author="VKordalis (generated)" id="1532638581601-26">
         <createTable tableName="Supermarket">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="SupermarketPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -471,13 +609,19 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-27">
+    <changeSet author="VKordalis (generated)" id="1532638581601-27">
         <createTable tableName="Vitamin">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="VitaminPK"/>
             </column>
+            <column name="createDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(1000)"/>
             <column name="isActive" type="BIT">
                 <constraints nullable="false"/>
@@ -486,6 +630,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
+            <column name="updateDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="quantity" type="DECIMAL(15, 12)">
                 <constraints nullable="false"/>
             </column>
@@ -495,107 +642,106 @@
             <column name="nutrientsInformation_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-28">
+    <changeSet author="VKordalis (generated)" id="1532638581601-28">
         <addUniqueConstraint columnNames="email" constraintName="UC_CLIENTEMAIL_COL" tableName="Client"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-29">
+    <changeSet author="VKordalis (generated)" id="1532638581601-29">
         <addUniqueConstraint columnNames="email" constraintName="UC_NUTRITIONISTEMAIL_COL" tableName="Nutritionist"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-30">
+    <changeSet author="VKordalis (generated)" id="1532638581601-30">
         <addForeignKeyConstraint baseColumnNames="ingredients_id" baseTableName="Ingredient_Allergy" constraintName="FK18s46w1wfnmrwvmj432xiqxyf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-31">
+    <changeSet author="VKordalis (generated)" id="1532638581601-31">
         <addForeignKeyConstraint baseColumnNames="foodCategorySubType_id" baseTableName="Ingredient" constraintName="FK1nr2q7vvdi69sr0687jdr84k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategorySubType"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-32">
+    <changeSet author="VKordalis (generated)" id="1532638581601-32">
         <addForeignKeyConstraint baseColumnNames="ingredient_id" baseTableName="Product" constraintName="FK2kt8xk0le5dtowb9fe6aydj3g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-33">
+    <changeSet author="VKordalis (generated)" id="1532638581601-33">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Proximate" constraintName="FK2qlnslnum4xhby7hnv051qdic" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-34">
+    <changeSet author="VKordalis (generated)" id="1532638581601-34">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="ClientNutritionist" constraintName="FK2vk16xfnsn8v7otyas9et0w4t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Client"/>
+    </changeSet>
+    <changeSet author="VKordalis (generated)" id="1532638581601-35">
         <addForeignKeyConstraint baseColumnNames="foodCategoryCoreType_id" baseTableName="Ingredient" constraintName="FK4moi9mmx4ab0sfmtf7lh65cgw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategoryCoreType"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-35">
+    <changeSet author="VKordalis (generated)" id="1532638581601-36">
         <addForeignKeyConstraint baseColumnNames="cuisines_id" baseTableName="Recipe_Cuisine" constraintName="FK4wqy785ukl31x8vmas4jjyao8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Cuisine"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-36">
+    <changeSet author="VKordalis (generated)" id="1532638581601-37">
         <addForeignKeyConstraint baseColumnNames="dislikedIngredients_id" baseTableName="Preference_Ingredient" constraintName="FK65db4etd9poatd4i0wuqawwf9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-37">
+    <changeSet author="VKordalis (generated)" id="1532638581601-38">
+        <addForeignKeyConstraint baseColumnNames="nutritionist_id" baseTableName="ClientNutritionist" constraintName="FK6yy9b7109drie2xa638s5anng" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Nutritionist"/>
+    </changeSet>
+    <changeSet author="VKordalis (generated)" id="1532638581601-39">
         <addForeignKeyConstraint baseColumnNames="supermarket_id" baseTableName="ProductPackage" constraintName="FK78ofyax8rlb5gg1womy28rd89" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Supermarket"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-38">
+    <changeSet author="VKordalis (generated)" id="1532638581601-40">
         <addForeignKeyConstraint baseColumnNames="allergies_id" baseTableName="Ingredient_Allergy" constraintName="FK7asqh90jtxy1yptjoploxbqcj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Allergy"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-39">
+    <changeSet author="VKordalis (generated)" id="1532638581601-41">
         <addForeignKeyConstraint baseColumnNames="foodCategoryCoreType_id" baseTableName="FoodCategorySubType" constraintName="FK8iimb5xjrrmkoaf3blkuh5dgn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="FoodCategoryCoreType"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-40">
+    <changeSet author="VKordalis (generated)" id="1532638581601-42">
         <addForeignKeyConstraint baseColumnNames="allergies_id" baseTableName="Preference_Allergy" constraintName="FK97ai7meksu71ch94tfq8fqys5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Allergy"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-41">
+    <changeSet author="VKordalis (generated)" id="1532638581601-43">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="Preference" constraintName="FKa2xh6ngncv81ne4ng9uuyhsjl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Client"/>
+    </changeSet>
+    <changeSet author="VKordalis (generated)" id="1532638581601-44">
         <addForeignKeyConstraint baseColumnNames="recipe_id" baseTableName="SelectedRecipe" constraintName="FKaf5h8ktt9t3jwnd6h8v4q17wv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Recipe"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-42">
+    <changeSet author="VKordalis (generated)" id="1532638581601-45">
         <addForeignKeyConstraint baseColumnNames="preferences_id" baseTableName="Preference_Allergy" constraintName="FKb6gl0an7bgd0o1yoysuxdumg0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Preference"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-43">
+    <changeSet author="VKordalis (generated)" id="1532638581601-46">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="ProductPackage" constraintName="FKcqiulpysduthj9kfqy77nj4f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Product"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-44">
+    <changeSet author="VKordalis (generated)" id="1532638581601-47">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Mineral" constraintName="FKfvd3h047r2t9dp8x9el6nelsn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-45">
+    <changeSet author="VKordalis (generated)" id="1532638581601-48">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="SelectedRecipe" constraintName="FKg0sbbr63vkijne3t52uipyuyv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-46">
+    <changeSet author="VKordalis (generated)" id="1532638581601-49">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Product" constraintName="FKg1yu4d6kyxu97fa90sfnt4x77" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-47">
+    <changeSet author="VKordalis (generated)" id="1532638581601-50">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Ingredient" constraintName="FKh2cttse567eaaea81vqa740ig" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-48">
-        <addForeignKeyConstraint baseColumnNames="people_id" baseTableName="Nutritionist_Client" constraintName="FKh494sh7f98unlk9exmnhmg0ge" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Nutritionist"/>
-    </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-49">
+    <changeSet author="VKordalis (generated)" id="1532638581601-51">
         <addForeignKeyConstraint baseColumnNames="preferences_id" baseTableName="Preference_Ingredient" constraintName="FKjll76i67xqctwsl2sc7uylc8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Preference"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-50">
+    <changeSet author="VKordalis (generated)" id="1532638581601-52">
         <addForeignKeyConstraint baseColumnNames="recipeCategory_id" baseTableName="Recipe" constraintName="FKk9qlos9ddym84q19m7brxxuhs" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="RecipeCategory"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-51">
-        <addForeignKeyConstraint baseColumnNames="preference_id" baseTableName="Client" constraintName="FKkien3wlwufmcdqlec752jhg2t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Preference"/>
-    </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-52">
+    <changeSet author="VKordalis (generated)" id="1532638581601-53">
         <addForeignKeyConstraint baseColumnNames="productPackage_id" baseTableName="SelectedProductPackage" constraintName="FKl7iag8clq5189kee37e75r6np" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ProductPackage"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-53">
+    <changeSet author="VKordalis (generated)" id="1532638581601-54">
         <addForeignKeyConstraint baseColumnNames="recipes_id" baseTableName="Recipe_Cuisine" constraintName="FKm1pt3h9pl540d1i806kvfrwrs" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Recipe"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-54">
+    <changeSet author="VKordalis (generated)" id="1532638581601-55">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="OtherNutrient" constraintName="FKnqewdvap3bmoj8s9u0reepiqu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-55">
+    <changeSet author="VKordalis (generated)" id="1532638581601-56">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Lipid" constraintName="FKob65qfl9tp6smt357y9rq72a7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-56">
+    <changeSet author="VKordalis (generated)" id="1532638581601-57">
         <addForeignKeyConstraint baseColumnNames="ingredient_id" baseTableName="IngredientPortion" constraintName="FKppv2yljq0n8cxmuirrvim6732" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Ingredient"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-57">
+    <changeSet author="VKordalis (generated)" id="1532638581601-58">
         <addForeignKeyConstraint baseColumnNames="recipe_id" baseTableName="IngredientPortion" constraintName="FKqwpxpy621xq4slftq3mxi7d82" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Recipe"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-58">
-        <addForeignKeyConstraint baseColumnNames="clients_id" baseTableName="Nutritionist_Client" constraintName="FKrf2h72xhyex4hfsefipke0day" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Client"/>
-    </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-59">
+    <changeSet author="VKordalis (generated)" id="1532638581601-59">
         <addForeignKeyConstraint baseColumnNames="nutrientsInformation_id" baseTableName="Vitamin" constraintName="FKsjxfnm75lnxlm6bsg473qeymo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="NutrientsInformation"/>
     </changeSet>
-    <changeSet author="vasilis (generated)" id="1523614207873-60">
+    <changeSet author="VKordalis (generated)" id="1532638581601-60">
         <addForeignKeyConstraint baseColumnNames="selectedRecipe_id" baseTableName="SelectedProductPackage" constraintName="FKtkwn12c7fgi734aimjp7oqsli" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="SelectedRecipe"/>
     </changeSet>
-    <changeSet id="1522061403047-34" author="vasilis">
-        <comment>Insert Initial Data</comment>
-        <sqlFile path="./initial_data.sql"/>
+    <changeSet author="VKordalis (generated)" id="26072018-60">
+        <sqlFile path="initial_data.sql"/>
     </changeSet>
 </databaseChangeLog>

@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 
 @MappedSuperclass
 public class BaseEntityNoId {
@@ -18,6 +19,16 @@ public class BaseEntityNoId {
     @NotNull
     @Column(nullable = false)
     private Boolean isDeleted;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private Timestamp createDate;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private Timestamp updateDate;
 
     @Basic
     @Size(max = 255)
@@ -59,5 +70,21 @@ public class BaseEntityNoId {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 }

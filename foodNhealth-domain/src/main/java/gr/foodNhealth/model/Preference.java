@@ -8,7 +8,7 @@ import java.util.Collection;
 @Entity
 public class Preference extends BaseEntity {
 
-    @OneToOne(mappedBy = "preference")
+    @OneToOne
     private Client client;
 
     @ManyToMany

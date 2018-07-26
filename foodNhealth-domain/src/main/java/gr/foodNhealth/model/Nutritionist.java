@@ -30,8 +30,8 @@ public class Nutritionist extends BaseEntity{
     @Basic
     private String comments;
 
-    @ManyToMany
-    private Collection<Client> clients;
+    @OneToMany(mappedBy = "client")
+    private Collection<ClientNutritionist> clientNutritionists;
 
 
     public String getFirstName() {
@@ -82,12 +82,12 @@ public class Nutritionist extends BaseEntity{
         this.comments = comments;
     }
 
-    public Collection<Client> getClients() {
-        return clients;
+    public Collection<ClientNutritionist> getClientNutritionists() {
+        return clientNutritionists;
     }
 
-    public void setClients(Collection<Client> clients) {
-        this.clients = clients;
+    public void setClientNutritionists(Collection<ClientNutritionist> clientNutritionists) {
+        this.clientNutritionists = clientNutritionists;
     }
 
     public enum Gender {

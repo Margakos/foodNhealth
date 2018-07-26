@@ -13,11 +13,11 @@ import org.springframework.data.rest.core.annotation.RestResource;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("SELECT c FROM Client c WHERE" +
-            " (c.email LIKE CONCAT('%',?1,'%') OR c.firstName LIKE CONCAT('%',?1,'%')" +
+            "(c.email LIKE CONCAT('%',?1,'%') OR c.firstName LIKE CONCAT('%',?1,'%')" +
             " OR c.lastName LIKE CONCAT('%',?1,'%') OR c.description LIKE CONCAT('%',?1,'%')" +
-            " OR c.address LIKE CONCAT('%',?1,'%') OR c.city LIKE CONCAT('%',?1,'%') OR c.zipCode LIKE CONCAT('%',?1,'%'))"  +
-            " AND c IN (SELECT cl FROM Client cl LEFT JOIN cl.people p WHERE p.email=?2)")
-    Page<Client> findByQuery(@Param("query") String query, @Param("email") String email, Pageable pageable);
+            " OR c.address LIKE CONCAT('%',?1,'%') OR c.city LIKE CONCAT('%',?1,'%') OR c.zipCode LIKE CONCAT('%',?1,'%'))" +
+            " AND c IN (SELECT cn.client FROM ClientNutritionist cn WHERE cn.nutritionist.id=?2 AND cn.state=gr.foodNhealth.model.ClientNutritionist$State.ACCEPTED)")
+    Page<Client> findByQuery(@Param("query") String query, @Param("nutritionistId") Long nutritionistId, Pageable pageable);
 
     @Query("SELECT c FROM Client c WHERE c.email LIKE CONCAT('%',?1,'%') OR c.firstName LIKE CONCAT('%',?1,'%') OR c.lastName LIKE CONCAT('%',?1,'%')")
     Page<Client> searchByQuery(@Param("query") String query, Pageable pageable);

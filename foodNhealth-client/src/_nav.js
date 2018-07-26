@@ -11,21 +11,6 @@ export default {
       icon: 'icon-puzzle'
     },
     {
-      name: 'Συστατικά',
-      url: '/ingredients',
-      icon: 'icon-puzzle'
-    },
-    {
-      name: 'Προϊόντα',
-      url: '/products',
-      icon: 'icon-puzzle'
-    },
-    {
-      name: 'Συνταγές',
-      url: '/recipes',
-      icon: 'icon-puzzle'
-    },
-    {
       name: 'Συνταγές προς Ενδιαφερόμενο',
       url: '/selectedRecipes',
       icon: 'icon-puzzle'
@@ -38,6 +23,21 @@ export default {
         {
           name: 'Διατροφολόγοι',
           url: '/admin/nutritionists',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Συστατικά',
+          url: '/ingredients',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Προϊόντα',
+          url: '/products',
+          icon: 'icon-puzzle'
+        },
+        {
+          name: 'Συνταγές',
+          url: '/recipes',
           icon: 'icon-puzzle'
         },
         {

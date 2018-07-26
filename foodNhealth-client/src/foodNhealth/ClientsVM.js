@@ -1,10 +1,10 @@
 import DataTable from '@/foodNhealth/components/DataTable'
-import Client from '@/foodNhealth/components/Client'
+// import Client from '@/foodNhealth/components/Client'
 
 export default {
   components: {
-    DataTable,
-    Client
+    DataTable
+    // Client
   },
   created () {
     console.log('Client created')
@@ -44,44 +44,22 @@ export default {
         }
       ],
       append_params: {
-        query: '',
-        email: this.$auth.user().email
-      },
-      clientAddTypeVisible: false,
-      clientAddType: 'CLIENT_FIND',
-      clientAddTypes: [
-        {
-          value: 'CLIENT_FIND',
-          text: this.getMessage('CLIENT_FIND')
-        },
-        {
-          value: 'CLIENT_ADD',
-          text: this.getMessage('CLIENT_ADD')
-        }
-      ]
+        query: ''
+      }
     }
   },
   methods: {
-    addClient (event) {
+    createAllergy (event) {
       console.log('fire edit-client event')
-      let addNew = this.clientAddType === 'CLIENT_ADD'
-      this.clientAddTypeVisible = false
-      this.$events.fire('edit-client', {item: null, addNew: addNew})
+      this.$events.fire('edit-client', null)
     },
-    onClientSelected (dataItem) {
+    onClientSelected (event) {
       console.log('fire edit-client event')
-      this.$events.fire('edit-client', {item: dataItem, addNew: null})
+      this.$events.fire('edit-client', event)
     },
-    onClientEdited (dataItem) {
+    onClientEdited (event) {
       console.log('fire data-changed event')
       this.$events.fire('data-changed')
-    },
-    addClientChoice () {
-      this.clientAddTypeVisible = true
-      this.clientAddType = 'CLIENT_FIND'
-    },
-    cancel () {
-      this.clientAddTypeVisible = false
     }
   }
 }
